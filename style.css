@@ -1,0 +1,374 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-primary: #121212;
+    --bg-secondary: #1e1e1e;
+    --bg-tertiary: #2a2a2a;
+    --text-primary: #e8e8e8;
+    --text-secondary: #a0a0a0;
+    --accent: #bb86fc;
+    --accent-hover: #9965f4;
+    --success: #03dac6;
+    --error: #cf6679;
+    --border: #3a3a3a;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    max-width: 600px;
+    width: 100%;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.header-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.icon-btn {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.2s;
+}
+
+.icon-btn:hover {
+    background: var(--bg-tertiary);
+    transform: translateY(-2px);
+}
+
+.game-board {
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    padding: 30px;
+    margin-bottom: 20px;
+}
+
+.hint-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 30px;
+}
+
+.hint {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    transition: all 0.3s;
+}
+
+.hint.unlocked {
+    border-color: var(--accent);
+}
+
+.hint.clickable {
+    cursor: pointer;
+}
+
+.hint.clickable:hover {
+    background: var(--bg-primary);
+    border-color: var(--accent);
+}
+
+.hint-label {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.hint-content {
+    font-size: 1.1rem;
+    line-height: 1.5;
+}
+
+.hint-content.locked {
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+.guess-section {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+#guess-input {
+    flex: 1;
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+#guess-input:focus {
+    border-color: var(--accent);
+}
+
+#guess-input:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+button {
+    background: var(--accent);
+    border: none;
+    color: var(--text-primary);
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+button:hover:not(:disabled) {
+    background: var(--accent-hover);
+    transform: translateY(-2px);
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+#skip-btn {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+}
+
+#skip-btn:hover:not(:disabled) {
+    background: var(--bg-primary);
+}
+
+.message {
+    text-align: center;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 500;
+    min-height: 20px;
+}
+
+.message.success {
+    background: rgba(3, 218, 198, 0.2);
+    color: var(--success);
+    border: 1px solid var(--success);
+}
+
+.message.error {
+    background: rgba(207, 102, 121, 0.2);
+    color: var(--error);
+    border: 1px solid var(--error);
+}
+
+.next-game {
+    text-align: center;
+    padding: 20px;
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    display: none;
+}
+
+.next-game.show {
+    display: block;
+}
+
+#countdown {
+    font-weight: 700;
+    color: var(--accent);
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(4px);
+}
+
+.modal.show {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: var(--bg-secondary);
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 500px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    border: 1px solid var(--border);
+}
+
+.close {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.close:hover {
+    color: var(--text-primary);
+}
+
+.modal-content h2 {
+    margin-bottom: 20px;
+}
+
+.modal-content h3 {
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+.modal-content ul,
+.modal-content ol {
+    margin-left: 20px;
+    line-height: 1.8;
+}
+
+.modal-content li {
+    margin-bottom: 8px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.stat-item {
+    text-align: center;
+    padding: 15px;
+    background: var(--bg-tertiary);
+    border-radius: 8px;
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.distribution {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.distribution-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.distribution-label {
+    min-width: 30px;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.distribution-fill {
+    background: var(--accent);
+    height: 30px;
+    min-width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 10px;
+    border-radius: 4px;
+    font-weight: 600;
+    transition: width 0.5s ease;
+}
+
+.distribution-fill.current {
+    background: var(--success);
+}
+
+.share-btn {
+    width: 100%;
+    margin-top: 20px;
+    background: var(--success);
+}
+
+.share-btn:hover:not(:disabled) {
+    background: #02b8a8;
+}
+
+@media (max-width: 600px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .game-board {
+        padding: 20px;
+    }
+
+    .guess-section {
+        flex-direction: column;
+    }
+}

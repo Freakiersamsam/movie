@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cinemdle - Daily Movie Dialogue Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Cinemdle</h1>
+            <div class="header-buttons">
+                <button id="stats-btn" class="icon-btn" title="Statistics">📊</button>
+                <button id="help-btn" class="icon-btn" title="How to play">❓</button>
+            </div>
+        </header>
+
+        <div class="game-board">
+            <div class="hint-container">
+                <div class="hint" id="hint-0">
+                    <div class="hint-label">Quote 1</div>
+                    <div class="hint-content locked">Click to reveal</div>
+                </div>
+                <div class="hint" id="hint-1">
+                    <div class="hint-label">Quote 2</div>
+                    <div class="hint-content locked">Click to reveal</div>
+                </div>
+                <div class="hint" id="hint-2">
+                    <div class="hint-label">Quote 3</div>
+                    <div class="hint-content locked">Click to reveal</div>
+                </div>
+                <div class="hint" id="hint-3">
+                    <div class="hint-label">Actor 1</div>
+                    <div class="hint-content locked">Click to reveal</div>
+                </div>
+                <div class="hint" id="hint-4">
+                    <div class="hint-label">Actor 2</div>
+                    <div class="hint-content locked">Click to reveal</div>
+                </div>
+                <div class="hint" id="hint-5">
+                    <div class="hint-label">Year</div>
+                    <div class="hint-content locked">Click to reveal</div>
+                </div>
+                <div class="hint" id="hint-6">
+                    <div class="hint-label">Movie Title</div>
+                    <div class="hint-content locked">Click to reveal</div>
+                </div>
+            </div>
+
+            <div class="guess-section">
+                <input type="text" id="guess-input" placeholder="Guess the movie..." autocomplete="off">
+                <button id="guess-btn">Guess</button>
+                <button id="skip-btn">Skip</button>
+            </div>
+
+            <div id="message" class="message"></div>
+        </div>
+
+        <div class="next-game" id="next-game">
+            <p>Next movie in: <span id="countdown"></span></p>
+        </div>
+    </div>
+
+    <!-- Stats Modal -->
+    <div id="stats-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Statistics</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-value" id="games-played">0</div>
+                    <div class="stat-label">Played</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="win-percentage">0</div>
+                    <div class="stat-label">Win %</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="current-streak">0</div>
+                    <div class="stat-label">Current Streak</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="max-streak">0</div>
+                    <div class="stat-label">Max Streak</div>
+                </div>
+            </div>
+            <h3>Guess Distribution</h3>
+            <div class="distribution" id="distribution"></div>
+            <button id="share-btn" class="share-btn">Share Results</button>
+        </div>
+    </div>
+
+    <!-- Help Modal -->
+    <div id="help-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>How to Play</h2>
+            <p>Guess the movie from dialogue quotes!</p>
+            <ul>
+                <li>You get 7 progressive hints</li>
+                <li>Each hint costs one guess attempt</li>
+                <li>The fewer hints you need, the better your score</li>
+                <li>A new movie every day at midnight</li>
+                <li>Try to maintain your streak!</li>
+            </ul>
+            <p><strong>Hints revealed in order:</strong></p>
+            <ol>
+                <li>First quote</li>
+                <li>Second quote</li>
+                <li>Third quote</li>
+                <li>Actor who said quote 1</li>
+                <li>Actor who said quote 2</li>
+                <li>Year released</li>
+                <li>Movie title (answer)</li>
+            </ol>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

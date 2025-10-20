@@ -1,10 +1,8 @@
-// Movie database
 const MOVIES = [
     {
         quotes: [
             "You're gonna need a bigger boat.",
-            "I can't see you coming back here.",
-            "We're gonna need a bigger boat."
+            "I can't see you coming back here."
         ],
         actors: ["Roy Scheider", "Richard Dreyfuss"],
         year: "1975",
@@ -13,8 +11,7 @@ const MOVIES = [
     {
         quotes: [
             "Here's looking at you, kid.",
-            "We'll always have Paris.",
-            "Louis, I think this is the beginning of a beautiful friendship."
+            "We'll always have Paris."
         ],
         actors: ["Humphrey Bogart", "Ingrid Bergman"],
         year: "1942",
@@ -23,8 +20,7 @@ const MOVIES = [
     {
         quotes: [
             "I'll have what she's having.",
-            "When you realize you want to spend the rest of your life with somebody, you want the rest of your life to start as soon as possible.",
-            "You're the worst kind. You're high maintenance but you think you're low maintenance."
+            "When you realize you want to spend the rest of your life with somebody, you want the rest of your life to start as soon as possible."
         ],
         actors: ["Meg Ryan", "Billy Crystal"],
         year: "1989",
@@ -33,8 +29,7 @@ const MOVIES = [
     {
         quotes: [
             "May the Force be with you.",
-            "I find your lack of faith disturbing.",
-            "These aren't the droids you're looking for."
+            "I find your lack of faith disturbing."
         ],
         actors: ["Mark Hamill", "Harrison Ford"],
         year: "1977",
@@ -43,8 +38,7 @@ const MOVIES = [
     {
         quotes: [
             "I'm going to make him an offer he can't refuse.",
-            "Leave the gun. Take the cannoli.",
-            "It's not personal, Sonny. It's strictly business."
+            "Leave the gun. Take the cannoli."
         ],
         actors: ["Marlon Brando", "Al Pacino"],
         year: "1972",
@@ -53,8 +47,7 @@ const MOVIES = [
     {
         quotes: [
             "Nobody puts Baby in a corner.",
-            "I carried a watermelon.",
-            "Me? I'm scared of everything. I'm scared of what I saw, I'm scared of what I did, of who I am."
+            "I carried a watermelon."
         ],
         actors: ["Patrick Swayze", "Jennifer Grey"],
         year: "1987",
@@ -63,8 +56,7 @@ const MOVIES = [
     {
         quotes: [
             "You can't handle the truth!",
-            "I want the truth!",
-            "Did you order the Code Red?"
+            "I want the truth!"
         ],
         actors: ["Jack Nicholson", "Tom Cruise"],
         year: "1992",
@@ -73,8 +65,7 @@ const MOVIES = [
     {
         quotes: [
             "Life is like a box of chocolates. You never know what you're gonna get.",
-            "My mama always said life was like a box of chocolates.",
-            "Run, Forrest, run!"
+            "My mama always said life was like a box of chocolates."
         ],
         actors: ["Tom Hanks", "Robin Wright"],
         year: "1994",
@@ -83,8 +74,7 @@ const MOVIES = [
     {
         quotes: [
             "I see dead people.",
-            "They don't know they're dead.",
-            "Some magic's real."
+            "They don't know they're dead."
         ],
         actors: ["Haley Joel Osment", "Bruce Willis"],
         year: "1999",
@@ -93,8 +83,7 @@ const MOVIES = [
     {
         quotes: [
             "You talking to me?",
-            "Are you talking to me?",
-            "Someday a real rain will come and wash all this scum off the streets."
+            "Are you talking to me?"
         ],
         actors: ["Robert De Niro", "Jodie Foster"],
         year: "1976",
@@ -102,314 +91,191 @@ const MOVIES = [
     }
 ];
 
-// Game state
 let currentHint = 0;
 let gameComplete = false;
 let todayMovie = null;
 
-// Get today's movie based on date
 function getTodayMovie() {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     const daysSinceEpoch = Math.floor(today.getTime() / (1000 * 60 * 60 * 24));
-    const movieIndex = daysSinceEpoch % MOVIES.length;
-    return MOVIES[movieIndex];
+    return MOVIES[daysSinceEpoch % MOVIES.length];
 }
 
-// Get today's date as a string key
 function getTodayKey() {
     const today = new Date();
     return `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
 }
 
-// Load game state from localStorage
-function loadGameState() {
-    const todayKey = getTodayKey();
-    const savedState = localStorage.getItem('gameState');
-
-    if (savedState) {
-        const state = JSON.parse(savedState);
-        if (state.date === todayKey) {
-            return state;
-        }
+function loadState() {
+    const saved = localStorage.getItem('state');
+    if (saved) {
+        const state = JSON.parse(saved);
+        if (state.date === getTodayKey()) return state;
     }
-
     return {
-        date: todayKey,
-        currentHint: 0,
+        date: getTodayKey(),
+        hint: 0,
         complete: false,
-        won: false,
-        hintsRevealed: []
+        won: false
     };
 }
 
-// Save game state to localStorage
-function saveGameState(state) {
-    localStorage.setItem('gameState', JSON.stringify(state));
+function saveState(state) {
+    localStorage.setItem('state', JSON.stringify(state));
 }
 
-// Load or initialize stats
 function loadStats() {
-    const savedStats = localStorage.getItem('stats');
-    if (savedStats) {
-        return JSON.parse(savedStats);
-    }
-
+    const saved = localStorage.getItem('stats');
+    if (saved) return JSON.parse(saved);
     return {
-        gamesPlayed: 0,
-        gamesWon: 0,
-        currentStreak: 0,
+        played: 0,
+        won: 0,
+        streak: 0,
         maxStreak: 0,
-        guessDistribution: [0, 0, 0, 0, 0, 0, 0],
-        lastPlayedDate: null
+        dist: [0, 0, 0, 0, 0, 0],
+        lastDate: null
     };
 }
 
-// Save stats to localStorage
 function saveStats(stats) {
     localStorage.setItem('stats', JSON.stringify(stats));
 }
 
-// Update stats after game completion
-function updateStats(won, hintsUsed) {
+function updateStats(won, hints) {
     const stats = loadStats();
-    const todayKey = getTodayKey();
+    const today = getTodayKey();
 
-    stats.gamesPlayed++;
+    stats.played++;
 
     if (won) {
-        stats.gamesWon++;
-        stats.guessDistribution[hintsUsed]++;
+        stats.won++;
+        stats.dist[hints]++;
 
-        // Update streak
-        if (stats.lastPlayedDate) {
+        if (stats.lastDate) {
             const yesterday = new Date();
             yesterday.setDate(yesterday.getDate() - 1);
             const yesterdayKey = `${yesterday.getFullYear()}-${yesterday.getMonth() + 1}-${yesterday.getDate()}`;
 
-            if (stats.lastPlayedDate === yesterdayKey) {
-                stats.currentStreak++;
+            if (stats.lastDate === yesterdayKey) {
+                stats.streak++;
             } else {
-                stats.currentStreak = 1;
+                stats.streak = 1;
             }
         } else {
-            stats.currentStreak = 1;
+            stats.streak = 1;
         }
 
-        stats.maxStreak = Math.max(stats.maxStreak, stats.currentStreak);
+        stats.maxStreak = Math.max(stats.maxStreak, stats.streak);
     } else {
-        stats.currentStreak = 0;
+        stats.streak = 0;
     }
 
-    stats.lastPlayedDate = todayKey;
+    stats.lastDate = today;
     saveStats(stats);
 }
 
-// Initialize game
-function initGame() {
-    todayMovie = getTodayMovie();
-    const state = loadGameState();
-
-    currentHint = state.currentHint;
-    gameComplete = state.complete;
-
-    // Restore revealed hints
-    state.hintsRevealed.forEach((content, index) => {
-        revealHint(index, content, false);
-    });
-
-    if (gameComplete) {
-        endGame(state.won, currentHint);
-    } else {
-        // Make first hint clickable if no hints revealed yet
-        if (currentHint === 0) {
-            makeHintClickable(0);
-        }
-    }
-
-    // Set up event listeners
-    setupEventListeners();
-
-    // Update countdown
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
-}
-
-// Setup event listeners
-function setupEventListeners() {
-    document.getElementById('guess-btn').addEventListener('click', handleGuess);
-    document.getElementById('skip-btn').addEventListener('click', handleSkip);
-    document.getElementById('guess-input').addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            handleGuess();
-        }
-    });
-
-    // Modal controls
-    document.getElementById('stats-btn').addEventListener('click', showStats);
-    document.getElementById('help-btn').addEventListener('click', showHelp);
-
-    document.querySelectorAll('.close').forEach(closeBtn => {
-        closeBtn.addEventListener('click', (e) => {
-            e.target.closest('.modal').classList.remove('show');
-        });
-    });
-
-    window.addEventListener('click', (e) => {
-        if (e.target.classList.contains('modal')) {
-            e.target.classList.remove('show');
-        }
-    });
-
-    document.getElementById('share-btn').addEventListener('click', shareResults);
-}
-
-// Make a hint clickable
-function makeHintClickable(index) {
-    const hintElement = document.getElementById(`hint-${index}`);
-    hintElement.classList.add('clickable');
-    hintElement.addEventListener('click', () => {
-        if (!gameComplete && currentHint === index) {
-            unlockHint(index);
-        }
-    });
-}
-
-// Unlock a hint
-function unlockHint(index) {
-    const hints = [
-        todayMovie.quotes[0],
-        todayMovie.quotes[1],
-        todayMovie.quotes[2],
-        todayMovie.actors[0],
-        todayMovie.actors[1],
-        todayMovie.year,
-        todayMovie.title
-    ];
-
-    revealHint(index, hints[index], true);
-
-    // Save state
-    const state = loadGameState();
-    state.hintsRevealed.push(hints[index]);
-    state.currentHint = currentHint;
-    saveGameState(state);
-
-    // If this was the last hint (title revealed), game is over
-    if (index === 6) {
-        endGame(false, currentHint);
-    } else {
-        // Make next hint clickable
-        currentHint++;
-        makeHintClickable(currentHint);
+function revealHint(index) {
+    if (index === 0) {
+        // First quote
+        const div = document.createElement('div');
+        div.className = 'quote';
+        div.textContent = `"${todayMovie.quotes[0]}"`;
+        document.getElementById('quotes').appendChild(div);
+        setTimeout(() => div.classList.add('show'), 50);
+    } else if (index === 1) {
+        // Second quote
+        const div = document.createElement('div');
+        div.className = 'quote';
+        div.textContent = `"${todayMovie.quotes[1]}"`;
+        document.getElementById('quotes').appendChild(div);
+        setTimeout(() => div.classList.add('show'), 50);
+    } else if (index === 2) {
+        // First actor
+        const div = document.createElement('div');
+        div.className = 'actor';
+        div.textContent = todayMovie.actors[0];
+        document.getElementById('actors').appendChild(div);
+        setTimeout(() => div.classList.add('show'), 50);
+    } else if (index === 3) {
+        // Second actor
+        const div = document.createElement('div');
+        div.className = 'actor';
+        div.textContent = todayMovie.actors[1];
+        document.getElementById('actors').appendChild(div);
+        setTimeout(() => div.classList.add('show'), 50);
+    } else if (index === 4) {
+        // Year
+        const year = document.getElementById('year');
+        year.textContent = todayMovie.year;
+        setTimeout(() => year.classList.add('show'), 50);
+    } else if (index === 5) {
+        // Title
+        const title = document.getElementById('title');
+        title.textContent = todayMovie.title;
+        setTimeout(() => title.classList.add('show'), 50);
     }
 }
 
-// Reveal a hint (without unlocking logic)
-function revealHint(index, content, animate) {
-    const hintElement = document.getElementById(`hint-${index}`);
-    const contentElement = hintElement.querySelector('.hint-content');
-
-    hintElement.classList.remove('clickable');
-    hintElement.classList.add('unlocked');
-    contentElement.classList.remove('locked');
-    contentElement.textContent = content;
-
-    if (animate) {
-        contentElement.style.opacity = '0';
-        setTimeout(() => {
-            contentElement.style.transition = 'opacity 0.3s';
-            contentElement.style.opacity = '1';
-        }, 50);
-    }
-}
-
-// Handle guess
 function handleGuess() {
     if (gameComplete) return;
 
-    const input = document.getElementById('guess-input');
+    const input = document.getElementById('guess');
     const guess = input.value.trim().toLowerCase();
 
-    if (!guess) {
-        showMessage('Please enter a guess', 'error');
-        return;
-    }
+    if (!guess) return;
 
-    const answer = todayMovie.title.toLowerCase();
-
-    if (guess === answer) {
-        // Correct guess!
-        revealHint(6, todayMovie.title, true);
+    if (guess === todayMovie.title.toLowerCase()) {
+        revealHint(5);
         endGame(true, currentHint);
     } else {
-        showMessage('Incorrect! Try again or reveal another hint', 'error');
+        document.getElementById('message').textContent = 'nope';
+        setTimeout(() => {
+            document.getElementById('message').textContent = '';
+        }, 2000);
         input.value = '';
     }
 }
 
-// Handle skip (reveal next hint)
-function handleSkip() {
-    if (gameComplete || currentHint >= 6) return;
-    unlockHint(currentHint);
+function handleNext() {
+    if (gameComplete || currentHint >= 5) return;
+    revealHint(currentHint);
+    currentHint++;
+
+    const state = loadState();
+    state.hint = currentHint;
+    saveState(state);
+
+    if (currentHint >= 6) {
+        endGame(false, currentHint - 1);
+    }
 }
 
-// End game
-function endGame(won, hintsUsed) {
+function endGame(won, hints) {
     gameComplete = true;
 
-    // Update state
-    const state = loadGameState();
+    const state = loadState();
     state.complete = true;
     state.won = won;
-    saveGameState(state);
+    saveState(state);
 
-    // Update stats
-    updateStats(won, hintsUsed);
+    updateStats(won, hints);
 
-    // Disable input
-    document.getElementById('guess-input').disabled = true;
-    document.getElementById('guess-btn').disabled = true;
-    document.getElementById('skip-btn').disabled = true;
+    document.getElementById('guess').disabled = true;
+    document.getElementById('next').disabled = true;
 
-    // Show message
     if (won) {
-        const messages = [
-            'Genius! Got it immediately! 🎬',
-            'Brilliant! Only needed one hint! ⭐',
-            'Excellent! 🎯',
-            'Great job! 👏',
-            'Well done! 🎥',
-            'Nice! You got it! 🎞️',
-            'Correct! 🎉'
-        ];
-        showMessage(messages[hintsUsed], 'success');
+        document.getElementById('message').textContent = 'correct';
     } else {
-        showMessage(`The answer was: ${todayMovie.title}`, 'success');
+        document.getElementById('message').textContent = 'game over';
     }
 
-    // Show countdown
-    document.getElementById('next-game').classList.add('show');
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
 
-    // Auto-show stats after a delay
-    setTimeout(showStats, 2000);
+    setTimeout(showStats, 1500);
 }
 
-// Show message
-function showMessage(text, type) {
-    const messageElement = document.getElementById('message');
-    messageElement.textContent = text;
-    messageElement.className = `message ${type}`;
-
-    if (type === 'error') {
-        setTimeout(() => {
-            messageElement.className = 'message';
-            messageElement.textContent = '';
-        }, 3000);
-    }
-}
-
-// Update countdown to next game
 function updateCountdown() {
     const now = new Date();
     const tomorrow = new Date(now);
@@ -422,99 +288,110 @@ function updateCountdown() {
     const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
     document.getElementById('countdown').textContent =
-        `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        `next: ${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 }
 
-// Show stats modal
 function showStats() {
     const stats = loadStats();
 
-    document.getElementById('games-played').textContent = stats.gamesPlayed;
-    document.getElementById('win-percentage').textContent =
-        stats.gamesPlayed > 0 ? Math.round((stats.gamesWon / stats.gamesPlayed) * 100) : 0;
-    document.getElementById('current-streak').textContent = stats.currentStreak;
-    document.getElementById('max-streak').textContent = stats.maxStreak;
+    document.getElementById('played').textContent = stats.played;
+    document.getElementById('won').textContent = stats.won;
+    document.getElementById('streak').textContent = stats.streak;
 
-    // Show distribution
-    const distributionElement = document.getElementById('distribution');
-    distributionElement.innerHTML = '';
+    const dist = document.getElementById('dist');
+    dist.innerHTML = '';
 
-    const maxCount = Math.max(...stats.guessDistribution, 1);
-    const state = loadGameState();
+    const max = Math.max(...stats.dist, 1);
 
-    stats.guessDistribution.forEach((count, index) => {
+    stats.dist.forEach((count, i) => {
         const bar = document.createElement('div');
-        bar.className = 'distribution-bar';
+        bar.className = 'bar';
 
         const label = document.createElement('div');
-        label.className = 'distribution-label';
-        label.textContent = index + 1;
+        label.className = 'bar-label';
+        label.textContent = i + 1;
 
         const fill = document.createElement('div');
-        fill.className = 'distribution-fill';
-        if (state.complete && state.won && state.currentHint === index) {
-            fill.classList.add('current');
-        }
-        fill.style.width = `${Math.max((count / maxCount) * 100, count > 0 ? 10 : 0)}%`;
+        fill.className = 'bar-fill';
+        fill.style.width = `${Math.max((count / max) * 100, count > 0 ? 10 : 0)}%`;
         fill.textContent = count;
 
         bar.appendChild(label);
         bar.appendChild(fill);
-        distributionElement.appendChild(bar);
+        dist.appendChild(bar);
     });
 
-    document.getElementById('stats-modal').classList.add('show');
+    document.getElementById('modal').classList.add('show');
 }
 
-// Show help modal
-function showHelp() {
-    document.getElementById('help-modal').classList.add('show');
-}
-
-// Share results
 function shareResults() {
-    const state = loadGameState();
+    const state = loadState();
+    if (!state.complete) return;
 
-    if (!state.complete) {
-        showMessage('Complete the game first!', 'error');
-        return;
-    }
-
-    const stats = loadStats();
-    const hintsUsed = state.currentHint + 1;
-
+    const hints = state.hint;
     let text = `Cinemdle ${getTodayKey()}\n`;
+    text += state.won ? `${hints + 1}/6\n\n` : `X/6\n\n`;
 
-    if (state.won) {
-        text += `${hintsUsed}/7 🎬\n\n`;
-    } else {
-        text += `X/7 🎬\n\n`;
-    }
-
-    // Show hint progression
-    for (let i = 0; i < 7; i++) {
-        if (i < hintsUsed) {
-            if (i === state.currentHint && state.won) {
-                text += '🟩';
-            } else {
-                text += '🟨';
-            }
+    for (let i = 0; i < 6; i++) {
+        if (i < hints) {
+            text += '□';
+        } else if (i === hints && state.won) {
+            text += '■';
         } else {
-            text += '⬜';
+            text += '·';
         }
     }
 
     navigator.clipboard.writeText(text).then(() => {
-        const shareBtn = document.getElementById('share-btn');
-        const originalText = shareBtn.textContent;
-        shareBtn.textContent = 'Copied!';
+        const btn = document.getElementById('share');
+        const orig = btn.textContent;
+        btn.textContent = 'copied';
         setTimeout(() => {
-            shareBtn.textContent = originalText;
-        }, 2000);
-    }).catch(() => {
-        showMessage('Failed to copy to clipboard', 'error');
+            btn.textContent = orig;
+        }, 1500);
     });
 }
 
-// Start the game
-initGame();
+function init() {
+    todayMovie = getTodayMovie();
+    const state = loadState();
+
+    currentHint = state.hint;
+    gameComplete = state.complete;
+
+    for (let i = 0; i < currentHint; i++) {
+        revealHint(i);
+    }
+
+    if (gameComplete) {
+        document.getElementById('guess').disabled = true;
+        document.getElementById('next').disabled = true;
+        if (state.won) {
+            document.getElementById('message').textContent = 'correct';
+        } else {
+            document.getElementById('message').textContent = 'game over';
+        }
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    }
+
+    document.getElementById('guess').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') handleGuess();
+    });
+
+    document.getElementById('next').addEventListener('click', handleNext);
+    document.getElementById('stats').addEventListener('click', showStats);
+    document.getElementById('share').addEventListener('click', shareResults);
+
+    document.getElementById('close').addEventListener('click', () => {
+        document.getElementById('modal').classList.remove('show');
+    });
+
+    window.addEventListener('click', (e) => {
+        if (e.target.id === 'modal') {
+            document.getElementById('modal').classList.remove('show');
+        }
+    });
+}
+
+init();

@@ -206,14 +206,14 @@ function revealHint(index) {
         setTimeout(() => div.classList.add('show'), 50);
     } else if (index === 4) {
         // Year
-        const year = document.getElementById('year');
-        year.textContent = todayMovie.year;
-        setTimeout(() => year.classList.add('show'), 50);
+        const yearTitle = document.getElementById('year-title');
+        yearTitle.textContent = todayMovie.year;
+        setTimeout(() => yearTitle.classList.add('show'), 50);
     } else if (index === 5) {
         // Title
-        const title = document.getElementById('title');
-        title.textContent = todayMovie.title;
-        setTimeout(() => title.classList.add('show'), 50);
+        const yearTitle = document.getElementById('year-title');
+        yearTitle.textContent = `${todayMovie.year} - ${todayMovie.title}`;
+        yearTitle.classList.add('show');
     }
 }
 

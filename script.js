@@ -21,8 +21,9 @@ function getTodayMovies() {
     const daysSinceEpoch = Math.floor(today.getTime() / (1000 * 60 * 60 * 24));
 
     // Add dev offset for testing different films
+    // Multiply by 37 (prime number) to ensure very different selections
     const devOffset = getDevOffset();
-    const seed = daysSinceEpoch + devOffset;
+    const seed = daysSinceEpoch + (devOffset * 37);
 
     const movies = [];
 

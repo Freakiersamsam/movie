@@ -1,105 +1,54 @@
-const MOVIES = [
-    {
-        quotes: [
-            "You're gonna need a bigger boat.",
-            "I can't see you coming back here."
-        ],
-        actors: ["Roy Scheider", "Richard Dreyfuss"],
-        year: "1975",
-        title: "Jaws"
-    },
-    {
-        quotes: [
-            "Here's looking at you, kid.",
-            "We'll always have Paris."
-        ],
-        actors: ["Humphrey Bogart", "Ingrid Bergman"],
-        year: "1942",
-        title: "Casablanca"
-    },
-    {
-        quotes: [
-            "I'll have what she's having.",
-            "When you realize you want to spend the rest of your life with somebody, you want the rest of your life to start as soon as possible."
-        ],
-        actors: ["Meg Ryan", "Billy Crystal"],
-        year: "1989",
-        title: "When Harry Met Sally"
-    },
-    {
-        quotes: [
-            "May the Force be with you.",
-            "I find your lack of faith disturbing."
-        ],
-        actors: ["Mark Hamill", "Harrison Ford"],
-        year: "1977",
-        title: "Star Wars"
-    },
-    {
-        quotes: [
-            "I'm going to make him an offer he can't refuse.",
-            "Leave the gun. Take the cannoli."
-        ],
-        actors: ["Marlon Brando", "Al Pacino"],
-        year: "1972",
-        title: "The Godfather"
-    },
-    {
-        quotes: [
-            "Nobody puts Baby in a corner.",
-            "I carried a watermelon."
-        ],
-        actors: ["Patrick Swayze", "Jennifer Grey"],
-        year: "1987",
-        title: "Dirty Dancing"
-    },
-    {
-        quotes: [
-            "You can't handle the truth!",
-            "I want the truth!"
-        ],
-        actors: ["Jack Nicholson", "Tom Cruise"],
-        year: "1992",
-        title: "A Few Good Men"
-    },
-    {
-        quotes: [
-            "Life is like a box of chocolates. You never know what you're gonna get.",
-            "My mama always said life was like a box of chocolates."
-        ],
-        actors: ["Tom Hanks", "Robin Wright"],
-        year: "1994",
-        title: "Forrest Gump"
-    },
-    {
-        quotes: [
-            "I see dead people.",
-            "They don't know they're dead."
-        ],
-        actors: ["Haley Joel Osment", "Bruce Willis"],
-        year: "1999",
-        title: "The Sixth Sense"
-    },
-    {
-        quotes: [
-            "You talking to me?",
-            "Are you talking to me?"
-        ],
-        actors: ["Robert De Niro", "Jodie Foster"],
-        year: "1976",
-        title: "Taxi Driver"
-    }
-];
+const ROUNDS_PER_DAY = 5;
 
 let currentHint = 0;
+let currentRound = 0;
 let gameComplete = false;
 let todayMovie = null;
 
-function getTodayMovie() {
+function getDevOffset() {
+    const offset = localStorage.getItem('devOffset');
+    return offset ? parseInt(offset) : 0;
+}
+
+function incrementDevOffset() {
+    const current = getDevOffset();
+    localStorage.setItem('devOffset', (current + 1).toString());
+}
+
+function getTodayMovies() {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     const daysSinceEpoch = Math.floor(today.getTime() / (1000 * 60 * 60 * 24));
-    return MOVIES[daysSinceEpoch % MOVIES.length];
+
+    // Add dev offset for testing different films
+    const devOffset = getDevOffset();
+    const seed = daysSinceEpoch + devOffset;
+
+    const movies = [];
+
+    // For each round, select a movie of appropriate difficulty
+    for (let round = 0; round < ROUNDS_PER_DAY; round++) {
+        const difficulty = round + 1; // Round 0=difficulty 1, Round 4=difficulty 5
+
+        // Get all movies of this difficulty
+        const moviesOfDifficulty = MOVIE_DATABASE.filter(m => m.difficulty === difficulty);
+
+        // Select one based on the day + dev offset
+        const index = (seed + round) % moviesOfDifficulty.length;
+        movies.push(moviesOfDifficulty[index]);
+    }
+
+    return movies;
+}
+
+function getTodayMovie(round) {
+    const movies = getTodayMovies();
+    return movies[round];
+}
+
+// Build autocomplete list from all movie titles
+function getAllMovieTitles() {
+    return MOVIE_DATABASE.map(m => m.title).sort();
 }
 
 function getTodayKey() {
@@ -115,9 +64,13 @@ function loadState() {
     }
     return {
         date: getTodayKey(),
-        hint: 0,
-        complete: false,
-        won: false
+        rounds: Array(ROUNDS_PER_DAY).fill(null).map(() => ({
+            hint: 0,
+            complete: false,
+            won: false
+        })),
+        currentRound: 0,
+        allComplete: false
     };
 }
 
@@ -129,10 +82,10 @@ function loadStats() {
     const saved = localStorage.getItem('stats');
     if (saved) return JSON.parse(saved);
     return {
-        played: 0,
-        won: 0,
-        streak: 0,
-        maxStreak: 0,
+        roundsPlayed: 0,
+        roundsWon: 0,
+        daysStreak: 0,
+        maxDaysStreak: 0,
         dist: [0, 0, 0, 0, 0, 0],
         lastDate: null
     };
@@ -142,36 +95,37 @@ function saveStats(stats) {
     localStorage.setItem('stats', JSON.stringify(stats));
 }
 
-function updateStats(won, hints) {
+function updateStats(won, hints, allRoundsComplete) {
     const stats = loadStats();
     const today = getTodayKey();
 
-    stats.played++;
+    stats.roundsPlayed++;
 
     if (won) {
-        stats.won++;
+        stats.roundsWon++;
         stats.dist[hints]++;
+    }
 
+    // Only update day streak when all rounds are complete
+    if (allRoundsComplete) {
         if (stats.lastDate) {
             const yesterday = new Date();
             yesterday.setDate(yesterday.getDate() - 1);
             const yesterdayKey = `${yesterday.getFullYear()}-${yesterday.getMonth() + 1}-${yesterday.getDate()}`;
 
             if (stats.lastDate === yesterdayKey) {
-                stats.streak++;
+                stats.daysStreak++;
             } else {
-                stats.streak = 1;
+                stats.daysStreak = 1;
             }
         } else {
-            stats.streak = 1;
+            stats.daysStreak = 1;
         }
 
-        stats.maxStreak = Math.max(stats.maxStreak, stats.streak);
-    } else {
-        stats.streak = 0;
+        stats.maxDaysStreak = Math.max(stats.maxDaysStreak, stats.daysStreak);
+        stats.lastDate = today;
     }
 
-    stats.lastDate = today;
     saveStats(stats);
 }
 
@@ -184,26 +138,34 @@ function revealHint(index) {
         document.getElementById('quotes').appendChild(div);
         setTimeout(() => div.classList.add('show'), 50);
     } else if (index === 1) {
+        // First actor - add inline to first quote
+        const quotes = document.getElementById('quotes');
+        const firstQuote = quotes.children[0];
+        if (firstQuote) {
+            const actor = document.createElement('div');
+            actor.className = 'actor-inline';
+            actor.textContent = `- ${todayMovie.actors[0]}`;
+            firstQuote.appendChild(actor);
+            setTimeout(() => actor.classList.add('show'), 50);
+        }
+    } else if (index === 2) {
         // Second quote
         const div = document.createElement('div');
         div.className = 'quote';
         div.textContent = `"${todayMovie.quotes[1]}"`;
         document.getElementById('quotes').appendChild(div);
         setTimeout(() => div.classList.add('show'), 50);
-    } else if (index === 2) {
-        // First actor
-        const div = document.createElement('div');
-        div.className = 'actor';
-        div.textContent = todayMovie.actors[0];
-        document.getElementById('actors').appendChild(div);
-        setTimeout(() => div.classList.add('show'), 50);
     } else if (index === 3) {
-        // Second actor
-        const div = document.createElement('div');
-        div.className = 'actor';
-        div.textContent = todayMovie.actors[1];
-        document.getElementById('actors').appendChild(div);
-        setTimeout(() => div.classList.add('show'), 50);
+        // Second actor - add inline to second quote
+        const quotes = document.getElementById('quotes');
+        const secondQuote = quotes.children[1];
+        if (secondQuote) {
+            const actor = document.createElement('div');
+            actor.className = 'actor-inline';
+            actor.textContent = `- ${todayMovie.actors[1]}`;
+            secondQuote.appendChild(actor);
+            setTimeout(() => actor.classList.add('show'), 50);
+        }
     } else if (index === 4) {
         // Year
         const yearTitle = document.getElementById('year-title');
@@ -220,6 +182,9 @@ function revealHint(index) {
 function handleGuess() {
     if (gameComplete) return;
 
+    // Close autocomplete
+    document.getElementById('autocomplete-list').innerHTML = '';
+
     const input = document.getElementById('guess');
     const guess = input.value.trim().toLowerCase();
 
@@ -227,7 +192,7 @@ function handleGuess() {
 
     if (guess === todayMovie.title.toLowerCase()) {
         revealHint(5);
-        endGame(true, currentHint);
+        endRound(true, currentHint);
     } else {
         document.getElementById('message').textContent = 'nope';
         setTimeout(() => {
@@ -238,42 +203,119 @@ function handleGuess() {
 }
 
 function handleNext() {
-    if (gameComplete || currentHint >= 5) return;
+    if (gameComplete) return;
+
+    // Reveal current hint
     revealHint(currentHint);
     currentHint++;
 
     const state = loadState();
-    state.hint = currentHint;
+    state.rounds[currentRound].hint = currentHint;
     saveState(state);
 
-    if (currentHint >= 6) {
-        endGame(false, currentHint - 1);
+    // After revealing the year (hint 4), next click reveals title and ends round
+    if (currentHint > 5) {
+        revealHint(5); // Reveal title
+        setTimeout(() => {
+            endRound(false, 5);
+        }, 1000);
     }
 }
 
-function endGame(won, hints) {
+function endRound(won, hints) {
     gameComplete = true;
 
     const state = loadState();
-    state.complete = true;
-    state.won = won;
-    saveState(state);
+    state.rounds[currentRound].complete = true;
+    state.rounds[currentRound].won = won;
 
-    updateStats(won, hints);
+    // Check if all rounds are complete
+    const allComplete = state.rounds.every(r => r.complete);
+    state.allComplete = allComplete;
+
+    saveState(state);
+    updateStats(won, hints, allComplete);
 
     document.getElementById('guess').disabled = true;
     document.getElementById('next').disabled = true;
 
     if (won) {
-        document.getElementById('message').textContent = 'correct';
+        document.getElementById('message').textContent = 'correct!';
+
+        // Auto-advance to next round if available
+        if (currentRound < ROUNDS_PER_DAY - 1 && !state.rounds[currentRound + 1].complete) {
+            setTimeout(() => {
+                startNextRound();
+            }, 2000);
+        } else {
+            // All rounds complete
+            if (allComplete) {
+                updateCountdown();
+                setInterval(updateCountdown, 1000);
+            }
+            setTimeout(showStats, 2000);
+        }
     } else {
-        document.getElementById('message').textContent = 'game over';
+        document.getElementById('message').textContent = 'failed - the answer was ' + todayMovie.title;
+
+        // Show button to go to next round or stats
+        if (currentRound < ROUNDS_PER_DAY - 1 && !state.rounds[currentRound + 1].complete) {
+            setTimeout(() => {
+                const existingBtn = document.getElementById('next-round-btn');
+                if (existingBtn) existingBtn.remove();
+
+                const nextBtn = document.createElement('button');
+                nextBtn.id = 'next-round-btn';
+                nextBtn.textContent = 'next round';
+                nextBtn.style.width = '100%';
+                nextBtn.style.marginTop = '20px';
+                nextBtn.onclick = startNextRound;
+                document.querySelector('.container').appendChild(nextBtn);
+            }, 2000);
+        } else {
+            // All rounds complete
+            if (allComplete) {
+                updateCountdown();
+                setInterval(updateCountdown, 1000);
+            }
+            setTimeout(showStats, 2000);
+        }
     }
+}
 
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
+function startNextRound() {
+    currentRound++;
+    currentHint = 0;
+    gameComplete = false;
 
-    setTimeout(showStats, 1500);
+    const state = loadState();
+    state.currentRound = currentRound;
+    saveState(state);
+
+    // Clear the UI
+    document.getElementById('quotes').innerHTML = '';
+    document.getElementById('year-title').textContent = '';
+    document.getElementById('year-title').classList.remove('show');
+    document.getElementById('message').textContent = '';
+    document.getElementById('guess').value = '';
+    document.getElementById('guess').disabled = false;
+    document.getElementById('next').disabled = false;
+
+    // Remove the "next round" button
+    const nextRoundBtn = document.getElementById('next-round-btn');
+    if (nextRoundBtn) nextRoundBtn.remove();
+
+    // Load new movie
+    todayMovie = getTodayMovie(currentRound);
+
+    // Update round info
+    updateRoundInfo();
+
+    // Reveal first hint automatically
+    revealHint(0);
+    currentHint = 1;
+    state.rounds[currentRound].hint = currentHint;
+    saveState(state);
 }
 
 function updateCountdown() {
@@ -291,12 +333,18 @@ function updateCountdown() {
         `next: ${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 }
 
+function updateRoundInfo() {
+    const info = document.getElementById('round-info');
+    const difficultyLabels = ['easy', 'medium', 'hard', 'harder', 'expert'];
+    info.textContent = `round ${currentRound + 1}/${ROUNDS_PER_DAY} - ${difficultyLabels[currentRound]}`;
+}
+
 function showStats() {
     const stats = loadStats();
 
-    document.getElementById('played').textContent = stats.played;
-    document.getElementById('won').textContent = stats.won;
-    document.getElementById('streak').textContent = stats.streak;
+    document.getElementById('played').textContent = stats.roundsPlayed;
+    document.getElementById('won').textContent = stats.roundsWon;
+    document.getElementById('streak').textContent = stats.daysStreak;
 
     const dist = document.getElementById('dist');
     dist.innerHTML = '';
@@ -326,21 +374,22 @@ function showStats() {
 
 function shareResults() {
     const state = loadState();
-    if (!state.complete) return;
+    if (!state.allComplete) return;
 
-    const hints = state.hint;
     let text = `Cinemdle ${getTodayKey()}\n`;
-    text += state.won ? `${hints + 1}/6\n\n` : `X/6\n\n`;
 
-    for (let i = 0; i < 6; i++) {
-        if (i < hints) {
-            text += '□';
-        } else if (i === hints && state.won) {
-            text += '■';
+    const wonRounds = state.rounds.filter(r => r.won).length;
+    text += `${wonRounds}/${ROUNDS_PER_DAY} rounds\n\n`;
+
+    state.rounds.forEach((round, idx) => {
+        text += `${idx + 1}. `;
+        if (round.won) {
+            text += `${round.hint + 1}/6`;
         } else {
-            text += '·';
+            text += 'X/6';
         }
-    }
+        text += '\n';
+    });
 
     navigator.clipboard.writeText(text).then(() => {
         const btn = document.getElementById('share');
@@ -352,27 +401,160 @@ function shareResults() {
     });
 }
 
+function setupAutocomplete() {
+    const input = document.getElementById('guess');
+    const autocompleteList = document.getElementById('autocomplete-list');
+    const allTitles = getAllMovieTitles();
+    let currentFocus = -1;
+
+    input.addEventListener('input', function() {
+        const val = this.value;
+        closeAutocomplete();
+        if (!val) return;
+
+        currentFocus = -1;
+
+        const matches = allTitles.filter(title =>
+            title.toLowerCase().includes(val.toLowerCase())
+        ).slice(0, 10); // Limit to 10 results
+
+        matches.forEach(title => {
+            const div = document.createElement('div');
+            div.className = 'autocomplete-item';
+            div.textContent = title;
+            div.addEventListener('click', function() {
+                input.value = title;
+                closeAutocomplete();
+            });
+            autocompleteList.appendChild(div);
+        });
+    });
+
+    input.addEventListener('keydown', function(e) {
+        const items = autocompleteList.getElementsByClassName('autocomplete-item');
+        if (e.keyCode === 40) { // Down arrow
+            currentFocus++;
+            addActive(items);
+            e.preventDefault();
+        } else if (e.keyCode === 38) { // Up arrow
+            currentFocus--;
+            addActive(items);
+            e.preventDefault();
+        } else if (e.keyCode === 13) { // Enter
+            if (currentFocus > -1 && items[currentFocus]) {
+                items[currentFocus].click();
+                e.preventDefault();
+            }
+        }
+    });
+
+    function addActive(items) {
+        if (!items) return false;
+        removeActive(items);
+        if (currentFocus >= items.length) currentFocus = 0;
+        if (currentFocus < 0) currentFocus = items.length - 1;
+        items[currentFocus].classList.add('autocomplete-active');
+    }
+
+    function removeActive(items) {
+        for (let i = 0; i < items.length; i++) {
+            items[i].classList.remove('autocomplete-active');
+        }
+    }
+
+    function closeAutocomplete() {
+        autocompleteList.innerHTML = '';
+    }
+
+    document.addEventListener('click', function(e) {
+        if (e.target !== input) {
+            closeAutocomplete();
+        }
+    });
+}
+
 function init() {
-    todayMovie = getTodayMovie();
     const state = loadState();
 
-    currentHint = state.hint;
-    gameComplete = state.complete;
+    setupAutocomplete();
 
-    for (let i = 0; i < currentHint; i++) {
-        revealHint(i);
+    // Find the current round (first incomplete round or last round if all complete)
+    currentRound = state.currentRound;
+    if (state.rounds[currentRound].complete && currentRound < ROUNDS_PER_DAY - 1) {
+        // Find next incomplete round
+        for (let i = 0; i < ROUNDS_PER_DAY; i++) {
+            if (!state.rounds[i].complete) {
+                currentRound = i;
+                state.currentRound = i;
+                saveState(state);
+                break;
+            }
+        }
+    }
+
+    todayMovie = getTodayMovie(currentRound);
+    currentHint = state.rounds[currentRound].hint;
+    gameComplete = state.rounds[currentRound].complete;
+
+    // Update round info
+    updateRoundInfo();
+
+    // If starting fresh (no hints yet), show first hint automatically
+    if (currentHint === 0 && !gameComplete) {
+        revealHint(0);
+        currentHint = 1;
+        state.rounds[currentRound].hint = currentHint;
+        saveState(state);
+    } else {
+        // Restore previous hints
+        for (let i = 0; i < currentHint; i++) {
+            revealHint(i);
+        }
     }
 
     if (gameComplete) {
         document.getElementById('guess').disabled = true;
         document.getElementById('next').disabled = true;
-        if (state.won) {
-            document.getElementById('message').textContent = 'correct';
+
+        if (state.rounds[currentRound].won) {
+            document.getElementById('message').textContent = 'correct!';
+
+            // If won, auto-advance was already handled, but on page reload we show button
+            if (currentRound < ROUNDS_PER_DAY - 1 && !state.rounds[currentRound + 1].complete) {
+                const existingBtn = document.getElementById('next-round-btn');
+                if (!existingBtn) {
+                    const nextBtn = document.createElement('button');
+                    nextBtn.id = 'next-round-btn';
+                    nextBtn.textContent = 'next round';
+                    nextBtn.style.width = '100%';
+                    nextBtn.style.marginTop = '20px';
+                    nextBtn.onclick = startNextRound;
+                    document.querySelector('.container').appendChild(nextBtn);
+                }
+            }
         } else {
-            document.getElementById('message').textContent = 'game over';
+            document.getElementById('message').textContent = 'failed - the answer was ' + todayMovie.title;
+
+            // If failed, show button to next round
+            if (currentRound < ROUNDS_PER_DAY - 1 && !state.rounds[currentRound + 1].complete) {
+                const existingBtn = document.getElementById('next-round-btn');
+                if (!existingBtn) {
+                    const nextBtn = document.createElement('button');
+                    nextBtn.id = 'next-round-btn';
+                    nextBtn.textContent = 'next round';
+                    nextBtn.style.width = '100%';
+                    nextBtn.style.marginTop = '20px';
+                    nextBtn.onclick = startNextRound;
+                    document.querySelector('.container').appendChild(nextBtn);
+                }
+            }
         }
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
+
+        // Show countdown if all rounds complete
+        if (state.allComplete) {
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        }
     }
 
     document.getElementById('guess').addEventListener('keypress', (e) => {
@@ -382,6 +564,18 @@ function init() {
     document.getElementById('next').addEventListener('click', handleNext);
     document.getElementById('stats').addEventListener('click', showStats);
     document.getElementById('share').addEventListener('click', shareResults);
+    document.getElementById('dev-reset').addEventListener('click', () => {
+        if (confirm('Reset game with new films? (dev mode)')) {
+            // Increment offset for new films
+            incrementDevOffset();
+
+            // Clear game state but keep dev offset
+            localStorage.removeItem('state');
+            localStorage.removeItem('stats');
+
+            location.reload();
+        }
+    });
 
     document.getElementById('close').addEventListener('click', () => {
         document.getElementById('modal').classList.remove('show');

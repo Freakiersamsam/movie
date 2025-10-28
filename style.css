@@ -19,9 +19,10 @@ body {
 .year-title {
     position: fixed;
     top: 20px;
-    left: 20px;
+    right: 20px;
     opacity: 0;
     transition: opacity 1s;
+    text-align: right;
 }
 
 .year-title.show {
@@ -38,6 +39,13 @@ body {
     padding: 80px 20px 40px;
 }
 
+.round-info {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 18px;
+    opacity: 0.7;
+}
+
 .quotes {
     margin-bottom: 60px;
     min-height: 100px;
@@ -45,7 +53,7 @@ body {
 
 .quote {
     opacity: 0;
-    margin-bottom: 15px;
+    margin-bottom: 30px;
     transition: opacity 1s;
 }
 
@@ -53,18 +61,15 @@ body {
     opacity: 1;
 }
 
-.actors {
-    margin-bottom: 80px;
-    min-height: 50px;
-}
-
-.actor {
+.actor-inline {
     opacity: 0;
-    margin-bottom: 10px;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #888;
     transition: opacity 1s;
 }
 
-.actor.show {
+.actor-inline.show {
     opacity: 1;
 }
 
@@ -75,9 +80,14 @@ body {
     justify-content: center;
 }
 
-#guess {
+.autocomplete-wrapper {
+    position: relative;
     flex: 1;
     max-width: 500px;
+}
+
+#guess {
+    width: 100%;
     background: #000;
     border: 1px solid #fff;
     color: #fff;
@@ -92,6 +102,37 @@ body {
 
 #guess:disabled {
     opacity: 0.3;
+}
+
+.autocomplete-items {
+    position: absolute;
+    border: 1px solid #fff;
+    border-top: none;
+    z-index: 99;
+    top: 100%;
+    left: 0;
+    right: 0;
+    max-height: 200px;
+    overflow-y: auto;
+    background: #000;
+}
+
+.autocomplete-item {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #333;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
+}
+
+.autocomplete-item:hover {
+    background: #fff;
+    color: #000;
+}
+
+.autocomplete-active {
+    background: #fff;
+    color: #000;
 }
 
 button {
@@ -221,11 +262,21 @@ h2 {
         flex-direction: column;
     }
 
-    #guess {
+    .autocomplete-wrapper {
         max-width: 100%;
     }
 
     .modal-content {
         padding: 30px 20px;
+    }
+
+    .year-title {
+        font-size: 14px;
+        top: 10px;
+        right: 10px;
+    }
+
+    .round-info {
+        font-size: 16px;
     }
 }

@@ -201,17 +201,17 @@ function handleGuess() {
         // Store the current hint count for stats
         const hintsUsed = currentHint;
 
-        // Reveal all remaining hints in sequence
+        // Reveal all remaining hints in sequence - fast cascade
         let delay = 0;
         for (let i = currentHint; i <= 5; i++) {
             ((hintIndex) => {
                 setTimeout(() => revealHint(hintIndex), delay);
             })(i);
-            delay += 300;
+            delay += 80;
         }
 
         // Call endRound after all hints are revealed
-        setTimeout(() => endRound(true, hintsUsed), delay + 300);
+        setTimeout(() => endRound(true, hintsUsed), delay + 200);
     } else {
         document.getElementById('message').textContent = 'nope';
         setTimeout(() => {

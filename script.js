@@ -292,6 +292,11 @@ function handleGuess() {
         showMessage('nope', TIMINGS.MESSAGE_DURATION);
         input.value = '';
 
+        // Auto-reveal next hint on wrong guess
+        if (currentHint <= 5) {
+            setTimeout(() => handleNext(), 500); // After shake animation
+        }
+
         // Maintain focus on input
         input.focus();
     }

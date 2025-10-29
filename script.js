@@ -104,7 +104,8 @@ function updateStats(won, hints, allRoundsComplete) {
 
     if (won) {
         stats.roundsWon++;
-        stats.dist[hints]++;
+        // hints represents currentHint (next hint to show), so subtract 1 to get actual hints seen
+        stats.dist[hints - 1]++;
     }
 
     // Only update day streak when all rounds are complete
@@ -132,13 +133,20 @@ function updateStats(won, hints, allRoundsComplete) {
 
 function revealHint(index) {
     if (index === 0) {
-        // First quote
+        // First quote (first line)
         const div = document.createElement('div');
         div.className = 'quote';
         div.textContent = `"${todayMovie.quotes[0]}"`;
         document.getElementById('quotes').appendChild(div);
         setTimeout(() => div.classList.add('show'), 50);
     } else if (index === 1) {
+        // Second quote (second line)
+        const div = document.createElement('div');
+        div.className = 'quote';
+        div.textContent = `"${todayMovie.quotes[1]}"`;
+        document.getElementById('quotes').appendChild(div);
+        setTimeout(() => div.classList.add('show'), 50);
+    } else if (index === 2) {
         // First actor - add inline to first quote
         const quotes = document.getElementById('quotes');
         const firstQuote = quotes.children[0];
@@ -149,13 +157,6 @@ function revealHint(index) {
             firstQuote.appendChild(actor);
             setTimeout(() => actor.classList.add('show'), 50);
         }
-    } else if (index === 2) {
-        // Second quote
-        const div = document.createElement('div');
-        div.className = 'quote';
-        div.textContent = `"${todayMovie.quotes[1]}"`;
-        document.getElementById('quotes').appendChild(div);
-        setTimeout(() => div.classList.add('show'), 50);
     } else if (index === 3) {
         // Second actor - add inline to second quote
         const quotes = document.getElementById('quotes');
@@ -192,8 +193,11 @@ function handleGuess() {
     if (!guess) return;
 
     if (guess === todayMovie.title.toLowerCase()) {
-        revealHint(5);
-        endRound(true, currentHint);
+        // Reveal all remaining hints
+        for (let i = currentHint; i <= 5; i++) {
+            setTimeout(() => revealHint(i), (i - currentHint) * 300);
+        }
+        setTimeout(() => endRound(true, currentHint), (6 - currentHint) * 300);
     } else {
         document.getElementById('message').textContent = 'nope';
         setTimeout(() => {
@@ -385,7 +389,7 @@ function shareResults() {
     state.rounds.forEach((round, idx) => {
         text += `${idx + 1}. `;
         if (round.won) {
-            text += `${round.hint + 1}/6`;
+            text += `${round.hint}/6`;
         } else {
             text += 'X/6';
         }

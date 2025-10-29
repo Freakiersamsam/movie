@@ -18,10 +18,6 @@ let currentRound = 0;
 let gameComplete = false;
 let todayMovie = null;
 
-// Dev mode state
-let shiftPressCount = 0;
-let devModeEnabled = false;
-
 function getDevOffset() {
     const offset = localStorage.getItem('devOffset');
     return offset ? parseInt(offset) : 0;
@@ -816,21 +812,6 @@ function init() {
         if (e.key === '?' && !e.target.matches('input, textarea')) {
             e.preventDefault();
             document.getElementById('help-modal').classList.add('show');
-        }
-
-        // Shift key counter for dev mode toggle
-        if (e.key === 'Shift') {
-            shiftPressCount++;
-            if (shiftPressCount >= 3) {
-                devModeEnabled = !devModeEnabled;
-                document.getElementById('dev-reset').style.display = devModeEnabled ? 'block' : 'none';
-                showMessage(devModeEnabled ? 'dev mode enabled' : 'dev mode disabled', TIMINGS.MESSAGE_DURATION);
-                shiftPressCount = 0;
-            }
-
-            setTimeout(() => {
-                shiftPressCount = 0;
-            }, TIMINGS.SHIFT_KEY_TIMEOUT);
         }
     });
 }

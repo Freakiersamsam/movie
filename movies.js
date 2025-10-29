@@ -4,7 +4,7 @@
 
 const MOVIE_DATABASE = [
     // ============================================
-    // DIFFICULTY 1 - EXTREMELY POPULAR BLOCKBUSTERS (40 films)
+    // DIFFICULTY 1 - EXTREMELY POPULAR BLOCKBUSTERS (36 films)
     // ============================================
     {
         title: "Titanic",
@@ -12,7 +12,7 @@ const MOVIE_DATABASE = [
         actors: ["Kate Winslet", "Leonardo DiCaprio"],
         quotes: [
             "Jack, I'm flying!",
-            "You're flying, Rose."
+            "You're flying, Rose.",
         ],
         difficulty: 1
     },
@@ -22,7 +22,7 @@ const MOVIE_DATABASE = [
         actors: ["Mark Hamill", "Alec Guinness"],
         quotes: [
             "I want to learn the ways of the Force and become a Jedi like my father.",
-            "You must do what you feel is right, of course."
+            "You must do what you feel is right, of course.",
         ],
         difficulty: 1
     },
@@ -32,7 +32,7 @@ const MOVIE_DATABASE = [
         actors: ["Salvatore Corsitto", "Marlon Brando"],
         quotes: [
             "I believe in America.",
-            "Why did you go to the police? Why didn't you come to me first?"
+            "Why did you go to the police? Why didn't you come to me first?",
         ],
         difficulty: 1
     },
@@ -42,7 +42,7 @@ const MOVIE_DATABASE = [
         actors: ["Tom Hanks", "Sally Field"],
         quotes: [
             "My mama always said life was like a box of chocolates. You never know what you're gonna get.",
-            "Run, Forrest! Run!"
+            "Run, Forrest! Run!",
         ],
         difficulty: 1
     },
@@ -52,7 +52,7 @@ const MOVIE_DATABASE = [
         actors: ["Nathan Lane", "Jeremy Irons"],
         quotes: [
             "Hakuna Matata. It means no worries.",
-            "Long live the King."
+            "Long live the King.",
         ],
         difficulty: 1
     },
@@ -62,7 +62,7 @@ const MOVIE_DATABASE = [
         actors: ["Jeff Goldblum", "Richard Attenborough"],
         quotes: [
             "Life finds a way.",
-            "Welcome to Jurassic Park."
+            "Welcome to Jurassic Park.",
         ],
         difficulty: 1
     },
@@ -72,7 +72,7 @@ const MOVIE_DATABASE = [
         actors: ["Keanu Reeves", "Laurence Fishburne"],
         quotes: [
             "I know kung fu.",
-            "Show me."
+            "Show me.",
         ],
         difficulty: 1
     },
@@ -82,7 +82,7 @@ const MOVIE_DATABASE = [
         actors: ["Robert Shaw", "Roy Scheider"],
         quotes: [
             "Here's to swimmin' with bow-legged women.",
-            "I'll drink to that."
+            "I'll drink to that.",
         ],
         difficulty: 1
     },
@@ -92,7 +92,7 @@ const MOVIE_DATABASE = [
         actors: ["Robbie Coltrane", "Daniel Radcliffe"],
         quotes: [
             "You're a wizard, Harry.",
-            "I'm a what?"
+            "I'm a what?",
         ],
         difficulty: 1
     },
@@ -102,7 +102,7 @@ const MOVIE_DATABASE = [
         actors: ["Mark Ruffalo", "Robert Downey Jr."],
         quotes: [
             "I'm always angry.",
-            "We have a Hulk."
+            "We have a Hulk.",
         ],
         difficulty: 1
     },
@@ -112,7 +112,7 @@ const MOVIE_DATABASE = [
         actors: ["Judy Garland", "Billie Burke"],
         quotes: [
             "Toto, I've a feeling we're not in Kansas anymore.",
-            "Are you a good witch or a bad witch?"
+            "Are you a good witch or a bad witch?",
         ],
         difficulty: 1
     },
@@ -122,7 +122,7 @@ const MOVIE_DATABASE = [
         actors: ["Henry Thomas", "E.T."],
         quotes: [
             "E.T. phone home.",
-            "And they'll come?"
+            "And they'll come?",
         ],
         difficulty: 1
     },
@@ -132,7 +132,7 @@ const MOVIE_DATABASE = [
         actors: ["Elijah Wood", "Ian McKellen"],
         quotes: [
             "I wish the Ring had never come to me.",
-            "So do all who live to see such times, but that is not for them to decide."
+            "So do all who live to see such times, but that is not for them to decide.",
         ],
         difficulty: 1
     },
@@ -142,7 +142,7 @@ const MOVIE_DATABASE = [
         actors: ["Tom Hanks", "Tim Allen"],
         quotes: [
             "To infinity and beyond!",
-            "That wasn't flying. That was falling with style."
+            "That wasn't flying. That was falling with style.",
         ],
         difficulty: 1
     },
@@ -152,7 +152,7 @@ const MOVIE_DATABASE = [
         actors: ["James Earl Jones", "Mark Hamill"],
         quotes: [
             "No, I am your father.",
-            "No. No! That's not true! That's impossible!"
+            "No. No! That's not true! That's impossible!",
         ],
         difficulty: 1
     },
@@ -162,7 +162,7 @@ const MOVIE_DATABASE = [
         actors: ["Sam Worthington", "Zoe Saldana"],
         quotes: [
             "I see you.",
-            "I see you too."
+            "I see you too.",
         ],
         difficulty: 1
     },
@@ -172,7 +172,7 @@ const MOVIE_DATABASE = [
         actors: ["Tom Hardy", "Christian Bale"],
         quotes: [
             "No one cared who I was until I put on the mask.",
-            "If I pull that off, will you die?"
+            "If I pull that off, will you die?",
         ],
         difficulty: 1
     },
@@ -182,7 +182,7 @@ const MOVIE_DATABASE = [
         actors: ["Harrison Ford", "Karen Allen"],
         quotes: [
             "It's not the years, honey. It's the mileage.",
-            "I can't believe you're the same girl."
+            "I can't believe you're the same girl.",
         ],
         difficulty: 1
     },
@@ -192,7 +192,7 @@ const MOVIE_DATABASE = [
         actors: ["Tobey Maguire", "Cliff Robertson"],
         quotes: [
             "With great power comes great responsibility.",
-            "Remember that, Peter. Remember that."
+            "Remember that, Peter. Remember that.",
         ],
         difficulty: 1
     },
@@ -202,7 +202,7 @@ const MOVIE_DATABASE = [
         actors: ["Idina Menzel", "Kristen Bell"],
         quotes: [
             "Let it go! Let it go!",
-            "Elsa!"
+            "Elsa!",
         ],
         difficulty: 1
     },
@@ -212,7 +212,7 @@ const MOVIE_DATABASE = [
         actors: ["Albert Brooks", "Alexander Gould"],
         quotes: [
             "Just keep swimming. Just keep swimming.",
-            "Dad, I don't think that's helping."
+            "Dad, I don't think that's helping.",
         ],
         difficulty: 1
     },
@@ -222,7 +222,7 @@ const MOVIE_DATABASE = [
         actors: ["Mike Myers", "Eddie Murphy"],
         quotes: [
             "Ogres are like onions.",
-            "They stink?"
+            "They stink?",
         ],
         difficulty: 1
     },
@@ -232,7 +232,7 @@ const MOVIE_DATABASE = [
         actors: ["Robert Downey Jr.", "Gwyneth Paltrow"],
         quotes: [
             "I am Iron Man.",
-            "You've always been Iron Man."
+            "You've always been Iron Man.",
         ],
         difficulty: 1
     },
@@ -242,7 +242,7 @@ const MOVIE_DATABASE = [
         actors: ["Russell Crowe", "Joaquin Phoenix"],
         quotes: [
             "My name is Maximus Decimus Meridius.",
-            "And I will have my vengeance, in this life or the next."
+            "And I will have my vengeance, in this life or the next.",
         ],
         difficulty: 1
     },
@@ -252,7 +252,7 @@ const MOVIE_DATABASE = [
         actors: ["Haley Joel Osment", "Bruce Willis"],
         quotes: [
             "I see dead people.",
-            "In your dreams?"
+            "In your dreams?",
         ],
         difficulty: 1
     },
@@ -262,7 +262,7 @@ const MOVIE_DATABASE = [
         actors: ["Leonardo DiCaprio", "Ellen Page"],
         quotes: [
             "What's the most resilient parasite?",
-            "An idea."
+            "An idea.",
         ],
         difficulty: 1
     },
@@ -272,7 +272,7 @@ const MOVIE_DATABASE = [
         actors: ["Jennifer Lawrence", "Josh Hutcherson"],
         quotes: [
             "May the odds be ever in your favor.",
-            "I volunteer! I volunteer as tribute!"
+            "I volunteer! I volunteer as tribute!",
         ],
         difficulty: 1
     },
@@ -282,7 +282,7 @@ const MOVIE_DATABASE = [
         actors: ["Chadwick Boseman", "Michael B. Jordan"],
         quotes: [
             "Wakanda forever!",
-            "Is this your king?"
+            "Is this your king?",
         ],
         difficulty: 1
     },
@@ -292,7 +292,7 @@ const MOVIE_DATABASE = [
         actors: ["Robert Downey Jr.", "Chris Evans"],
         quotes: [
             "I am Iron Man.",
-            "Avengers, assemble!"
+            "Avengers, assemble!",
         ],
         difficulty: 1
     },
@@ -302,27 +302,7 @@ const MOVIE_DATABASE = [
         actors: ["Craig T. Nelson", "Holly Hunter"],
         quotes: [
             "Where is my super suit?",
-            "What?"
-        ],
-        difficulty: 1
-    },
-    {
-        title: "Frozen",
-        year: "2013",
-        actors: ["Kristen Bell", "Idina Menzel"],
-        quotes: [
-            "Do you want to build a snowman?",
-            "Let it go!"
-        ],
-        difficulty: 1
-    },
-    {
-        title: "Shrek",
-        year: "2001",
-        actors: ["Mike Myers", "Eddie Murphy"],
-        quotes: [
-            "Ogres are like onions.",
-            "They stink?"
+            "What?",
         ],
         difficulty: 1
     },
@@ -332,67 +312,7 @@ const MOVIE_DATABASE = [
         actors: ["Tom Hanks", "Tim Allen"],
         quotes: [
             "So long, partner.",
-            "To infinity and beyond!"
-        ],
-        difficulty: 1
-    },
-    {
-        title: "Spider-Man",
-        year: "2002",
-        actors: ["Tobey Maguire", "Willem Dafoe"],
-        quotes: [
-            "With great power comes great responsibility.",
-            "I'm Spider-Man."
-        ],
-        difficulty: 1
-    },
-    {
-        title: "Iron Man",
-        year: "2008",
-        actors: ["Robert Downey Jr.", "Jeff Bridges"],
-        quotes: [
-            "I am Iron Man.",
-            "Tony Stark was able to build this in a cave! With a box of scraps!"
-        ],
-        difficulty: 1
-    },
-    {
-        title: "The Avengers",
-        year: "2012",
-        actors: ["Robert Downey Jr.", "Chris Evans"],
-        quotes: [
-            "I'm always angry.",
-            "We have a Hulk."
-        ],
-        difficulty: 1
-    },
-    {
-        title: "Jaws",
-        year: "1975",
-        actors: ["Roy Scheider", "Robert Shaw"],
-        quotes: [
-            "You're gonna need a bigger boat.",
-            "Smile, you son of a bitch!"
-        ],
-        difficulty: 1
-    },
-    {
-        title: "E.T. the Extra-Terrestrial",
-        year: "1982",
-        actors: ["Henry Thomas", "Drew Barrymore"],
-        quotes: [
-            "E.T. phone home.",
-            "I'll be right here."
-        ],
-        difficulty: 1
-    },
-    {
-        title: "The Wizard of Oz",
-        year: "1939",
-        actors: ["Judy Garland", "Ray Bolger"],
-        quotes: [
-            "There's no place like home.",
-            "Toto, I've a feeling we're not in Kansas anymore."
+            "To infinity and beyond!",
         ],
         difficulty: 1
     },
@@ -402,13 +322,53 @@ const MOVIE_DATABASE = [
         actors: ["Sylvester Stallone", "Talia Shire"],
         quotes: [
             "Yo, Adrian!",
-            "I love you!"
+            "I love you!",
+        ],
+        difficulty: 1
+    },
+    {
+        title: "Aladdin",
+        year: "1992",
+        actors: ["Scott Weinger", "Linda Larkin"],
+        quotes: [
+            "Do you trust me?",
+            "Yes.",
+        ],
+        difficulty: 1
+    },
+    {
+        title: "Dumb and Dumber",
+        year: "1994",
+        actors: ["Jim Carrey", "Lauren Holly"],
+        quotes: [
+            "I got worms.",
+            "I beg your pardon?",
+        ],
+        difficulty: 1
+    },
+    {
+        title: "The Mask",
+        year: "1994",
+        actors: ["Jim Carrey", "Cameron Diaz"],
+        quotes: [
+            "You are a rug. I am talking astro-turf here.",
+            "Hey, I'm a gentleman. If they can't appreciate that, it's their problem.",
+        ],
+        difficulty: 1
+    },
+    {
+        title: "Ace Ventura: Pet Detective",
+        year: "1994",
+        actors: ["Jim Carrey", "Courteney Cox"],
+        quotes: [
+            "Get out of the tank.",
+            "Can't hear you Flipper, Flipper... gotta find Flipper",
         ],
         difficulty: 1
     },
 
     // ============================================
-    // DIFFICULTY 2 - VERY POPULAR & WELL-KNOWN (125 films)
+    // DIFFICULTY 2 - VERY POPULAR & WELL-KNOWN (111 films)
     // ============================================
     {
         title: "Casablanca",
@@ -416,7 +376,7 @@ const MOVIE_DATABASE = [
         actors: ["Dooley Wilson", "Humphrey Bogart"],
         quotes: [
             "Boss, ain't you going to bed?",
-            "Not right now."
+            "Not right now.",
         ],
         difficulty: 2
     },
@@ -426,7 +386,7 @@ const MOVIE_DATABASE = [
         actors: ["Morgan Freeman", "Tim Robbins"],
         quotes: [
             "Get busy living, or get busy dying.",
-            "Hope is a good thing, maybe the best of things."
+            "Hope is a good thing, maybe the best of things.",
         ],
         difficulty: 2
     },
@@ -436,7 +396,7 @@ const MOVIE_DATABASE = [
         actors: ["John Travolta", "Samuel L. Jackson"],
         quotes: [
             "They call it a Royale with Cheese.",
-            "Royale with Cheese. What do they call a Big Mac?"
+            "Royale with Cheese. What do they call a Big Mac?",
         ],
         difficulty: 2
     },
@@ -446,7 +406,7 @@ const MOVIE_DATABASE = [
         actors: ["Heath Ledger", "Christian Bale"],
         quotes: [
             "Why so serious?",
-            "Let's put a smile on that face!"
+            "Let's put a smile on that face!",
         ],
         difficulty: 2
     },
@@ -456,7 +416,7 @@ const MOVIE_DATABASE = [
         actors: ["Brad Pitt", "Edward Norton"],
         quotes: [
             "The first rule of Fight Club is: you do not talk about Fight Club.",
-            "I am Jack's complete lack of surprise."
+            "I am Jack's complete lack of surprise.",
         ],
         difficulty: 2
     },
@@ -466,7 +426,7 @@ const MOVIE_DATABASE = [
         actors: ["Arnold Schwarzenegger", "Michael Biehn"],
         quotes: [
             "I'll be back.",
-            "Come with me if you want to live."
+            "Come with me if you want to live.",
         ],
         difficulty: 2
     },
@@ -476,7 +436,7 @@ const MOVIE_DATABASE = [
         actors: ["Michael J. Fox", "Christopher Lloyd"],
         quotes: [
             "Wait a minute, Doc. Are you telling me you built a time machine out of a DeLorean?",
-            "The way I see it, if you're gonna build a time machine into a car, why not do it with some style?"
+            "The way I see it, if you're gonna build a time machine into a car, why not do it with some style?",
         ],
         difficulty: 2
     },
@@ -486,7 +446,7 @@ const MOVIE_DATABASE = [
         actors: ["Jodie Foster", "Anthony Hopkins"],
         quotes: [
             "If you didn't kill him, then who did, sir?",
-            "Who can say? Best thing for him, really. His therapy was going nowhere."
+            "Who can say? Best thing for him, really. His therapy was going nowhere.",
         ],
         difficulty: 2
     },
@@ -496,7 +456,7 @@ const MOVIE_DATABASE = [
         actors: ["Liam Neeson", "Ben Kingsley"],
         quotes: [
             "I could have got more out. I could have got more.",
-            "Oskar, there are eleven hundred people who are alive because of you."
+            "Oskar, there are eleven hundred people who are alive because of you.",
         ],
         difficulty: 2
     },
@@ -506,7 +466,7 @@ const MOVIE_DATABASE = [
         actors: ["Ray Liotta", "Robert De Niro"],
         quotes: [
             "As far back as I can remember, I always wanted to be a gangster.",
-            "You know why you went to the can? You went to the can because you didn't have the balls."
+            "You know why you went to the can? You went to the can because you didn't have the balls.",
         ],
         difficulty: 2
     },
@@ -516,7 +476,7 @@ const MOVIE_DATABASE = [
         actors: ["Tom Hanks", "Michael Clarke Duncan"],
         quotes: [
             "I'm tired, boss.",
-            "You and me both, John."
+            "You and me both, John.",
         ],
         difficulty: 2
     },
@@ -526,7 +486,7 @@ const MOVIE_DATABASE = [
         actors: ["Tom Hanks", "Matt Damon"],
         quotes: [
             "Earn this.",
-            "Yes, sir."
+            "Yes, sir.",
         ],
         difficulty: 2
     },
@@ -536,7 +496,7 @@ const MOVIE_DATABASE = [
         actors: ["Leonardo DiCaprio", "Matt Damon"],
         quotes: [
             "I'm the guy who does his job. You must be the other guy.",
-            "Maybe. Maybe not. Maybe fuck yourself."
+            "Maybe. Maybe not. Maybe fuck yourself.",
         ],
         difficulty: 2
     },
@@ -546,7 +506,7 @@ const MOVIE_DATABASE = [
         actors: ["Christian Bale", "Hugh Jackman"],
         quotes: [
             "Are you watching closely?",
-            "Every magic trick consists of three parts."
+            "Every magic trick consists of three parts.",
         ],
         difficulty: 2
     },
@@ -556,7 +516,7 @@ const MOVIE_DATABASE = [
         actors: ["Guy Pearce", "Carrie-Anne Moss"],
         quotes: [
             "I have to believe in a world outside my own mind.",
-            "What's the last thing you remember?"
+            "What's the last thing you remember?",
         ],
         difficulty: 2
     },
@@ -566,7 +526,7 @@ const MOVIE_DATABASE = [
         actors: ["Kevin Spacey", "Chazz Palminteri"],
         quotes: [
             "The greatest trick the Devil ever pulled was convincing the world he didn't exist.",
-            "And like that... he's gone."
+            "And like that... he's gone.",
         ],
         difficulty: 2
     },
@@ -576,7 +536,7 @@ const MOVIE_DATABASE = [
         actors: ["Brad Pitt", "Morgan Freeman"],
         quotes: [
             "What's in the box?",
-            "Nothing you need to see."
+            "Nothing you need to see.",
         ],
         difficulty: 2
     },
@@ -586,7 +546,7 @@ const MOVIE_DATABASE = [
         actors: ["Jim Carrey", "Ed Harris"],
         quotes: [
             "Good morning! And in case I don't see you, good afternoon, good evening, and good night!",
-            "We accept the reality of the world with which we're presented."
+            "We accept the reality of the world with which we're presented.",
         ],
         difficulty: 2
     },
@@ -596,7 +556,7 @@ const MOVIE_DATABASE = [
         actors: ["Kevin Spacey", "Annette Bening"],
         quotes: [
             "I'm just an ordinary guy with nothing to lose.",
-            "You don't get to tell me what to do ever again."
+            "You don't get to tell me what to do ever again.",
         ],
         difficulty: 2
     },
@@ -606,7 +566,7 @@ const MOVIE_DATABASE = [
         actors: ["Jesse Eisenberg", "Andrew Garfield"],
         quotes: [
             "I'm CEO, bitch.",
-            "Is he allowed to do that?"
+            "Is he allowed to do that?",
         ],
         difficulty: 2
     },
@@ -616,7 +576,7 @@ const MOVIE_DATABASE = [
         actors: ["Matthew McConaughey", "Anne Hathaway"],
         quotes: [
             "We used to look up at the sky and wonder at our place in the stars.",
-            "Now we just look down and worry about our place in the dirt."
+            "Now we just look down and worry about our place in the dirt.",
         ],
         difficulty: 2
     },
@@ -626,7 +586,7 @@ const MOVIE_DATABASE = [
         actors: ["Tom Hardy", "Charlize Theron"],
         quotes: [
             "What a lovely day!",
-            "We are not things!"
+            "We are not things!",
         ],
         difficulty: 2
     },
@@ -636,7 +596,7 @@ const MOVIE_DATABASE = [
         actors: ["Jamie Foxx", "Christoph Waltz"],
         quotes: [
             "The D is silent.",
-            "I know."
+            "I know.",
         ],
         difficulty: 2
     },
@@ -646,7 +606,7 @@ const MOVIE_DATABASE = [
         actors: ["Javier Bardem", "Woody Harrelson"],
         quotes: [
             "What's the most you ever lost on a coin toss?",
-            "Sir?"
+            "Sir?",
         ],
         difficulty: 2
     },
@@ -656,7 +616,7 @@ const MOVIE_DATABASE = [
         actors: ["Daniel Day-Lewis", "Paul Dano"],
         quotes: [
             "I drink your milkshake!",
-            "I drink it up!"
+            "I drink it up!",
         ],
         difficulty: 2
     },
@@ -666,7 +626,7 @@ const MOVIE_DATABASE = [
         actors: ["J.K. Simmons", "Miles Teller"],
         quotes: [
             "Not quite my tempo.",
-            "Were you rushing or were you dragging?"
+            "Were you rushing or were you dragging?",
         ],
         difficulty: 2
     },
@@ -676,7 +636,7 @@ const MOVIE_DATABASE = [
         actors: ["Song Kang-ho", "Lee Sun-kyun"],
         quotes: [
             "You know what kind of plan never fails?",
-            "No plan at all."
+            "No plan at all.",
         ],
         difficulty: 2
     },
@@ -686,7 +646,7 @@ const MOVIE_DATABASE = [
         actors: ["Daniel Kaluuya", "Allison Williams"],
         quotes: [
             "I would have voted for Obama for a third term if I could.",
-            "Do they know I'm black?"
+            "Do they know I'm black?",
         ],
         difficulty: 2
     },
@@ -696,7 +656,7 @@ const MOVIE_DATABASE = [
         actors: ["Ralph Fiennes", "Tony Revolori"],
         quotes: [
             "You see, there are still faint glimmers of civilization left in this barbaric slaughterhouse.",
-            "Indeed, sir."
+            "Indeed, sir.",
         ],
         difficulty: 2
     },
@@ -706,7 +666,7 @@ const MOVIE_DATABASE = [
         actors: ["Dev Patel", "Freida Pinto"],
         quotes: [
             "When somebody asks me a question, I tell them the answer.",
-            "This is your destiny."
+            "This is your destiny.",
         ],
         difficulty: 2
     },
@@ -716,7 +676,7 @@ const MOVIE_DATABASE = [
         actors: ["Colin Firth", "Geoffrey Rush"],
         quotes: [
             "I have a voice!",
-            "Yes, you do."
+            "Yes, you do.",
         ],
         difficulty: 2
     },
@@ -726,7 +686,7 @@ const MOVIE_DATABASE = [
         actors: ["Russell Crowe", "Jennifer Connelly"],
         quotes: [
             "I need to believe that something extraordinary is possible.",
-            "You are all I want."
+            "You are all I want.",
         ],
         difficulty: 2
     },
@@ -736,7 +696,7 @@ const MOVIE_DATABASE = [
         actors: ["Leonardo DiCaprio", "Tom Hardy"],
         quotes: [
             "I ain't afraid to die anymore.",
-            "I was just doing my job."
+            "I was just doing my job.",
         ],
         difficulty: 2
     },
@@ -746,7 +706,7 @@ const MOVIE_DATABASE = [
         actors: ["Ryan Gosling", "Emma Stone"],
         quotes: [
             "Here's to the ones who dream.",
-            "Foolish as they may seem."
+            "Foolish as they may seem.",
         ],
         difficulty: 2
     },
@@ -756,7 +716,7 @@ const MOVIE_DATABASE = [
         actors: ["Mahershala Ali", "Ashton Sanders"],
         quotes: [
             "At some point, you gotta decide for yourself who you're going to be.",
-            "Can't let nobody make that decision for you."
+            "Can't let nobody make that decision for you.",
         ],
         difficulty: 2
     },
@@ -766,7 +726,7 @@ const MOVIE_DATABASE = [
         actors: ["Judd Nelson", "Molly Ringwald"],
         quotes: [
             "Does Barry Manilow know you raid his wardrobe?",
-            "We're all pretty bizarre. Some of us are just better at hiding it."
+            "We're all pretty bizarre. Some of us are just better at hiding it.",
         ],
         difficulty: 2
     },
@@ -776,7 +736,7 @@ const MOVIE_DATABASE = [
         actors: ["Matthew Broderick", "Alan Ruck"],
         quotes: [
             "Life moves pretty fast. If you don't stop and look around once in a while, you could miss it.",
-            "Ferris, my father loves this car more than life itself."
+            "Ferris, my father loves this car more than life itself.",
         ],
         difficulty: 2
     },
@@ -786,7 +746,7 @@ const MOVIE_DATABASE = [
         actors: ["Bill Murray", "Dan Aykroyd"],
         quotes: [
             "Who you gonna call?",
-            "Ghostbusters!"
+            "Ghostbusters!",
         ],
         difficulty: 2
     },
@@ -796,7 +756,7 @@ const MOVIE_DATABASE = [
         actors: ["Macaulay Culkin", "Joe Pesci"],
         quotes: [
             "Keep the change, ya filthy animal!",
-            "Merry Christmas, ya filthy animal!"
+            "Merry Christmas, ya filthy animal!",
         ],
         difficulty: 2
     },
@@ -806,7 +766,7 @@ const MOVIE_DATABASE = [
         actors: ["Robin Williams", "Sally Field"],
         quotes: [
             "It was a run-by fruiting!",
-            "Helloooo!"
+            "Helloooo!",
         ],
         difficulty: 2
     },
@@ -816,27 +776,7 @@ const MOVIE_DATABASE = [
         actors: ["Bruce Willis", "Alan Rickman"],
         quotes: [
             "Yippee-ki-yay, motherfucker.",
-            "Now I have a machine gun. Ho ho ho."
-        ],
-        difficulty: 2
-    },
-    {
-        title: "The Silence of the Lambs",
-        year: "1991",
-        actors: ["Anthony Hopkins", "Jodie Foster"],
-        quotes: [
-            "Good evening, Clarice.",
-            "I do wish we could chat longer, but I'm having an old friend for dinner."
-        ],
-        difficulty: 2
-    },
-    {
-        title: "Jurassic Park",
-        year: "1993",
-        actors: ["Sam Neill", "Laura Dern"],
-        quotes: [
-            "That is one big pile of shit.",
-            "That's... that's chaos theory."
+            "Now I have a machine gun. Ho ho ho.",
         ],
         difficulty: 2
     },
@@ -846,7 +786,7 @@ const MOVIE_DATABASE = [
         actors: ["Harrison Ford", "Tommy Lee Jones"],
         quotes: [
             "I didn't kill my wife!",
-            "I don't care!"
+            "I don't care!",
         ],
         difficulty: 2
     },
@@ -856,7 +796,7 @@ const MOVIE_DATABASE = [
         actors: ["Tom Hanks", "Kevin Bacon"],
         quotes: [
             "Houston, we have a problem.",
-            "Roger that. We see you venting."
+            "Roger that. We see you venting.",
         ],
         difficulty: 2
     },
@@ -866,7 +806,7 @@ const MOVIE_DATABASE = [
         actors: ["Mel Gibson", "Sophie Marceau"],
         quotes: [
             "They may take our lives, but they'll never take our freedom!",
-            "Every man dies. Not every man really lives."
+            "Every man dies. Not every man really lives.",
         ],
         difficulty: 2
     },
@@ -876,7 +816,7 @@ const MOVIE_DATABASE = [
         actors: ["Sean Connery", "Nicolas Cage"],
         quotes: [
             "Welcome to the Rock.",
-            "I'd take pleasure in guttin' you, boy."
+            "I'd take pleasure in guttin' you, boy.",
         ],
         difficulty: 2
     },
@@ -886,7 +826,7 @@ const MOVIE_DATABASE = [
         actors: ["Bill Pullman", "Jeff Goldblum"],
         quotes: [
             "Today, we celebrate our Independence Day!",
-            "Must go faster. Must go faster!"
+            "Must go faster. Must go faster!",
         ],
         difficulty: 2
     },
@@ -896,7 +836,7 @@ const MOVIE_DATABASE = [
         actors: ["Will Smith", "Tommy Lee Jones"],
         quotes: [
             "Here come the Men in Black!",
-            "A person is smart. People are dumb, panicky dangerous animals."
+            "A person is smart. People are dumb, panicky dangerous animals.",
         ],
         difficulty: 2
     },
@@ -906,7 +846,7 @@ const MOVIE_DATABASE = [
         actors: ["Bruce Willis", "Milla Jovovich"],
         quotes: [
             "Multipass!",
-            "Leeloo Dallas, multipass."
+            "Leeloo Dallas, multipass.",
         ],
         difficulty: 2
     },
@@ -916,7 +856,7 @@ const MOVIE_DATABASE = [
         actors: ["Edward Norton", "Edward Furlong"],
         quotes: [
             "Has anything you've done made your life better?",
-            "I've been going to this place all my life."
+            "I've been going to this place all my life.",
         ],
         difficulty: 2
     },
@@ -926,7 +866,7 @@ const MOVIE_DATABASE = [
         actors: ["Jeff Bridges", "John Goodman"],
         quotes: [
             "Yeah, well, that's just like, your opinion, man.",
-            "This is what happens when you fuck a stranger in the ass!"
+            "This is what happens when you fuck a stranger in the ass!",
         ],
         difficulty: 2
     },
@@ -936,7 +876,7 @@ const MOVIE_DATABASE = [
         actors: ["Jason Biggs", "Chris Klein"],
         quotes: [
             "This one time, at band camp...",
-            "I had sex with Michelle!"
+            "I had sex with Michelle!",
         ],
         difficulty: 2
     },
@@ -946,7 +886,7 @@ const MOVIE_DATABASE = [
         actors: ["Brendan Fraser", "Rachel Weisz"],
         quotes: [
             "You must not read from the book!",
-            "We are in serious trouble."
+            "We are in serious trouble.",
         ],
         difficulty: 2
     },
@@ -956,7 +896,7 @@ const MOVIE_DATABASE = [
         actors: ["Tom Hanks", "Wilson"],
         quotes: [
             "Wilson! Wilson!",
-            "I'm sorry, Wilson!"
+            "I'm sorry, Wilson!",
         ],
         difficulty: 2
     },
@@ -966,7 +906,7 @@ const MOVIE_DATABASE = [
         actors: ["Julia Roberts", "Albert Finney"],
         quotes: [
             "They're called boobs, Ed.",
-            "I noticed."
+            "I noticed.",
         ],
         difficulty: 2
     },
@@ -976,7 +916,7 @@ const MOVIE_DATABASE = [
         actors: ["Leonardo DiCaprio", "Tom Hanks"],
         quotes: [
             "Two little mice fell in a bucket of cream.",
-            "The first mouse quickly gave up and drowned."
+            "The first mouse quickly gave up and drowned.",
         ],
         difficulty: 2
     },
@@ -986,7 +926,7 @@ const MOVIE_DATABASE = [
         actors: ["Matt Damon", "Franka Potente"],
         quotes: [
             "I can tell you the license plate numbers of all six cars outside.",
-            "I can tell you that our waitress is left-handed."
+            "I can tell you that our waitress is left-handed.",
         ],
         difficulty: 2
     },
@@ -996,7 +936,7 @@ const MOVIE_DATABASE = [
         actors: ["Johnny Depp", "Orlando Bloom"],
         quotes: [
             "Why is the rum always gone?",
-            "This is the day you will always remember as the day you almost caught Captain Jack Sparrow!"
+            "This is the day you will always remember as the day you almost caught Captain Jack Sparrow!",
         ],
         difficulty: 2
     },
@@ -1006,7 +946,7 @@ const MOVIE_DATABASE = [
         actors: ["Uma Thurman", "Lucy Liu"],
         quotes: [
             "Silly rabbit. Trix are for kids.",
-            "Do you still want to kill me?"
+            "Do you still want to kill me?",
         ],
         difficulty: 2
     },
@@ -1016,17 +956,7 @@ const MOVIE_DATABASE = [
         actors: ["Jim Carrey", "Kate Winslet"],
         quotes: [
             "Meet me in Montauk.",
-            "Okay."
-        ],
-        difficulty: 2
-    },
-    {
-        title: "The Departed",
-        year: "2006",
-        actors: ["Jack Nicholson", "Leonardo DiCaprio"],
-        quotes: [
-            "I'm the guy who does his job. You must be the other guy.",
-            "What are you, on your period?"
+            "Okay.",
         ],
         difficulty: 2
     },
@@ -1036,7 +966,7 @@ const MOVIE_DATABASE = [
         actors: ["Gerard Butler", "Lena Headey"],
         quotes: [
             "This is Sparta!",
-            "Tonight we dine in hell!"
+            "Tonight we dine in hell!",
         ],
         difficulty: 2
     },
@@ -1046,7 +976,7 @@ const MOVIE_DATABASE = [
         actors: ["Jonah Hill", "Michael Cera"],
         quotes: [
             "McLovin? What kind of stupid name is that?",
-            "People don't forget!"
+            "People don't forget!",
         ],
         difficulty: 2
     },
@@ -1056,17 +986,7 @@ const MOVIE_DATABASE = [
         actors: ["Ellen Page", "Michael Cera"],
         quotes: [
             "That ain't no Etch-a-Sketch. This is one doodle that can't be undid.",
-            "Honest to blog?"
-        ],
-        difficulty: 2
-    },
-    {
-        title: "Slumdog Millionaire",
-        year: "2008",
-        actors: ["Dev Patel", "Freida Pinto"],
-        quotes: [
-            "When somebody asks me a question, I tell them the answer.",
-            "It is written."
+            "Honest to blog?",
         ],
         difficulty: 2
     },
@@ -1076,7 +996,7 @@ const MOVIE_DATABASE = [
         actors: ["Bradley Cooper", "Zach Galifianakis"],
         quotes: [
             "What happens in Vegas stays in Vegas.",
-            "Except herpes. That shit'll come back with you."
+            "Except herpes. That shit'll come back with you.",
         ],
         difficulty: 2
     },
@@ -1086,7 +1006,7 @@ const MOVIE_DATABASE = [
         actors: ["Sharlto Copley", "Jason Cope"],
         quotes: [
             "Get your fookin' tentacle out of my face!",
-            "This is my district!"
+            "This is my district!",
         ],
         difficulty: 2
     },
@@ -1096,17 +1016,7 @@ const MOVIE_DATABASE = [
         actors: ["Ed Asner", "Jordan Nagai"],
         quotes: [
             "Adventure is out there!",
-            "It's just a house."
-        ],
-        difficulty: 2
-    },
-    {
-        title: "The King's Speech",
-        year: "2010",
-        actors: ["Colin Firth", "Geoffrey Rush"],
-        quotes: [
-            "Because I have a voice!",
-            "Yes, you do."
+            "It's just a house.",
         ],
         difficulty: 2
     },
@@ -1116,7 +1026,7 @@ const MOVIE_DATABASE = [
         actors: ["James Franco", "Amber Tamblyn"],
         quotes: [
             "This rock has been waiting for me my entire life.",
-            "I chose this. I chose all of this."
+            "I chose this. I chose all of this.",
         ],
         difficulty: 2
     },
@@ -1126,7 +1036,7 @@ const MOVIE_DATABASE = [
         actors: ["Viola Davis", "Emma Stone"],
         quotes: [
             "You is kind. You is smart. You is important.",
-            "Eat my shit."
+            "Eat my shit.",
         ],
         difficulty: 2
     },
@@ -1136,7 +1046,7 @@ const MOVIE_DATABASE = [
         actors: ["Ryan Gosling", "Carey Mulligan"],
         quotes: [
             "I drive.",
-            "That's what you do?"
+            "That's what you do?",
         ],
         difficulty: 2
     },
@@ -1146,7 +1056,7 @@ const MOVIE_DATABASE = [
         actors: ["Leonardo DiCaprio", "Jonah Hill"],
         quotes: [
             "I'm not leaving! I'm not fucking leaving!",
-            "The show goes on!"
+            "The show goes on!",
         ],
         difficulty: 2
     },
@@ -1156,7 +1066,7 @@ const MOVIE_DATABASE = [
         actors: ["Sandra Bullock", "George Clooney"],
         quotes: [
             "I hate space.",
-            "What do you hate about it?"
+            "What do you hate about it?",
         ],
         difficulty: 2
     },
@@ -1166,7 +1076,7 @@ const MOVIE_DATABASE = [
         actors: ["Ben Affleck", "Rosamund Pike"],
         quotes: [
             "I'm the cunt you married.",
-            "The only time you liked yourself was when you were trying to be someone this cunt might like."
+            "The only time you liked yourself was when you were trying to be someone this cunt might like.",
         ],
         difficulty: 2
     },
@@ -1176,7 +1086,7 @@ const MOVIE_DATABASE = [
         actors: ["Michael Keaton", "Edward Norton"],
         quotes: [
             "Popularity is the slutty little cousin of prestige.",
-            "I'm not here to be liked. I'm here to be respected."
+            "I'm not here to be liked. I'm here to be respected.",
         ],
         difficulty: 2
     },
@@ -1186,7 +1096,7 @@ const MOVIE_DATABASE = [
         actors: ["Domhnall Gleeson", "Oscar Isaac"],
         quotes: [
             "One day the AIs are going to look back on us the same way we look at fossil skeletons.",
-            "Isn't it strange, to create something that hates you?"
+            "Isn't it strange, to create something that hates you?",
         ],
         difficulty: 2
     },
@@ -1196,7 +1106,7 @@ const MOVIE_DATABASE = [
         actors: ["Brie Larson", "Jacob Tremblay"],
         quotes: [
             "I want to be five.",
-            "You are five."
+            "You are five.",
         ],
         difficulty: 2
     },
@@ -1206,7 +1116,7 @@ const MOVIE_DATABASE = [
         actors: ["Amy Adams", "Jeremy Renner"],
         quotes: [
             "Language is the first weapon drawn in a conflict.",
-            "If you could see your whole life from start to finish, would you change things?"
+            "If you could see your whole life from start to finish, would you change things?",
         ],
         difficulty: 2
     },
@@ -1216,7 +1126,7 @@ const MOVIE_DATABASE = [
         actors: ["Fionn Whitehead", "Tom Hardy"],
         quotes: [
             "All we did is survive.",
-            "That's enough."
+            "That's enough.",
         ],
         difficulty: 2
     },
@@ -1226,7 +1136,7 @@ const MOVIE_DATABASE = [
         actors: ["Frances McDormand", "Woody Harrelson"],
         quotes: [
             "Raped while dying.",
-            "And still no arrests?"
+            "And still no arrests?",
         ],
         difficulty: 2
     },
@@ -1236,7 +1146,7 @@ const MOVIE_DATABASE = [
         actors: ["Emily Blunt", "John Krasinski"],
         quotes: [
             "Who are we if we can't protect them?",
-            "We protect them by teaching them."
+            "We protect them by teaching them.",
         ],
         difficulty: 2
     },
@@ -1246,7 +1156,7 @@ const MOVIE_DATABASE = [
         actors: ["Joaquin Phoenix", "Robert De Niro"],
         quotes: [
             "Is it just me, or is it getting crazier out there?",
-            "You get what you fucking deserve!"
+            "You get what you fucking deserve!",
         ],
         difficulty: 2
     },
@@ -1256,7 +1166,7 @@ const MOVIE_DATABASE = [
         actors: ["George MacKay", "Dean-Charles Chapman"],
         quotes: [
             "There is only one way this war ends. Last man standing.",
-            "I hope you're right."
+            "I hope you're right.",
         ],
         difficulty: 2
     },
@@ -1266,27 +1176,7 @@ const MOVIE_DATABASE = [
         actors: ["Ewan McGregor", "Ewan McGregor"],
         quotes: [
             "Choose life.",
-            "Choose a job. Choose a career. Choose a family."
-        ],
-        difficulty: 2
-    },
-    {
-        title: "American Beauty",
-        year: "1999",
-        actors: ["Kevin Spacey", "Annette Bening"],
-        quotes: [
-            "I feel like I've been in a coma for the past twenty years.",
-            "And I'm just now waking up."
-        ],
-        difficulty: 2
-    },
-    {
-        title: "Eternal Sunshine of the Spotless Mind",
-        year: "2004",
-        actors: ["Jim Carrey", "Kate Winslet"],
-        quotes: [
-            "Meet me in Montauk.",
-            "Okay."
+            "Choose a job. Choose a career. Choose a family.",
         ],
         difficulty: 2
     },
@@ -1296,17 +1186,7 @@ const MOVIE_DATABASE = [
         actors: ["Hugo Weaving", "Natalie Portman"],
         quotes: [
             "Remember, remember, the fifth of November.",
-            "People should not be afraid of their governments. Governments should be afraid of their people."
-        ],
-        difficulty: 2
-    },
-    {
-        title: "Cast Away",
-        year: "2000",
-        actors: ["Tom Hanks", "Tom Hanks"],
-        quotes: [
-            "Wilson!",
-            "I'm sorry, Wilson!"
+            "People should not be afraid of their governments. Governments should be afraid of their people.",
         ],
         difficulty: 2
     },
@@ -1316,17 +1196,7 @@ const MOVIE_DATABASE = [
         actors: ["Will Ferrell", "James Caan"],
         quotes: [
             "The best way to spread Christmas cheer is singing loud for all to hear.",
-            "Santa! I know him!"
-        ],
-        difficulty: 2
-    },
-    {
-        title: "Superbad",
-        year: "2007",
-        actors: ["Jonah Hill", "Michael Cera"],
-        quotes: [
-            "I am McLovin.",
-            "McLovin? What kind of a stupid name is that?"
+            "Santa! I know him!",
         ],
         difficulty: 2
     },
@@ -1336,7 +1206,7 @@ const MOVIE_DATABASE = [
         actors: ["Will Ferrell", "Christina Applegate"],
         quotes: [
             "I'm kind of a big deal.",
-            "Really."
+            "Really.",
         ],
         difficulty: 2
     },
@@ -1346,7 +1216,7 @@ const MOVIE_DATABASE = [
         actors: ["Will Ferrell", "John C. Reilly"],
         quotes: [
             "Did we just become best friends?",
-            "Yep!"
+            "Yep!",
         ],
         difficulty: 2
     },
@@ -1356,17 +1226,7 @@ const MOVIE_DATABASE = [
         actors: ["Kristen Wiig", "Maya Rudolph"],
         quotes: [
             "Help me, I'm poor.",
-            "You're your problem and you're also your solution."
-        ],
-        difficulty: 2
-    },
-    {
-        title: "The Truman Show",
-        year: "1998",
-        actors: ["Jim Carrey", "Ed Harris"],
-        quotes: [
-            "Good morning, and in case I don't see ya, good afternoon, good evening, and good night!",
-            "We accept the reality of the world with which we're presented."
+            "You're your problem and you're also your solution.",
         ],
         difficulty: 2
     },
@@ -1376,7 +1236,7 @@ const MOVIE_DATABASE = [
         actors: ["Robin Williams", "Forest Whitaker"],
         quotes: [
             "Good morning, Vietnam!",
-            "What's the matter, nothing to say?"
+            "What's the matter, nothing to say?",
         ],
         difficulty: 2
     },
@@ -1386,7 +1246,7 @@ const MOVIE_DATABASE = [
         actors: ["Tom Cruise", "Val Kilmer"],
         quotes: [
             "I feel the need... the need for speed!",
-            "You can be my wingman anytime."
+            "You can be my wingman anytime.",
         ],
         difficulty: 2
     },
@@ -1396,7 +1256,7 @@ const MOVIE_DATABASE = [
         actors: ["Tom Cruise", "Cuba Gooding Jr."],
         quotes: [
             "Show me the money!",
-            "You had me at hello."
+            "You had me at hello.",
         ],
         difficulty: 2
     },
@@ -1406,7 +1266,7 @@ const MOVIE_DATABASE = [
         actors: ["Jack Nicholson", "Helen Hunt"],
         quotes: [
             "You make me want to be a better man.",
-            "That's maybe the best compliment of my life."
+            "That's maybe the best compliment of my life.",
         ],
         difficulty: 2
     },
@@ -1416,7 +1276,7 @@ const MOVIE_DATABASE = [
         actors: ["Ryan Gosling", "Rachel McAdams"],
         quotes: [
             "If you're a bird, I'm a bird.",
-            "It wasn't over. It still isn't over!"
+            "It wasn't over. It still isn't over!",
         ],
         difficulty: 2
     },
@@ -1426,7 +1286,7 @@ const MOVIE_DATABASE = [
         actors: ["Joseph Gordon-Levitt", "Zooey Deschanel"],
         quotes: [
             "I love how she makes me feel, like anything's possible.",
-            "This is me accepting the hurt."
+            "This is me accepting the hurt.",
         ],
         difficulty: 2
     },
@@ -1436,7 +1296,7 @@ const MOVIE_DATABASE = [
         actors: ["Bradley Cooper", "Jennifer Lawrence"],
         quotes: [
             "There's always gonna be a part of me that's sloppy and dirty.",
-            "But I like that."
+            "But I like that.",
         ],
         difficulty: 2
     },
@@ -1446,27 +1306,7 @@ const MOVIE_DATABASE = [
         actors: ["Abigail Breslin", "Greg Kinnear"],
         quotes: [
             "Do what you love and fuck the rest.",
-            "You're not a loser."
-        ],
-        difficulty: 2
-    },
-    {
-        title: "The Help",
-        year: "2011",
-        actors: ["Emma Stone", "Viola Davis"],
-        quotes: [
-            "You is kind. You is smart. You is important.",
-            "Yes ma'am."
-        ],
-        difficulty: 2
-    },
-    {
-        title: "127 Hours",
-        year: "2010",
-        actors: ["James Franco", "Kate Mara"],
-        quotes: [
-            "This rock has been waiting for me my entire life.",
-            "I chose this. I chose all of this."
+            "You're not a loser.",
         ],
         difficulty: 2
     },
@@ -1476,7 +1316,7 @@ const MOVIE_DATABASE = [
         actors: ["Suraj Sharma", "Irrfan Khan"],
         quotes: [
             "I must say a word about fear.",
-            "It is life's only true opponent."
+            "It is life's only true opponent.",
         ],
         difficulty: 2
     },
@@ -1486,17 +1326,7 @@ const MOVIE_DATABASE = [
         actors: ["Joaquin Phoenix", "Scarlett Johansson"],
         quotes: [
             "Sometimes I think I have felt everything I'm ever gonna feel.",
-            "And from here on out, I'm not gonna feel anything new."
-        ],
-        difficulty: 2
-    },
-    {
-        title: "Arrival",
-        year: "2016",
-        actors: ["Amy Adams", "Jeremy Renner"],
-        quotes: [
-            "Language is the foundation of civilization.",
-            "It is the glue that holds a people together."
+            "And from here on out, I'm not gonna feel anything new.",
         ],
         difficulty: 2
     },
@@ -1506,7 +1336,7 @@ const MOVIE_DATABASE = [
         actors: ["Ryan Gosling", "Harrison Ford"],
         quotes: [
             "I know what's real.",
-            "You do?"
+            "You do?",
         ],
         difficulty: 2
     },
@@ -1516,7 +1346,7 @@ const MOVIE_DATABASE = [
         actors: ["Emily Blunt", "Benicio del Toro"],
         quotes: [
             "You should move to a small town, where the rule of law still exists.",
-            "You're asking me how a watch is made. For now, just keep an eye on the time."
+            "You're asking me how a watch is made. For now, just keep an eye on the time.",
         ],
         difficulty: 2
     },
@@ -1526,7 +1356,7 @@ const MOVIE_DATABASE = [
         actors: ["Hugh Jackman", "Jake Gyllenhaal"],
         quotes: [
             "Pray for the best, but prepare for the worst.",
-            "We're gonna find them."
+            "We're gonna find them.",
         ],
         difficulty: 2
     },
@@ -1536,27 +1366,7 @@ const MOVIE_DATABASE = [
         actors: ["Tom Cruise", "Emily Blunt"],
         quotes: [
             "Come find me when you wake up.",
-            "On your feet, maggot!"
-        ],
-        difficulty: 2
-    },
-    {
-        title: "District 9",
-        year: "2009",
-        actors: ["Sharlto Copley", "David James"],
-        quotes: [
-            "Get your fookin' tentacle out of my face!",
-            "I want to go home."
-        ],
-        difficulty: 2
-    },
-    {
-        title: "Ex Machina",
-        year: "2014",
-        actors: ["Domhnall Gleeson", "Oscar Isaac"],
-        quotes: [
-            "One day the AIs are going to look back on us the same way we look at fossil skeletons.",
-            "Isn't it strange, to create something that hates you?"
+            "On your feet, maggot!",
         ],
         difficulty: 2
     },
@@ -1566,7 +1376,7 @@ const MOVIE_DATABASE = [
         actors: ["Ansel Elgort", "Kevin Spacey"],
         quotes: [
             "I was just listening to some music.",
-            "Was it, uh, was it Debora?"
+            "Was it, uh, was it Debora?",
         ],
         difficulty: 2
     },
@@ -1576,7 +1386,7 @@ const MOVIE_DATABASE = [
         actors: ["Michael Cera", "Mary Elizabeth Winstead"],
         quotes: [
             "Bread makes you fat?",
-            "Bread makes you fat."
+            "Bread makes you fat.",
         ],
         difficulty: 2
     },
@@ -1586,7 +1396,7 @@ const MOVIE_DATABASE = [
         actors: ["Jesse Eisenberg", "Woody Harrelson"],
         quotes: [
             "Time to nut up or shut up.",
-            "I'm not easy to get along with."
+            "I'm not easy to get along with.",
         ],
         difficulty: 2
     },
@@ -1596,7 +1406,7 @@ const MOVIE_DATABASE = [
         actors: ["Simon Pegg", "Nick Frost"],
         quotes: [
             "You've got red on you.",
-            "We're coming to get you, Barbara."
+            "We're coming to get you, Barbara.",
         ],
         difficulty: 2
     },
@@ -1606,7 +1416,7 @@ const MOVIE_DATABASE = [
         actors: ["Simon Pegg", "Nick Frost"],
         quotes: [
             "For the greater good.",
-            "The greater good."
+            "The greater good.",
         ],
         difficulty: 2
     },
@@ -1616,7 +1426,7 @@ const MOVIE_DATABASE = [
         actors: ["Jonah Hill", "Channing Tatum"],
         quotes: [
             "We're reviving a canceled undercover police program from the '80s.",
-            "And revamping it for modern times."
+            "And revamping it for modern times.",
         ],
         difficulty: 2
     },
@@ -1626,7 +1436,7 @@ const MOVIE_DATABASE = [
         actors: ["Will Ferrell", "Mark Wahlberg"],
         quotes: [
             "Aim for the bushes.",
-            "There goes my hero."
+            "There goes my hero.",
         ],
         difficulty: 2
     },
@@ -1636,7 +1446,7 @@ const MOVIE_DATABASE = [
         actors: ["Ben Stiller", "Owen Wilson"],
         quotes: [
             "What is this? A center for ants?",
-            "But why male models?"
+            "But why male models?",
         ],
         difficulty: 2
     },
@@ -1646,7 +1456,7 @@ const MOVIE_DATABASE = [
         actors: ["Owen Wilson", "Vince Vaughn"],
         quotes: [
             "I almost numchucked you.",
-            "You don't just chuck those around."
+            "You don't just chuck those around.",
         ],
         difficulty: 2
     },
@@ -1656,13 +1466,23 @@ const MOVIE_DATABASE = [
         actors: ["Seth Rogen", "Katherine Heigl"],
         quotes: [
             "I'm pregnant.",
-            "Fuck off."
+            "Fuck off.",
+        ],
+        difficulty: 2
+    },
+    {
+        title: "Groundhog Day",
+        year: "1993",
+        actors: ["Bill Murray", "Andie MacDowell"],
+        quotes: [
+            "There was a young man from Nantucket...",
+            "That's really funny. When are you going to grow up?",
         ],
         difficulty: 2
     },
 
     // ============================================
-    // DIFFICULTY 3 - POPULAR CLASSICS (60 films)
+    // DIFFICULTY 3 - CULT CLASSICS & FILM BUFF FAVORITES (47 films)
     // ============================================
     {
         title: "Taxi Driver",
@@ -1670,7 +1490,7 @@ const MOVIE_DATABASE = [
         actors: ["Robert De Niro", "Robert De Niro"],
         quotes: [
             "You talkin' to me?",
-            "You talkin' to me? You talkin' to me? Then who the hell else are you talkin' to?"
+            "You talkin' to me? You talkin' to me? Then who the hell else are you talkin' to?",
         ],
         difficulty: 3
     },
@@ -1680,7 +1500,7 @@ const MOVIE_DATABASE = [
         actors: ["Tom Cruise", "Jack Nicholson"],
         quotes: [
             "I want the truth!",
-            "You can't handle the truth!"
+            "You can't handle the truth!",
         ],
         difficulty: 3
     },
@@ -1690,7 +1510,7 @@ const MOVIE_DATABASE = [
         actors: ["Billy Crystal", "Meg Ryan"],
         quotes: [
             "When you realize you want to spend the rest of your life with somebody, you want the rest of your life to start as soon as possible.",
-            "I'll have what she's having."
+            "I'll have what she's having.",
         ],
         difficulty: 3
     },
@@ -1700,7 +1520,7 @@ const MOVIE_DATABASE = [
         actors: ["Patrick Swayze", "Jennifer Grey"],
         quotes: [
             "Nobody puts Baby in a corner.",
-            "I carried a watermelon."
+            "I carried a watermelon.",
         ],
         difficulty: 3
     },
@@ -1710,7 +1530,7 @@ const MOVIE_DATABASE = [
         actors: ["Cary Elwes", "Mandy Patinkin"],
         quotes: [
             "As you wish.",
-            "Hello. My name is Inigo Montoya. You killed my father. Prepare to die."
+            "Hello. My name is Inigo Montoya. You killed my father. Prepare to die.",
         ],
         difficulty: 3
     },
@@ -1720,7 +1540,7 @@ const MOVIE_DATABASE = [
         actors: ["Al Pacino", "Steven Bauer"],
         quotes: [
             "Say hello to my little friend!",
-            "In this country, you gotta make the money first."
+            "In this country, you gotta make the money first.",
         ],
         difficulty: 3
     },
@@ -1730,17 +1550,7 @@ const MOVIE_DATABASE = [
         actors: ["Matt Damon", "Robin Williams"],
         quotes: [
             "How do you like them apples?",
-            "It's not your fault. It's not your fault."
-        ],
-        difficulty: 3
-    },
-    {
-        title: "The Big Lebowski",
-        year: "1998",
-        actors: ["Jeff Bridges", "John Goodman"],
-        quotes: [
-            "The Dude abides.",
-            "That rug really tied the room together."
+            "It's not your fault. It's not your fault.",
         ],
         difficulty: 3
     },
@@ -1750,7 +1560,7 @@ const MOVIE_DATABASE = [
         actors: ["Martin Sheen", "Marlon Brando"],
         quotes: [
             "I love the smell of napalm in the morning.",
-            "The horror... the horror..."
+            "The horror... the horror...",
         ],
         difficulty: 3
     },
@@ -1760,7 +1570,7 @@ const MOVIE_DATABASE = [
         actors: ["Robert De Niro", "Joe Pesci"],
         quotes: [
             "You fuck my wife?",
-            "What? How could you ask me that?"
+            "What? How could you ask me that?",
         ],
         difficulty: 3
     },
@@ -1770,7 +1580,7 @@ const MOVIE_DATABASE = [
         actors: ["Christopher Walken", "Robert De Niro"],
         quotes: [
             "This is this.",
-            "What do you mean, this is this?"
+            "What do you mean, this is this?",
         ],
         difficulty: 3
     },
@@ -1780,7 +1590,7 @@ const MOVIE_DATABASE = [
         actors: ["Jack Nicholson", "Louise Fletcher"],
         quotes: [
             "But I tried, didn't I? Goddammit, at least I did that.",
-            "Mr. McMurphy, you are under my jurisdiction."
+            "Mr. McMurphy, you are under my jurisdiction.",
         ],
         difficulty: 3
     },
@@ -1790,7 +1600,7 @@ const MOVIE_DATABASE = [
         actors: ["Jack Nicholson", "Faye Dunaway"],
         quotes: [
             "Forget it, Jake. It's Chinatown.",
-            "She's my sister and my daughter!"
+            "She's my sister and my daughter!",
         ],
         difficulty: 3
     },
@@ -1800,7 +1610,7 @@ const MOVIE_DATABASE = [
         actors: ["Dustin Hoffman", "Anne Bancroft"],
         quotes: [
             "Mrs. Robinson, you're trying to seduce me.",
-            "Aren't you?"
+            "Aren't you?",
         ],
         difficulty: 3
     },
@@ -1810,7 +1620,7 @@ const MOVIE_DATABASE = [
         actors: ["Henry Fonda", "Lee J. Cobb"],
         quotes: [
             "It's possible!",
-            "You sat right here and said guilty with everyone else."
+            "You sat right here and said guilty with everyone else.",
         ],
         difficulty: 3
     },
@@ -1820,7 +1630,7 @@ const MOVIE_DATABASE = [
         actors: ["Anthony Perkins", "Janet Leigh"],
         quotes: [
             "A boy's best friend is his mother.",
-            "We all go a little mad sometimes."
+            "We all go a little mad sometimes.",
         ],
         difficulty: 3
     },
@@ -1830,7 +1640,7 @@ const MOVIE_DATABASE = [
         actors: ["James Stewart", "Kim Novak"],
         quotes: [
             "Only one is a wanderer. Two together are always going somewhere.",
-            "Where are we going?"
+            "Where are we going?",
         ],
         difficulty: 3
     },
@@ -1840,7 +1650,7 @@ const MOVIE_DATABASE = [
         actors: ["Jack Nicholson", "Shelley Duvall"],
         quotes: [
             "Here's Johnny!",
-            "All work and no play makes Jack a dull boy."
+            "All work and no play makes Jack a dull boy.",
         ],
         difficulty: 3
     },
@@ -1850,7 +1660,7 @@ const MOVIE_DATABASE = [
         actors: ["Sigourney Weaver", "Tom Skerritt"],
         quotes: [
             "In space, no one can hear you scream.",
-            "Get out of there! Behind you!"
+            "Get out of there! Behind you!",
         ],
         difficulty: 3
     },
@@ -1860,7 +1670,7 @@ const MOVIE_DATABASE = [
         actors: ["Harrison Ford", "Rutger Hauer"],
         quotes: [
             "I've seen things you people wouldn't believe.",
-            "All those moments will be lost in time, like tears in rain."
+            "All those moments will be lost in time, like tears in rain.",
         ],
         difficulty: 3
     },
@@ -1870,7 +1680,7 @@ const MOVIE_DATABASE = [
         actors: ["Douglas Rain", "Keir Dullea"],
         quotes: [
             "I'm sorry, Dave. I'm afraid I can't do that.",
-            "What's the problem?"
+            "What's the problem?",
         ],
         difficulty: 3
     },
@@ -1880,7 +1690,7 @@ const MOVIE_DATABASE = [
         actors: ["Malcolm McDowell", "Patrick Magee"],
         quotes: [
             "I was cured all right.",
-            "It's funny how the colors of the real world only seem really real when you viddy them on the screen."
+            "It's funny how the colors of the real world only seem really real when you viddy them on the screen.",
         ],
         difficulty: 3
     },
@@ -1890,17 +1700,7 @@ const MOVIE_DATABASE = [
         actors: ["Linda Blair", "Max von Sydow"],
         quotes: [
             "The power of Christ compels you!",
-            "Your mother sucks cocks in hell!"
-        ],
-        difficulty: 3
-    },
-    {
-        title: "Jaws",
-        year: "1975",
-        actors: ["Roy Scheider", "Richard Dreyfuss"],
-        quotes: [
-            "You're gonna need a bigger boat.",
-            "That's a twenty footer."
+            "Your mother sucks cocks in hell!",
         ],
         difficulty: 3
     },
@@ -1910,7 +1710,7 @@ const MOVIE_DATABASE = [
         actors: ["Woody Allen", "Diane Keaton"],
         quotes: [
             "La-di-da, la-di-da.",
-            "You're a real Kafkaesque character."
+            "You're a real Kafkaesque character.",
         ],
         difficulty: 3
     },
@@ -1920,7 +1720,7 @@ const MOVIE_DATABASE = [
         actors: ["Peter Finch", "Faye Dunaway"],
         quotes: [
             "I'm as mad as hell, and I'm not going to take this anymore!",
-            "You're television incarnate, Diana."
+            "You're television incarnate, Diana.",
         ],
         difficulty: 3
     },
@@ -1930,7 +1730,7 @@ const MOVIE_DATABASE = [
         actors: ["Gene Hackman", "Roy Scheider"],
         quotes: [
             "Picking your feet in Poughkeepsie?",
-            "What?"
+            "What?",
         ],
         difficulty: 3
     },
@@ -1940,7 +1740,7 @@ const MOVIE_DATABASE = [
         actors: ["Robert Redford", "Dustin Hoffman"],
         quotes: [
             "Follow the money.",
-            "What do you mean?"
+            "What do you mean?",
         ],
         difficulty: 3
     },
@@ -1950,7 +1750,7 @@ const MOVIE_DATABASE = [
         actors: ["Al Pacino", "John Cazale"],
         quotes: [
             "Attica! Attica!",
-            "Which country do you want to go to?"
+            "Which country do you want to go to?",
         ],
         difficulty: 3
     },
@@ -1960,7 +1760,7 @@ const MOVIE_DATABASE = [
         actors: ["Dustin Hoffman", "Jon Voight"],
         quotes: [
             "I'm walkin' here! I'm walkin' here!",
-            "Up yours, you son of a bitch!"
+            "Up yours, you son of a bitch!",
         ],
         difficulty: 3
     },
@@ -1970,7 +1770,7 @@ const MOVIE_DATABASE = [
         actors: ["William Holden", "Ernest Borgnine"],
         quotes: [
             "If they move, kill 'em.",
-            "Let's go."
+            "Let's go.",
         ],
         difficulty: 3
     },
@@ -1980,7 +1780,7 @@ const MOVIE_DATABASE = [
         actors: ["Warren Beatty", "Faye Dunaway"],
         quotes: [
             "We rob banks.",
-            "Ain't he something?"
+            "Ain't he something?",
         ],
         difficulty: 3
     },
@@ -1990,7 +1790,7 @@ const MOVIE_DATABASE = [
         actors: ["Humphrey Bogart", "Mary Astor"],
         quotes: [
             "The stuff that dreams are made of.",
-            "What is it?"
+            "What is it?",
         ],
         difficulty: 3
     },
@@ -2000,7 +1800,7 @@ const MOVIE_DATABASE = [
         actors: ["Fred MacMurray", "Barbara Stanwyck"],
         quotes: [
             "How could I have known that murder can sometimes smell like honeysuckle?",
-            "Goodbye, baby."
+            "Goodbye, baby.",
         ],
         difficulty: 3
     },
@@ -2010,7 +1810,7 @@ const MOVIE_DATABASE = [
         actors: ["Gloria Swanson", "William Holden"],
         quotes: [
             "I am big. It's the pictures that got small.",
-            "You're Norma Desmond. You used to be in silent pictures."
+            "You're Norma Desmond. You used to be in silent pictures.",
         ],
         difficulty: 3
     },
@@ -2020,7 +1820,7 @@ const MOVIE_DATABASE = [
         actors: ["Tom Cruise", "Rebecca De Mornay"],
         quotes: [
             "Sometimes you gotta say 'What the fuck.'",
-            "What the fuck."
+            "What the fuck.",
         ],
         difficulty: 3
     },
@@ -2030,7 +1830,7 @@ const MOVIE_DATABASE = [
         actors: ["Dustin Hoffman", "Tom Cruise"],
         quotes: [
             "I'm an excellent driver.",
-            "Yeah, you are."
+            "Yeah, you are.",
         ],
         difficulty: 3
     },
@@ -2040,7 +1840,7 @@ const MOVIE_DATABASE = [
         actors: ["Charlie Sheen", "Willem Dafoe"],
         quotes: [
             "I think now, looking back, we did not fight the enemy.",
-            "We fought ourselves."
+            "We fought ourselves.",
         ],
         difficulty: 3
     },
@@ -2050,17 +1850,7 @@ const MOVIE_DATABASE = [
         actors: ["Michael Douglas", "Charlie Sheen"],
         quotes: [
             "Greed, for lack of a better word, is good.",
-            "Greed works."
-        ],
-        difficulty: 3
-    },
-    {
-        title: "Braveheart",
-        year: "1995",
-        actors: ["Mel Gibson", "Sophie Marceau"],
-        quotes: [
-            "They may take our lives, but they'll never take our freedom!",
-            "Alba gu bràth!"
+            "Greed works.",
         ],
         difficulty: 3
     },
@@ -2070,7 +1860,7 @@ const MOVIE_DATABASE = [
         actors: ["Wil Wheaton", "River Phoenix"],
         quotes: [
             "I never had any friends later on like the ones I had when I was twelve.",
-            "Jesus, does anyone?"
+            "Jesus, does anyone?",
         ],
         difficulty: 3
     },
@@ -2080,47 +1870,7 @@ const MOVIE_DATABASE = [
         actors: ["Robin Williams", "Robert Sean Leonard"],
         quotes: [
             "Carpe diem. Seize the day, boys.",
-            "Make your lives extraordinary."
-        ],
-        difficulty: 3
-    },
-    {
-        title: "The Graduate",
-        year: "1967",
-        actors: ["Dustin Hoffman", "Anne Bancroft"],
-        quotes: [
-            "Mrs. Robinson, you're trying to seduce me.",
-            "Aren't you?"
-        ],
-        difficulty: 3
-    },
-    {
-        title: "Network",
-        year: "1976",
-        actors: ["Peter Finch", "Faye Dunaway"],
-        quotes: [
-            "I'm as mad as hell, and I'm not going to take this anymore!",
-            "This is mass hysteria!"
-        ],
-        difficulty: 3
-    },
-    {
-        title: "Dog Day Afternoon",
-        year: "1975",
-        actors: ["Al Pacino", "John Cazale"],
-        quotes: [
-            "Attica! Attica!",
-            "We want what's coming to us!"
-        ],
-        difficulty: 3
-    },
-    {
-        title: "One Flew Over the Cuckoo's Nest",
-        year: "1975",
-        actors: ["Jack Nicholson", "Louise Fletcher"],
-        quotes: [
-            "But I tried, didn't I?",
-            "Goddamnit, at least I did that."
+            "Make your lives extraordinary.",
         ],
         difficulty: 3
     },
@@ -2130,7 +1880,7 @@ const MOVIE_DATABASE = [
         actors: ["Paul Newman", "Strother Martin"],
         quotes: [
             "What we've got here is failure to communicate.",
-            "Some men you just can't reach."
+            "Some men you just can't reach.",
         ],
         difficulty: 3
     },
@@ -2140,7 +1890,7 @@ const MOVIE_DATABASE = [
         actors: ["Paul Newman", "Robert Redford"],
         quotes: [
             "Who are those guys?",
-            "I can't swim!"
+            "I can't swim!",
         ],
         difficulty: 3
     },
@@ -2150,27 +1900,7 @@ const MOVIE_DATABASE = [
         actors: ["Paul Newman", "Robert Redford"],
         quotes: [
             "Ya follow?",
-            "Not yet."
-        ],
-        difficulty: 3
-    },
-    {
-        title: "Midnight Cowboy",
-        year: "1969",
-        actors: ["Dustin Hoffman", "Jon Voight"],
-        quotes: [
-            "I'm walking here! I'm walking here!",
-            "Actually, I'm a cowboy."
-        ],
-        difficulty: 3
-    },
-    {
-        title: "The French Connection",
-        year: "1971",
-        actors: ["Gene Hackman", "Roy Scheider"],
-        quotes: [
-            "All right, Popeye's here! Get your hands on your heads!",
-            "You picked a bad one today."
+            "Not yet.",
         ],
         difficulty: 3
     },
@@ -2180,17 +1910,7 @@ const MOVIE_DATABASE = [
         actors: ["Al Pacino", "John Randolph"],
         quotes: [
             "The reality is that we do not wash our own laundry.",
-            "It just gets dirtier."
-        ],
-        difficulty: 3
-    },
-    {
-        title: "All the President's Men",
-        year: "1976",
-        actors: ["Robert Redford", "Dustin Hoffman"],
-        quotes: [
-            "Follow the money.",
-            "Where does it lead?"
+            "It just gets dirtier.",
         ],
         difficulty: 3
     },
@@ -2200,7 +1920,7 @@ const MOVIE_DATABASE = [
         actors: ["Dustin Hoffman", "Laurence Olivier"],
         quotes: [
             "Is it safe?",
-            "I don't know what you mean."
+            "I don't know what you mean.",
         ],
         difficulty: 3
     },
@@ -2210,7 +1930,7 @@ const MOVIE_DATABASE = [
         actors: ["Gene Hackman", "John Cazale"],
         quotes: [
             "I don't have anything personal.",
-            "Nothing of value."
+            "Nothing of value.",
         ],
         difficulty: 3
     },
@@ -2220,37 +1940,7 @@ const MOVIE_DATABASE = [
         actors: ["Gregory Peck", "Mary Badham"],
         quotes: [
             "You never really understand a person until you consider things from his point of view.",
-            "Sir?"
-        ],
-        difficulty: 3
-    },
-    {
-        title: "12 Angry Men",
-        year: "1957",
-        actors: ["Henry Fonda", "Lee J. Cobb"],
-        quotes: [
-            "It's not easy to stand alone against the ridicule of others.",
-            "So much at stake for a boy."
-        ],
-        difficulty: 3
-    },
-    {
-        title: "The Maltese Falcon",
-        year: "1941",
-        actors: ["Humphrey Bogart", "Mary Astor"],
-        quotes: [
-            "The stuff that dreams are made of.",
-            "You're taking the fall."
-        ],
-        difficulty: 3
-    },
-    {
-        title: "Double Indemnity",
-        year: "1944",
-        actors: ["Fred MacMurray", "Barbara Stanwyck"],
-        quotes: [
-            "How could I have known that murder could sometimes smell like honeysuckle?",
-            "We're both rotten."
+            "Sir?",
         ],
         difficulty: 3
     },
@@ -2260,13 +1950,13 @@ const MOVIE_DATABASE = [
         actors: ["Sidney Poitier", "Rod Steiger"],
         quotes: [
             "They call me Mr. Tibbs!",
-            "I don't think we're going to get along."
+            "I don't think we're going to get along.",
         ],
         difficulty: 3
     },
 
     // ============================================
-    // DIFFICULTY 4 - CULT CLASSICS & DEEPER CUTS (55 films)
+    // DIFFICULTY 4 - DEEPER CUTS & INDIE DARLINGS (54 films)
     // ============================================
     {
         title: "Donnie Darko",
@@ -2274,17 +1964,7 @@ const MOVIE_DATABASE = [
         actors: ["Jake Gyllenhaal", "Frank the Rabbit"],
         quotes: [
             "Why are you wearing that stupid bunny suit?",
-            "Why are you wearing that stupid man suit?"
-        ],
-        difficulty: 4
-    },
-    {
-        title: "Eternal Sunshine of the Spotless Mind",
-        year: "2004",
-        actors: ["Jim Carrey", "Kate Winslet"],
-        quotes: [
-            "Meet me in Montauk.",
-            "Okay."
+            "Why are you wearing that stupid man suit?",
         ],
         difficulty: 4
     },
@@ -2294,7 +1974,7 @@ const MOVIE_DATABASE = [
         actors: ["Harvey Keitel", "Steve Buscemi"],
         quotes: [
             "I don't tip.",
-            "You don't tip?"
+            "You don't tip?",
         ],
         difficulty: 4
     },
@@ -2304,7 +1984,7 @@ const MOVIE_DATABASE = [
         actors: ["Humphrey Bogart", "Lauren Bacall"],
         quotes: [
             "I don't mind if you don't like my manners. I don't like them myself.",
-            "You know what he'll do when he comes back? Beat my teeth out, then kick me in the stomach for mumbling."
+            "You know what he'll do when he comes back? Beat my teeth out, then kick me in the stomach for mumbling.",
         ],
         difficulty: 4
     },
@@ -2314,7 +1994,7 @@ const MOVIE_DATABASE = [
         actors: ["Joseph Cotten", "Orson Welles"],
         quotes: [
             "In Italy for 30 years under the Borgias they had warfare, terror, murder, and bloodshed, but they produced Michelangelo.",
-            "Look down there. Would you really feel any pity if one of those dots stopped moving forever?"
+            "Look down there. Would you really feel any pity if one of those dots stopped moving forever?",
         ],
         difficulty: 4
     },
@@ -2324,7 +2004,7 @@ const MOVIE_DATABASE = [
         actors: ["Naomi Watts", "Laura Harring"],
         quotes: [
             "Silencio.",
-            "No hay banda."
+            "No hay banda.",
         ],
         difficulty: 4
     },
@@ -2334,7 +2014,7 @@ const MOVIE_DATABASE = [
         actors: ["Dennis Hopper", "Isabella Rossellini"],
         quotes: [
             "Heineken? Fuck that shit! Pabst Blue Ribbon!",
-            "Baby wants to fuck!"
+            "Baby wants to fuck!",
         ],
         difficulty: 4
     },
@@ -2344,7 +2024,7 @@ const MOVIE_DATABASE = [
         actors: ["Jack Nance", "Charlotte Stewart"],
         quotes: [
             "In Heaven, everything is fine.",
-            "They're not even sure it is a baby."
+            "They're not even sure it is a baby.",
         ],
         difficulty: 4
     },
@@ -2354,7 +2034,7 @@ const MOVIE_DATABASE = [
         actors: ["Liv Ullmann", "Bibi Andersson"],
         quotes: [
             "I thought you were dead.",
-            "No, I'm not dead."
+            "No, I'm not dead.",
         ],
         difficulty: 4
     },
@@ -2364,7 +2044,7 @@ const MOVIE_DATABASE = [
         actors: ["Marcello Mastroianni", "Claudia Cardinale"],
         quotes: [
             "Everything's confused again, but that doesn't matter.",
-            "All the confusion of my life has been a reflection of myself!"
+            "All the confusion of my life has been a reflection of myself!",
         ],
         difficulty: 4
     },
@@ -2374,7 +2054,7 @@ const MOVIE_DATABASE = [
         actors: ["Jean-Paul Belmondo", "Jean Seberg"],
         quotes: [
             "I told you I don't like your friends.",
-            "Between grief and nothing, I will take grief."
+            "Between grief and nothing, I will take grief.",
         ],
         difficulty: 4
     },
@@ -2384,7 +2064,7 @@ const MOVIE_DATABASE = [
         actors: ["Jean-Pierre Léaud", "Claire Maurier"],
         quotes: [
             "My parents are the cause of every trouble in my life.",
-            "I'd rather be at the reformatory than at home."
+            "I'd rather be at the reformatory than at home.",
         ],
         difficulty: 4
     },
@@ -2394,7 +2074,7 @@ const MOVIE_DATABASE = [
         actors: ["Chishu Ryu", "Chieko Higashiyama"],
         quotes: [
             "Isn't life disappointing?",
-            "Yes, it is."
+            "Yes, it is.",
         ],
         difficulty: 4
     },
@@ -2404,7 +2084,7 @@ const MOVIE_DATABASE = [
         actors: ["Toshiro Mifune", "Machiko Kyo"],
         quotes: [
             "It's human to lie.",
-            "Most human beings can't tell the truth about themselves."
+            "Most human beings can't tell the truth about themselves.",
         ],
         difficulty: 4
     },
@@ -2414,7 +2094,7 @@ const MOVIE_DATABASE = [
         actors: ["Takashi Shimura", "Toshiro Mifune"],
         quotes: [
             "Again we are defeated.",
-            "No. The farmers have won. We have lost."
+            "No. The farmers have won. We have lost.",
         ],
         difficulty: 4
     },
@@ -2424,7 +2104,7 @@ const MOVIE_DATABASE = [
         actors: ["Peter Lorre", "Gustaf Gründgens"],
         quotes: [
             "I can't help myself! I haven't any control over this evil thing inside of me!",
-            "The fire, the voices, they won't leave me alone!"
+            "The fire, the voices, they won't leave me alone!",
         ],
         difficulty: 4
     },
@@ -2434,7 +2114,7 @@ const MOVIE_DATABASE = [
         actors: ["Lamberto Maggiorani", "Enzo Staiola"],
         quotes: [
             "Why should I kill myself worrying when I'll end up just as dead?",
-            "There's a cure for everything except death."
+            "There's a cure for everything except death.",
         ],
         difficulty: 4
     },
@@ -2444,7 +2124,7 @@ const MOVIE_DATABASE = [
         actors: ["Marcello Mastroianni", "Anita Ekberg"],
         quotes: [
             "Marcello, come here! Hurry up!",
-            "Sweetness itself!"
+            "Sweetness itself!",
         ],
         difficulty: 4
     },
@@ -2454,7 +2134,7 @@ const MOVIE_DATABASE = [
         actors: ["Bruno Zanin", "Pupella Maggio"],
         quotes: [
             "At last, the day has come!",
-            "We're going to see the Rex!"
+            "We're going to see the Rex!",
         ],
         difficulty: 4
     },
@@ -2464,7 +2144,7 @@ const MOVIE_DATABASE = [
         actors: ["Jean-Louis Trintignant", "Stefania Sandrelli"],
         quotes: [
             "I want to be like everyone else.",
-            "Normal. Normal!"
+            "Normal. Normal!",
         ],
         difficulty: 4
     },
@@ -2474,7 +2154,7 @@ const MOVIE_DATABASE = [
         actors: ["Monica Vitti", "Gabriele Ferzetti"],
         quotes: [
             "What do we do now?",
-            "I don't know."
+            "I don't know.",
         ],
         difficulty: 4
     },
@@ -2484,7 +2164,7 @@ const MOVIE_DATABASE = [
         actors: ["Kanu Bannerjee", "Karuna Bannerjee"],
         quotes: [
             "I'll bring something for you.",
-            "When will you come back?"
+            "When will you come back?",
         ],
         difficulty: 4
     },
@@ -2494,7 +2174,7 @@ const MOVIE_DATABASE = [
         actors: ["Brahim Hadjadj", "Jean Martin"],
         quotes: [
             "Starting a revolution is hard, and it's even harder to continue it.",
-            "To win, we will have to make the French leave."
+            "To win, we will have to make the French leave.",
         ],
         difficulty: 4
     },
@@ -2504,7 +2184,7 @@ const MOVIE_DATABASE = [
         actors: ["Song Kang-ho", "Kim Sang-kyung"],
         quotes: [
             "Document this. You see? He's laughing.",
-            "Do you see my eyes? They can read people."
+            "Do you see my eyes? They can read people.",
         ],
         difficulty: 4
     },
@@ -2514,7 +2194,7 @@ const MOVIE_DATABASE = [
         actors: ["Choi Min-sik", "Yoo Ji-tae"],
         quotes: [
             "Laugh and the world laughs with you. Weep and you weep alone.",
-            "I'm going to kill you."
+            "I'm going to kill you.",
         ],
         difficulty: 4
     },
@@ -2524,7 +2204,7 @@ const MOVIE_DATABASE = [
         actors: ["Alexander Kaidanovsky", "Anatoly Solonitsyn"],
         quotes: [
             "Let everything that's been planned come true.",
-            "The Zone wants to be respected. Otherwise it will punish."
+            "The Zone wants to be respected. Otherwise it will punish.",
         ],
         difficulty: 4
     },
@@ -2534,7 +2214,7 @@ const MOVIE_DATABASE = [
         actors: ["Donatas Banionis", "Natalya Bondarchuk"],
         quotes: [
             "We don't need other worlds. We need mirrors.",
-            "We think of ourselves as seekers of truth."
+            "We think of ourselves as seekers of truth.",
         ],
         difficulty: 4
     },
@@ -2544,7 +2224,7 @@ const MOVIE_DATABASE = [
         actors: ["Anatoly Solonitsyn", "Ivan Lapikov"],
         quotes: [
             "You are a great master. Why do you play the fool?",
-            "I paint for God, not for people."
+            "I paint for God, not for people.",
         ],
         difficulty: 4
     },
@@ -2554,7 +2234,7 @@ const MOVIE_DATABASE = [
         actors: ["Aleksey Kravchenko", "Olga Mironova"],
         quotes: [
             "He doesn't want to die.",
-            "So much for the Partisan!"
+            "So much for the Partisan!",
         ],
         difficulty: 4
     },
@@ -2564,7 +2244,7 @@ const MOVIE_DATABASE = [
         actors: ["Margarita Terekhova", "Filipp Yankovsky"],
         quotes: [
             "I remember I was very surprised when I first saw a chandelier.",
-            "Let everything happen to you: beauty and terror."
+            "Let everything happen to you: beauty and terror.",
         ],
         difficulty: 4
     },
@@ -2574,7 +2254,7 @@ const MOVIE_DATABASE = [
         actors: ["Bruno Ganz", "Solveig Dommartin"],
         quotes: [
             "I wish I could say: 'now' and 'now' and 'now.'",
-            "When the child was a child, it walked with its arms swinging."
+            "When the child was a child, it walked with its arms swinging.",
         ],
         difficulty: 4
     },
@@ -2584,7 +2264,7 @@ const MOVIE_DATABASE = [
         actors: ["Anne Wiazemsky", "Walter Green"],
         quotes: [
             "The world is wicked. You can't love the world.",
-            "God doesn't exist for donkeys."
+            "God doesn't exist for donkeys.",
         ],
         difficulty: 4
     },
@@ -2594,7 +2274,7 @@ const MOVIE_DATABASE = [
         actors: ["Martin LaSalle", "Marika Green"],
         quotes: [
             "For me, theft is a form of liberty.",
-            "Oh Jeanne, to reach you at last, what a strange path I had to take."
+            "Oh Jeanne, to reach you at last, what a strange path I had to take.",
         ],
         difficulty: 4
     },
@@ -2604,7 +2284,7 @@ const MOVIE_DATABASE = [
         actors: ["Silvia Pinal", "Francisco Rabal"],
         quotes: [
             "Thank God I'm an atheist.",
-            "If only you knew what good I want to do."
+            "If only you knew what good I want to do.",
         ],
         difficulty: 4
     },
@@ -2614,7 +2294,7 @@ const MOVIE_DATABASE = [
         actors: ["Klaus Kinski", "Helena Rojo"],
         quotes: [
             "I am the great traitor. There must be no other.",
-            "I am the Wrath of God!"
+            "I am the Wrath of God!",
         ],
         difficulty: 4
     },
@@ -2624,7 +2304,7 @@ const MOVIE_DATABASE = [
         actors: ["Shane Carruth", "David Sullivan"],
         quotes: [
             "Are you hungry? I haven't eaten since later this afternoon.",
-            "What are you doing?"
+            "What are you doing?",
         ],
         difficulty: 4
     },
@@ -2634,7 +2314,7 @@ const MOVIE_DATABASE = [
         actors: ["Sean Gullette", "Mark Margolis"],
         quotes: [
             "When I was a little kid, my mother told me not to stare into the sun.",
-            "So once when I was six, I did."
+            "So once when I was six, I did.",
         ],
         difficulty: 4
     },
@@ -2644,7 +2324,7 @@ const MOVIE_DATABASE = [
         actors: ["Kirsten Dunst", "Charlotte Gainsbourg"],
         quotes: [
             "The Earth is evil. We don't need to grieve for it.",
-            "Nobody will miss it."
+            "Nobody will miss it.",
         ],
         difficulty: 4
     },
@@ -2654,7 +2334,7 @@ const MOVIE_DATABASE = [
         actors: ["Scarlett Johansson", "Jeremy McWilliams"],
         quotes: [
             "Where are you from?",
-            "I'm from a different planet."
+            "I'm from a different planet.",
         ],
         difficulty: 4
     },
@@ -2664,7 +2344,7 @@ const MOVIE_DATABASE = [
         actors: ["Denis Lavant", "Édith Scob"],
         quotes: [
             "Who were we, when we were who we were?",
-            "Beauty is in the eye."
+            "Beauty is in the eye.",
         ],
         difficulty: 4
     },
@@ -2674,7 +2354,7 @@ const MOVIE_DATABASE = [
         actors: ["Nathaniel Brown", "Paz de la Huerta"],
         quotes: [
             "I'm not dead.",
-            "Are you sure?"
+            "Are you sure?",
         ],
         difficulty: 4
     },
@@ -2684,7 +2364,7 @@ const MOVIE_DATABASE = [
         actors: ["Colin Farrell", "Rachel Weisz"],
         quotes: [
             "If you encounter any problems, you cannot resort to violence.",
-            "You will turn into an animal of your choosing."
+            "You will turn into an animal of your choosing.",
         ],
         difficulty: 4
     },
@@ -2694,7 +2374,7 @@ const MOVIE_DATABASE = [
         actors: ["Philip Seymour Hoffman", "Samantha Morton"],
         quotes: [
             "Everything is more complicated than you think.",
-            "I know how to do it now."
+            "I know how to do it now.",
         ],
         difficulty: 4
     },
@@ -2704,7 +2384,7 @@ const MOVIE_DATABASE = [
         actors: ["Joaquin Phoenix", "Philip Seymour Hoffman"],
         quotes: [
             "If you figure out a way to live without a master, any master, be sure to let the rest of us know.",
-            "For you'd be the first in the history of the world."
+            "For you'd be the first in the history of the world.",
         ],
         difficulty: 4
     },
@@ -2714,7 +2394,7 @@ const MOVIE_DATABASE = [
         actors: ["Wiley Wiggins", "Ethan Hawke"],
         quotes: [
             "Dream is destiny.",
-            "The trick is to combine your waking rational abilities with the infinite possibilities of your dreams."
+            "The trick is to combine your waking rational abilities with the infinite possibilities of your dreams.",
         ],
         difficulty: 4
     },
@@ -2724,7 +2404,7 @@ const MOVIE_DATABASE = [
         actors: ["Amy Seimetz", "Shane Carruth"],
         quotes: [
             "Are you scared?",
-            "I feel like I'm here with you."
+            "I feel like I'm here with you.",
         ],
         difficulty: 4
     },
@@ -2734,7 +2414,7 @@ const MOVIE_DATABASE = [
         actors: ["Keanu Reeves", "Robert Downey Jr."],
         quotes: [
             "What does a scanner see?",
-            "Into the head? Into the heart?"
+            "Into the head? Into the heart?",
         ],
         difficulty: 4
     },
@@ -2744,7 +2424,7 @@ const MOVIE_DATABASE = [
         actors: ["Alejandro Jodorowsky", "Horacio Salinas"],
         quotes: [
             "You are excrement. You can change yourself into gold.",
-            "Zoom back camera!"
+            "Zoom back camera!",
         ],
         difficulty: 4
     },
@@ -2754,7 +2434,7 @@ const MOVIE_DATABASE = [
         actors: ["Alejandro Jodorowsky", "Brontis Jodorowsky"],
         quotes: [
             "Too much perfection is a mistake.",
-            "You are seven years old. You are a man."
+            "You are seven years old. You are a man.",
         ],
         difficulty: 4
     },
@@ -2764,7 +2444,7 @@ const MOVIE_DATABASE = [
         actors: ["Laura Dern", "Jeremy Irons"],
         quotes: [
             "I'm in this dark place.",
-            "You say you're married?"
+            "You say you're married?",
         ],
         difficulty: 4
     },
@@ -2774,7 +2454,7 @@ const MOVIE_DATABASE = [
         actors: ["Willem Dafoe", "Charlotte Gainsbourg"],
         quotes: [
             "Chaos reigns.",
-            "Nature is Satan's church."
+            "Nature is Satan's church.",
         ],
         difficulty: 4
     },
@@ -2784,7 +2464,7 @@ const MOVIE_DATABASE = [
         actors: ["Andrea Riseborough", "Christopher Abbott"],
         quotes: [
             "Pull me out.",
-            "I need to stay focused."
+            "I need to stay focused.",
         ],
         difficulty: 4
     },
@@ -2794,7 +2474,7 @@ const MOVIE_DATABASE = [
         actors: ["Jennifer Lawrence", "Javier Bardem"],
         quotes: [
             "You never loved me. You just loved how much I loved you.",
-            "I gave you everything!"
+            "I gave you everything!",
         ],
         difficulty: 4
     },
@@ -2804,7 +2484,7 @@ const MOVIE_DATABASE = [
         actors: ["Natalie Portman", "Jennifer Jason Leigh"],
         quotes: [
             "It's not destroying. It's making something new.",
-            "Ventress wants to face it. You want to fight it. But I don't think I want either of those things."
+            "Ventress wants to face it. You want to fight it. But I don't think I want either of those things.",
         ],
         difficulty: 4
     },
@@ -2814,13 +2494,13 @@ const MOVIE_DATABASE = [
         actors: ["Andrew Garfield", "Riley Keough"],
         quotes: [
             "I've been waiting for you.",
-            "What is it you think you're looking for?"
+            "What is it you think you're looking for?",
         ],
         difficulty: 4
     },
 
     // ============================================
-    // DIFFICULTY 5 - DEEP CUTS & ART HOUSE (50 films)
+    // DIFFICULTY 5 - ARTHOUSE & INTERNATIONAL CINEMA (41 films)
     // ============================================
     {
         title: "L'Atalante",
@@ -2828,7 +2508,7 @@ const MOVIE_DATABASE = [
         actors: ["Jean Dasté", "Dita Parlo"],
         quotes: [
             "When you're under the water, you can see the one you love.",
-            "The water shows you their face."
+            "The water shows you their face.",
         ],
         difficulty: 5
     },
@@ -2838,7 +2518,7 @@ const MOVIE_DATABASE = [
         actors: ["Kinuyo Tanaka", "Yoshiaki Hanayagi"],
         quotes: [
             "Without mercy, man is like a beast.",
-            "Is life so dear or peace so sweet?"
+            "Is life so dear or peace so sweet?",
         ],
         difficulty: 5
     },
@@ -2848,7 +2528,7 @@ const MOVIE_DATABASE = [
         actors: ["Mihály Víg", "Putyi Horváth"],
         quotes: [
             "There's nothing to understand. The world is complete as it is.",
-            "We're all alone and we're heading towards defeat."
+            "We're all alone and we're heading towards defeat.",
         ],
         difficulty: 5
     },
@@ -2858,7 +2538,7 @@ const MOVIE_DATABASE = [
         actors: ["Delphine Seyrig", "Jan Decorte"],
         quotes: [
             "I'm making meatloaf.",
-            "I prefer to work alone."
+            "I prefer to work alone.",
         ],
         difficulty: 5
     },
@@ -2868,7 +2548,7 @@ const MOVIE_DATABASE = [
         actors: ["János Derzsi", "Erika Bók"],
         quotes: [
             "The horse won't eat.",
-            "We must carry on."
+            "We must carry on.",
         ],
         difficulty: 5
     },
@@ -2878,7 +2558,7 @@ const MOVIE_DATABASE = [
         actors: ["Hollis Frampton", "Amy Taubin"],
         quotes: [
             "I think there's been a murder.",
-            "Can you call the police?"
+            "Can you call the police?",
         ],
         difficulty: 5
     },
@@ -2888,7 +2568,7 @@ const MOVIE_DATABASE = [
         actors: ["Delphine Seyrig", "Giorgio Albertazzi"],
         quotes: [
             "You're still hesitating.",
-            "I never hesitate."
+            "I never hesitate.",
         ],
         difficulty: 5
     },
@@ -2898,7 +2578,7 @@ const MOVIE_DATABASE = [
         actors: ["Corinne Marchand", "Antoine Bourseiller"],
         quotes: [
             "Ugliness is a kind of death.",
-            "As long as I'm beautiful, I'm alive."
+            "As long as I'm beautiful, I'm alive.",
         ],
         difficulty: 5
     },
@@ -2908,7 +2588,7 @@ const MOVIE_DATABASE = [
         actors: ["Alain Delon", "François Périer"],
         quotes: [
             "There is no greater solitude than that of the samurai.",
-            "Unless it is that of the tiger in the jungle."
+            "Unless it is that of the tiger in the jungle.",
         ],
         difficulty: 5
     },
@@ -2918,7 +2598,7 @@ const MOVIE_DATABASE = [
         actors: ["Tony Leung", "Faye Wong"],
         quotes: [
             "If memories could be canned, would they also have expiry dates?",
-            "Dreams. If only I could live in them."
+            "Dreams. If only I could live in them.",
         ],
         difficulty: 5
     },
@@ -2928,7 +2608,7 @@ const MOVIE_DATABASE = [
         actors: ["Tony Leung", "Maggie Cheung"],
         quotes: [
             "I don't know how to say it. I wonder if there is anyone behind you.",
-            "He didn't turn back. It's like me."
+            "He didn't turn back. It's like me.",
         ],
         difficulty: 5
     },
@@ -2938,7 +2618,7 @@ const MOVIE_DATABASE = [
         actors: ["Nien-Jen Wu", "Elaine Jin"],
         quotes: [
             "I'm old. I don't have anything new to say.",
-            "Every day I feel I'm living someone else's life."
+            "Every day I feel I'm living someone else's life.",
         ],
         difficulty: 5
     },
@@ -2948,7 +2628,7 @@ const MOVIE_DATABASE = [
         actors: ["Banlop Lomnoi", "Sakda Kaewbuadee"],
         quotes: [
             "I'm the shaman of the bygone past.",
-            "I'm the tiger spirit."
+            "I'm the tiger spirit.",
         ],
         difficulty: 5
     },
@@ -2958,7 +2638,7 @@ const MOVIE_DATABASE = [
         actors: ["Jenjira Pongpas", "Banlop Lomnoi"],
         quotes: [
             "The soldiers are sleeping again.",
-            "They're dreaming of the palace."
+            "They're dreaming of the palace.",
         ],
         difficulty: 5
     },
@@ -2968,7 +2648,7 @@ const MOVIE_DATABASE = [
         actors: ["Lars Rudolph", "Peter Fitz"],
         quotes: [
             "The sun has come to a standstill.",
-            "There is nothing else to do but wait."
+            "There is nothing else to do but wait.",
         ],
         difficulty: 5
     },
@@ -2978,7 +2658,7 @@ const MOVIE_DATABASE = [
         actors: ["Miroslav Krobot", "Tilda Swinton"],
         quotes: [
             "I saw something I shouldn't have.",
-            "Something terrible."
+            "Something terrible.",
         ],
         difficulty: 5
     },
@@ -2988,7 +2668,7 @@ const MOVIE_DATABASE = [
         actors: ["Thanapat Saisaymar", "Jenjira Pongpas"],
         quotes: [
             "I've been thinking about my past lives lately.",
-            "Do you remember them all?"
+            "Do you remember them all?",
         ],
         difficulty: 5
     },
@@ -2998,7 +2678,7 @@ const MOVIE_DATABASE = [
         actors: ["Oleg Yankovsky", "Erland Josephson"],
         quotes: [
             "Man is happy when he has faith.",
-            "But what if he has no faith?"
+            "But what if he has no faith?",
         ],
         difficulty: 5
     },
@@ -3008,7 +2688,7 @@ const MOVIE_DATABASE = [
         actors: ["Erland Josephson", "Susan Fleetwood"],
         quotes: [
             "In the beginning was the Word.",
-            "Why did you say that?"
+            "Why did you say that?",
         ],
         difficulty: 5
     },
@@ -3018,7 +2698,7 @@ const MOVIE_DATABASE = [
         actors: ["Kolya Burlyayev", "Valentin Zubkov"],
         quotes: [
             "He's not a child anymore.",
-            "The war has taken that from him."
+            "The war has taken that from him.",
         ],
         difficulty: 5
     },
@@ -3028,7 +2708,7 @@ const MOVIE_DATABASE = [
         actors: ["Boris Plotnikov", "Vladimir Gostyukhin"],
         quotes: [
             "Why didn't you shoot?",
-            "I couldn't."
+            "I couldn't.",
         ],
         difficulty: 5
     },
@@ -3038,7 +2718,7 @@ const MOVIE_DATABASE = [
         actors: ["Sofiko Chiaureli", "Melkon Alekyan"],
         quotes: [
             "I am the man whose life and soul are torture.",
-            "My poems are like pomegranate seeds."
+            "My poems are like pomegranate seeds.",
         ],
         difficulty: 5
     },
@@ -3048,7 +2728,7 @@ const MOVIE_DATABASE = [
         actors: ["Ivan Mykolaichuk", "Larisa Kadochnikova"],
         quotes: [
             "Marichka, where are you?",
-            "I'm here, Ivan."
+            "I'm here, Ivan.",
         ],
         difficulty: 5
     },
@@ -3058,7 +2738,7 @@ const MOVIE_DATABASE = [
         actors: ["János Görbe", "Zoltán Latinovits"],
         quotes: [
             "Who is your leader?",
-            "I don't know."
+            "I don't know.",
         ],
         difficulty: 5
     },
@@ -3068,7 +2748,7 @@ const MOVIE_DATABASE = [
         actors: ["Lajos Balázsovits", "András Bálint"],
         quotes: [
             "The revolution has begun.",
-            "We will sing and dance."
+            "We will sing and dance.",
         ],
         difficulty: 5
     },
@@ -3078,7 +2758,7 @@ const MOVIE_DATABASE = [
         actors: ["Jean-Luc Godard", "Julie Delpy"],
         quotes: [
             "All great fiction films tend toward documentary.",
-            "All great documentaries tend toward fiction."
+            "All great documentaries tend toward fiction.",
         ],
         difficulty: 5
     },
@@ -3088,7 +2768,7 @@ const MOVIE_DATABASE = [
         actors: ["Catherine Tanvier", "Christian Sinniger"],
         quotes: [
             "No comment.",
-            "Pas de commentaire."
+            "Pas de commentaire.",
         ],
         difficulty: 5
     },
@@ -3098,7 +2778,7 @@ const MOVIE_DATABASE = [
         actors: ["Ion Fiscuteanu", "Luminita Gheorghiu"],
         quotes: [
             "I don't feel well.",
-            "We need to get you to a hospital."
+            "We need to get you to a hospital.",
         ],
         difficulty: 5
     },
@@ -3108,7 +2788,7 @@ const MOVIE_DATABASE = [
         actors: ["Anamaria Marinca", "Laura Vasiliu"],
         quotes: [
             "You have to help me.",
-            "I'll do whatever you need."
+            "I'll do whatever you need.",
         ],
         difficulty: 5
     },
@@ -3118,7 +2798,7 @@ const MOVIE_DATABASE = [
         actors: ["Tatyana Samoylova", "Aleksey Batalov"],
         quotes: [
             "Wait for me, and I'll come back.",
-            "I'll wait forever."
+            "I'll wait forever.",
         ],
         difficulty: 5
     },
@@ -3128,7 +2808,7 @@ const MOVIE_DATABASE = [
         actors: ["Chen Chang", "Lisa Yang"],
         quotes: [
             "I don't know how I got here.",
-            "But I'm here now."
+            "But I'm here now.",
         ],
         difficulty: 5
     },
@@ -3138,37 +2818,7 @@ const MOVIE_DATABASE = [
         actors: ["Luigi Lo Cascio", "Alessio Boni"],
         quotes: [
             "We were young, and we believed in everything.",
-            "Life was beginning."
-        ],
-        difficulty: 5
-    },
-    {
-        title: "Yi Yi",
-        year: "2000",
-        actors: ["Nien-Jen Wu", "Elaine Jin"],
-        quotes: [
-            "We are almost twice as old.",
-            "How do we really know about one another?"
-        ],
-        difficulty: 5
-    },
-    {
-        title: "Memories of Murder",
-        year: "2003",
-        actors: ["Song Kang-ho", "Kim Sang-kyung"],
-        quotes: [
-            "This is not America.",
-            "The documents are all you need."
-        ],
-        difficulty: 5
-    },
-    {
-        title: "Oldboy",
-        year: "2003",
-        actors: ["Choi Min-sik", "Yoo Ji-tae"],
-        quotes: [
-            "Laugh and the world laughs with you. Weep and you weep alone.",
-            "My daughter. My love."
+            "Life was beginning.",
         ],
         difficulty: 5
     },
@@ -3178,7 +2828,7 @@ const MOVIE_DATABASE = [
         actors: ["Kim Min-hee", "Kim Tae-ri"],
         quotes: [
             "From that moment, we were together.",
-            "No one can separate us now."
+            "No one can separate us now.",
         ],
         difficulty: 5
     },
@@ -3188,27 +2838,7 @@ const MOVIE_DATABASE = [
         actors: ["Yoo Ah-in", "Steven Yeun"],
         quotes: [
             "There are so many greenhouses in Korea now.",
-            "They have to disappear."
-        ],
-        difficulty: 5
-    },
-    {
-        title: "Chungking Express",
-        year: "1994",
-        actors: ["Brigitte Lin", "Tony Leung"],
-        quotes: [
-            "If memories could be canned, would they also have expiry dates?",
-            "If so, I hope they last for centuries."
-        ],
-        difficulty: 5
-    },
-    {
-        title: "In the Mood for Love",
-        year: "2000",
-        actors: ["Tony Leung", "Maggie Cheung"],
-        quotes: [
-            "I didn't think you'd fall in love with me.",
-            "I was just being polite."
+            "They have to disappear.",
         ],
         difficulty: 5
     },
@@ -3218,27 +2848,7 @@ const MOVIE_DATABASE = [
         actors: ["Tony Leung", "Leslie Cheung"],
         quotes: [
             "Let's start over.",
-            "Not again."
-        ],
-        difficulty: 5
-    },
-    {
-        title: "Tropical Malady",
-        year: "2004",
-        actors: ["Banlop Lomnoi", "Sakda Kaewbuadee"],
-        quotes: [
-            "I've never understood why people have to love each other.",
-            "All I want is to devour you."
-        ],
-        difficulty: 5
-    },
-    {
-        title: "Uncle Boonmee Who Can Recall His Past Lives",
-        year: "2010",
-        actors: ["Thanapat Saisaymar", "Jenjira Pongpas"],
-        quotes: [
-            "I think I know why I'm sick.",
-            "I've killed too many bugs on the farm."
+            "Not again.",
         ],
         difficulty: 5
     },
@@ -3248,7 +2858,7 @@ const MOVIE_DATABASE = [
         actors: ["David Hemmings", "Vanessa Redgrave"],
         quotes: [
             "I saw something.",
-            "Nothing's wrong. It's beautiful."
+            "Nothing's wrong. It's beautiful.",
         ],
         difficulty: 5
     },
@@ -3258,7 +2868,7 @@ const MOVIE_DATABASE = [
         actors: ["Monica Vitti", "Richard Harris"],
         quotes: [
             "I need something real.",
-            "What is this fog?"
+            "What is this fog?",
         ],
         difficulty: 5
     },
@@ -3268,7 +2878,7 @@ const MOVIE_DATABASE = [
         actors: ["Monica Vitti", "Alain Delon"],
         quotes: [
             "I wish I didn't love you, or that I loved you much more.",
-            "I don't know."
+            "I don't know.",
         ],
         difficulty: 5
     },
@@ -3278,7 +2888,7 @@ const MOVIE_DATABASE = [
         actors: ["Marcello Mastroianni", "Jeanne Moreau"],
         quotes: [
             "When was the last time you told me you loved me?",
-            "I can't remember."
+            "I can't remember.",
         ],
         difficulty: 5
     },
@@ -3288,27 +2898,7 @@ const MOVIE_DATABASE = [
         actors: ["Brigitte Bardot", "Michel Piccoli"],
         quotes: [
             "I love you totally, tenderly, tragically.",
-            "Me too, Paul."
-        ],
-        difficulty: 5
-    },
-    {
-        title: "Cléo from 5 to 7",
-        year: "1962",
-        actors: ["Corinne Marchand", "Antoine Bourseiller"],
-        quotes: [
-            "Everyone spoils me. Nobody loves me.",
-            "I'm always afraid."
-        ],
-        difficulty: 5
-    },
-    {
-        title: "Le Samouraï",
-        year: "1967",
-        actors: ["Alain Delon", "François Périer"],
-        quotes: [
-            "There is no greater solitude than that of the samurai.",
-            "Unless it is that of the tiger in the jungle."
+            "Me too, Paul.",
         ],
         difficulty: 5
     },
@@ -3318,7 +2908,7 @@ const MOVIE_DATABASE = [
         actors: ["Vincent Cassel", "Hubert Koundé"],
         quotes: [
             "It's about a society on its way down.",
-            "And as it falls, it keeps telling itself: 'So far so good.'"
+            "And as it falls, it keeps telling itself: 'So far so good.'",
         ],
         difficulty: 5
     }

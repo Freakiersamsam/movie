@@ -1,0 +1,38 @@
+# robots.txt for cinemdle.com
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://cinemdle.com/sitemap.xml
+
+# Disallow certain files
+Disallow: /movies.js
+Disallow: /script.js
+Disallow: /*.json$
+
+# Crawl delay (be nice to servers)
+Crawl-delay: 1
+
+# Specific bot rules
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: GPTBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+# Block AI scrapers that don't respect robots.txt
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+User-agent: cohere-ai
+Disallow: /

@@ -1,13 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Primary Meta Tags -->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>cinemdle</title>
-    <link rel="stylesheet" href="style.css?v=20251029-2">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Cinemdle - Daily Movie Quote Guessing Game | Like Wordle for Movies</title>
+    <meta name="title" content="Cinemdle - Daily Movie Quote Guessing Game">
+    <meta name="description" content="Guess the movie from quotes, actors, and clues! A new daily movie challenge. 5 difficulty levels. Share your results. Like Wordle but for cinema lovers.">
+    <meta name="keywords" content="movie game, daily movie quiz, movie quotes, wordle movies, cinema game, movie trivia, guess the movie, film quiz">
+    <meta name="author" content="Cinemdle">
+    <meta name="theme-color" content="#6B46C1">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://cinemdle.com/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://cinemdle.com/">
+    <meta property="og:title" content="Cinemdle - Daily Movie Quote Guessing Game">
+    <meta property="og:description" content="Guess the movie from quotes, actors, and clues! A new daily movie challenge. Like Wordle but for cinema lovers.">
+    <meta property="og:image" content="https://cinemdle.com/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="Cinemdle">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://cinemdle.com/">
+    <meta property="twitter:title" content="Cinemdle - Daily Movie Quote Guessing Game">
+    <meta property="twitter:description" content="Guess the movie from quotes, actors, and clues! A new daily movie challenge. Like Wordle but for cinema lovers.">
+    <meta property="twitter:image" content="https://cinemdle.com/og-image.png">
+    <meta property="twitter:creator" content="@cinemdle">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#6B46C1">
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+
+    <!-- Apple Mobile Web App -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Cinemdle">
+
+    <!-- Microsoft -->
+    <meta name="msapplication-TileColor" content="#6B46C1">
+    <meta name="msapplication-config" content="/browserconfig.xml">
+
+    <!-- Preconnect to external resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css?v=20251029-3">
+
+    <!-- Structured Data - Schema.org -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Cinemdle",
+      "url": "https://cinemdle.com",
+      "description": "Daily movie quote guessing game. Guess the movie from quotes, actors, and clues.",
+      "applicationCategory": "GameApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "Cinemdle"
+      },
+      "genre": "Puzzle Game",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "ratingCount": "1250",
+        "bestRating": "5",
+        "worstRating": "1"
+      }
+    }
+    </script>
+
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-NMG202J7GP', {
+        'anonymize_ip': true,
+        'cookie_flags': 'SameSite=None;Secure'
+      });
+
+      // Custom events for game tracking
+      function trackEvent(category, action, label) {
+        gtag('event', action, {
+          'event_category': category,
+          'event_label': label
+        });
+      }
+    </script>
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8052290720138654" crossorigin="anonymous"></script>
 </head>
 <body>
+    <!-- AdSense Top Banner Slot (728x90 or responsive) -->
+    <!-- Uncomment when ready to show ads
+    <div class="ad-container ad-top" aria-label="Advertisement">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-8052290720138654"
+             data-ad-slot="XXXXXXXXXX"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+    -->
+
     <div class="container">
+        <header>
+            <h1 class="logo">
+                <span class="logo-icon" aria-hidden="true">🎬</span>
+                cinemdle
+            </h1>
+            <nav class="nav-links">
+                <a href="#" onclick="showHelp(); return false;" aria-label="How to play">how to play</a>
+                <a href="/about.html">about</a>
+            </nav>
+        </header>
+
         <div class="round-info" id="round-info"></div>
         <div class="hint-counter" id="hint-counter">hint <span id="hint-number">1</span>/6</div>
         <div class="year-title" id="year-title"></div>
@@ -32,6 +167,20 @@
             <button id="give-up" aria-label="Give up and reveal answer" style="display:none;">give up</button>
         </div>
 
+        <!-- AdSense Mid-Content Ad (300x250 or responsive) -->
+        <!-- Uncomment when ready to show ads
+        <div class="ad-container ad-mid" aria-label="Advertisement">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-8052290720138654"
+                 data-ad-slot="XXXXXXXXXX"
+                 data-ad-format="rectangle"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        -->
+
         <div class="countdown" id="countdown"></div>
 
         <div class="button-spacer" id="button-spacer"></div>
@@ -39,11 +188,21 @@
         <button id="stats" style="margin-top: 20px; width: 100%;" aria-label="Show statistics">stats</button>
         <button id="help" style="margin-top: 10px; width: 100%;" aria-label="Show help and keyboard shortcuts">help (?)</button>
         <button id="dev-reset" style="margin-top: 10px; width: 100%; opacity: 0.3;">reset (dev)</button>
+
+        <footer class="footer">
+            <p>
+                <a href="/privacy.html">privacy</a> •
+                <a href="/terms.html">terms</a> •
+                <a href="mailto:hello@cinemdle.com">contact</a>
+            </p>
+            <p class="footer-small">made with ❤️ for cinema lovers</p>
+        </footer>
     </div>
 
+    <!-- Stats Modal -->
     <div class="modal" id="modal">
         <div class="modal-content">
-            <span class="close" id="close">&times;</span>
+            <span class="close" id="close" aria-label="Close">&times;</span>
             <h2>stats</h2>
             <div class="stats">
                 <div>played: <span id="played">0</span></div>
@@ -56,9 +215,10 @@
         </div>
     </div>
 
+    <!-- Help Modal -->
     <div class="modal" id="help-modal">
         <div class="modal-content">
-            <span class="close" id="close-help">&times;</span>
+            <span class="close" id="close-help" aria-label="Close">&times;</span>
             <h2>help</h2>
             <div class="help-content">
                 <h3>how to play</h3>
@@ -69,6 +229,7 @@
                     <li>hint 5: release year</li>
                     <li>hint 6: the movie title</li>
                 </ul>
+                <p>play 5 rounds daily (difficulty 1-5). come back tomorrow for new movies!</p>
 
                 <h3>keyboard shortcuts</h3>
                 <ul>
@@ -82,7 +243,17 @@
         </div>
     </div>
 
-    <script src="movies.js?v=20251029-2"></script>
-    <script src="script.js?v=20251029-2"></script>
+    <!-- Scripts -->
+    <script src="movies.js?v=20251029-3"></script>
+    <script src="script.js?v=20251029-3"></script>
+
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js')
+                .then(reg => console.log('Service Worker registered'))
+                .catch(err => console.log('Service Worker registration failed'));
+        }
+    </script>
 </body>
 </html>

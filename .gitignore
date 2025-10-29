@@ -1,0 +1,38 @@
+# Development files
+*.pyc
+__pycache__/
+.DS_Store
+node_modules/
+.env
+
+# Backup files
+*_backup_*.js
+movies_cleaned.js
+new_movie_entry.txt
+new_movies_batch.txt
+verified_additions.txt
+
+# Development scripts
+remove_duplicates.py
+add_movie_helper.py
+find_missing_movies.py
+check_afi_coverage.py
+auto_add_movies.py
+merge_additions.py
+movies_to_add.md
+
+# Test files
+test.js
+browser-test.html
+comprehensive-test.html
+
+# Keep only production-ready HTML
+index-production.html
+
+# Documentation (optional - keep for reference)
+# You can uncomment these if you don't want them in the repo:
+# CLOUDFLARE_DEPLOY.md
+# DEPLOYMENT_CHECKLIST.md
+# FAVICON_GUIDE.md
+# LAUNCH_NOW.md
+# README_DEPLOYMENT.md

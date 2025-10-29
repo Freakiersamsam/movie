@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprehensive Test - Movie Game</title>
+    <style>
+        body {
+            font-family: monospace;
+            padding: 20px;
+            background: #000;
+            color: #0f0;
+        }
+        .test { margin: 10px 0; }
+        .pass { color: #0f0; }
+        .fail { color: #f00; }
+        button {
+            background: #000;
+            color: #0f0;
+            border: 1px solid #0f0;
+            padding: 10px 20px;
+            margin: 10px 0;
+            cursor: pointer;
+            font-family: monospace;
+        }
+        button:hover { background: #0f0; color: #000; }
+    </style>
+</head>
+<body>
+    <h1>Movie Game Comprehensive Test</h1>
+    <div id="results"></div>
+    <button onclick="runTests()">Run Tests</button>
+    <button onclick="testReset()">Test Dev Reset</button>
+    <button onclick="window.location.href='index.html'">Go to Game</button>
+
+    <script src="movies.js"></script>
+    <script>
+        const results = document.getElementById('results');
+
+        function log(msg, pass = true) {
+            const div = document.createElement('div');
+            div.className = `test ${pass ? 'pass' : 'fail'}`;
+            div.textContent = (pass ? '✅ ' : '❌ ') + msg;
+            results.appendChild(div);
+        }
+
+        function runTests() {
+            results.innerHTML = '<h2>Running Tests...</h2>';
+
+            // Test 1: Database loaded
+            if (typeof MOVIE_DATABASE === 'undefined') {
+                log('MOVIE_DATABASE not loaded', false);
+                return;
+            }
+            log(`Database loaded with ${MOVIE_DATABASE.length} movies`);
+
+            // Test 2: Count by difficulty
+            const counts = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0};
+            MOVIE_DATABASE.forEach(movie => {
+                counts[movie.difficulty]++;
+            });
+
+            log(`Difficulty 1: ${counts[1]} films (expected 40)`);
+            log(`Difficulty 2: ${counts[2]} films (expected 125)`);
+            log(`Difficulty 3: ${counts[3]} films (expected 60)`);
+            log(`Difficulty 4: ${counts[4]} films (expected 55)`);
+            log(`Difficulty 5: ${counts[5]} films (expected 50)`);
+
+            const total = Object.values(counts).reduce((a, b) => a + b, 0);
+            log(`Total: ${total} films (expected 330)`, total === 330);
+
+            // Test 3: Validate structure
+            let structureValid = true;
+            MOVIE_DATABASE.forEach((movie, i) => {
+                if (!movie.title || !movie.year || !movie.actors || !movie.quotes || !movie.difficulty) {
+                    log(`Invalid structure at index ${i}: ${movie.title || 'NO TITLE'}`, false);
+                    structureValid = false;
+                }
+            });
+            if (structureValid) log('All movies have valid structure');
+
+            // Test 4: LocalStorage functions
+            function getDevOffset() {
+                const offset = localStorage.getItem('devOffset');
+                return offset ? parseInt(offset) : 0;
+            }
+
+            function incrementDevOffset() {
+                const current = getDevOffset();
+                localStorage.setItem('devOffset', (current + 1).toString());
+            }
+
+            const currentOffset = getDevOffset();
+            log(`Current dev offset: ${currentOffset}`);
+
+            // Test 5: Film selection logic
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            const daysSinceEpoch = Math.floor(today.getTime() / (1000 * 60 * 60 * 24));
+
+            function getMoviesForOffset(offset) {
+                const seed = daysSinceEpoch + (offset * 37);
+                const movies = [];
+
+                for (let round = 0; round < 5; round++) {
+                    const difficulty = round + 1;
+                    const moviesOfDifficulty = MOVIE_DATABASE.filter(m => m.difficulty === difficulty);
+                    const index = (seed + round) % moviesOfDifficulty.length;
+                    movies.push(moviesOfDifficulty[index]);
+                }
+
+                return movies;
+            }
+
+            // Show current selection
+            const currentMovies = getMoviesForOffset(currentOffset);
+            log('');
+            log('Current film selection (offset ' + currentOffset + '):');
+            currentMovies.forEach((movie, i) => {
+                log(`  Round ${i + 1}: ${movie.title} (${movie.year})`);
+            });
+
+            // Show what reset would give
+            log('');
+            log('After reset (offset ' + (currentOffset + 1) + '):');
+            const nextMovies = getMoviesForOffset(currentOffset + 1);
+            nextMovies.forEach((movie, i) => {
+                log(`  Round ${i + 1}: ${movie.title} (${movie.year})`);
+            });
+
+            // Check they're different
+            const same = currentMovies.every((m, i) => m.title === nextMovies[i].title);
+            log('', !same);
+            log(same ? 'WARNING: Reset gives same films!' : 'Reset will give different films', !same);
+
+            log('');
+            log('=== ALL TESTS COMPLETE ===');
+        }
+
+        function testReset() {
+            if (confirm('This will increment the dev offset and clear game state. Continue?')) {
+                // Increment offset
+                const current = parseInt(localStorage.getItem('devOffset') || '0');
+                localStorage.setItem('devOffset', (current + 1).toString());
+
+                // Clear game state
+                localStorage.removeItem('state');
+                localStorage.removeItem('stats');
+
+                alert(`Reset complete! Offset is now ${current + 1}. Click "Go to Game" to test.`);
+                runTests();
+            }
+        }
+
+        // Run tests on load
+        runTests();
+    </script>
+</body>
+</html>

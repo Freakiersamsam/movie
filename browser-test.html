@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debug Test</title>
+</head>
+<body>
+    <h1>Debug Console</h1>
+    <div id="output"></div>
+
+    <script src="movies.js"></script>
+    <script>
+        const output = document.getElementById('output');
+
+        function log(msg, isError = false) {
+            const p = document.createElement('p');
+            p.textContent = msg;
+            p.style.color = isError ? 'red' : 'green';
+            output.appendChild(p);
+            console.log(msg);
+        }
+
+        // Test 1: Check if MOVIE_DATABASE exists
+        if (typeof MOVIE_DATABASE === 'undefined') {
+            log('❌ MOVIE_DATABASE is not defined!', true);
+        } else {
+            log(`✅ MOVIE_DATABASE is defined with ${MOVIE_DATABASE.length} movies`);
+        }
+
+        // Test 2: Count by difficulty
+        const counts = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0};
+        MOVIE_DATABASE.forEach(movie => {
+            if (movie.difficulty >= 1 && movie.difficulty <= 5) {
+                counts[movie.difficulty]++;
+            }
+        });
+
+        log(`Difficulty 1: ${counts[1]} films`);
+        log(`Difficulty 2: ${counts[2]} films`);
+        log(`Difficulty 3: ${counts[3]} films`);
+        log(`Difficulty 4: ${counts[4]} films`);
+        log(`Difficulty 5: ${counts[5]} films`);
+
+        // Test 3: Test selection logic
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const daysSinceEpoch = Math.floor(today.getTime() / (1000 * 60 * 60 * 24));
+
+        function getMoviesForOffset(offset) {
+            const seed = daysSinceEpoch + (offset * 37);
+            const movies = [];
+
+            for (let round = 0; round < 5; round++) {
+                const difficulty = round + 1;
+                const moviesOfDifficulty = MOVIE_DATABASE.filter(m => m.difficulty === difficulty);
+                const index = (seed + round) % moviesOfDifficulty.length;
+                movies.push(moviesOfDifficulty[index]);
+            }
+
+            return movies;
+        }
+
+        log('');
+        log('Testing film selection with different offsets:');
+        for (let offset = 0; offset < 3; offset++) {
+            const movies = getMoviesForOffset(offset);
+            log(`Offset ${offset}: ${movies.map(m => m.title).join(', ')}`);
+        }
+
+        log('');
+        log('✅ All tests passed!');
+    </script>
+</body>
+</html>

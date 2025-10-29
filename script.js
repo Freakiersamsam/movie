@@ -193,11 +193,25 @@ function handleGuess() {
     if (!guess) return;
 
     if (guess === todayMovie.title.toLowerCase()) {
-        // Reveal all remaining hints
+        // Mark game as complete immediately to prevent other interactions
+        gameComplete = true;
+        input.disabled = true;
+        document.getElementById('next').disabled = true;
+
+        // Store the current hint count for stats
+        const hintsUsed = currentHint;
+
+        // Reveal all remaining hints in sequence
+        let delay = 0;
         for (let i = currentHint; i <= 5; i++) {
-            setTimeout(() => revealHint(i), (i - currentHint) * 300);
+            ((hintIndex) => {
+                setTimeout(() => revealHint(hintIndex), delay);
+            })(i);
+            delay += 300;
         }
-        setTimeout(() => endRound(true, currentHint), (6 - currentHint) * 300);
+
+        // Call endRound after all hints are revealed
+        setTimeout(() => endRound(true, hintsUsed), delay + 300);
     } else {
         document.getElementById('message').textContent = 'nope';
         setTimeout(() => {

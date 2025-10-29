@@ -22,6 +22,7 @@ body {
     text-align: center;
     margin-bottom: 30px;
     font-size: 18px;
+    min-height: 29px;
 }
 
 .year-title.show {
@@ -47,13 +48,14 @@ body {
 
 .quotes {
     margin-bottom: 60px;
-    min-height: 100px;
+    min-height: 200px;
 }
 
 .quote {
     opacity: 0;
     margin-bottom: 30px;
     transition: opacity 1s;
+    min-height: 50px;
 }
 
 .quote.show {
@@ -66,6 +68,7 @@ body {
     font-size: 14px;
     color: #888;
     transition: opacity 1s;
+    min-height: 23px;
 }
 
 .actor-inline.show {
@@ -245,6 +248,15 @@ h2 {
 
 #share {
     width: 100%;
+}
+
+#next-round-btn {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.button-spacer {
+    min-height: 62px;
 }
 
 @media (max-width: 600px) {

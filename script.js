@@ -280,16 +280,14 @@ function endRound(won, hints) {
         // Show button to go to next round or stats
         if (currentRound < ROUNDS_PER_DAY - 1 && !state.rounds[currentRound + 1].complete) {
             setTimeout(() => {
-                const existingBtn = document.getElementById('next-round-btn');
-                if (existingBtn) existingBtn.remove();
+                const spacer = document.getElementById('button-spacer');
+                spacer.innerHTML = '';
 
                 const nextBtn = document.createElement('button');
                 nextBtn.id = 'next-round-btn';
                 nextBtn.textContent = 'next round';
-                nextBtn.style.width = '100%';
-                nextBtn.style.marginTop = '20px';
                 nextBtn.onclick = startNextRound;
-                document.querySelector('.container').appendChild(nextBtn);
+                spacer.appendChild(nextBtn);
             }, 2000);
         } else {
             // All rounds complete
@@ -320,9 +318,8 @@ function startNextRound() {
     document.getElementById('guess').disabled = false;
     document.getElementById('next').disabled = false;
 
-    // Remove the "next round" button
-    const nextRoundBtn = document.getElementById('next-round-btn');
-    if (nextRoundBtn) nextRoundBtn.remove();
+    // Clear the button spacer
+    document.getElementById('button-spacer').innerHTML = '';
 
     // Load new movie
     todayMovie = getTodayMovie(currentRound);
@@ -540,15 +537,13 @@ function init() {
 
             // If won, auto-advance was already handled, but on page reload we show button
             if (currentRound < ROUNDS_PER_DAY - 1 && !state.rounds[currentRound + 1].complete) {
-                const existingBtn = document.getElementById('next-round-btn');
-                if (!existingBtn) {
+                const spacer = document.getElementById('button-spacer');
+                if (!spacer.querySelector('#next-round-btn')) {
                     const nextBtn = document.createElement('button');
                     nextBtn.id = 'next-round-btn';
                     nextBtn.textContent = 'next round';
-                    nextBtn.style.width = '100%';
-                    nextBtn.style.marginTop = '20px';
                     nextBtn.onclick = startNextRound;
-                    document.querySelector('.container').appendChild(nextBtn);
+                    spacer.appendChild(nextBtn);
                 }
             }
         } else {
@@ -556,15 +551,13 @@ function init() {
 
             // If failed, show button to next round
             if (currentRound < ROUNDS_PER_DAY - 1 && !state.rounds[currentRound + 1].complete) {
-                const existingBtn = document.getElementById('next-round-btn');
-                if (!existingBtn) {
+                const spacer = document.getElementById('button-spacer');
+                if (!spacer.querySelector('#next-round-btn')) {
                     const nextBtn = document.createElement('button');
                     nextBtn.id = 'next-round-btn';
                     nextBtn.textContent = 'next round';
-                    nextBtn.style.width = '100%';
-                    nextBtn.style.marginTop = '20px';
                     nextBtn.onclick = startNextRound;
-                    document.querySelector('.container').appendChild(nextBtn);
+                    spacer.appendChild(nextBtn);
                 }
             }
         }

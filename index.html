@@ -4,16 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>cinemdle</title>
-    <link rel="stylesheet" href="style.css?v=20251028-2">
+    <link rel="stylesheet" href="style.css?v=20251029-1">
 </head>
 <body>
     <div class="container">
         <div class="round-info" id="round-info"></div>
+        <div class="hint-counter" id="hint-counter">hint <span id="hint-number">1</span>/6</div>
         <div class="year-title" id="year-title"></div>
 
         <div class="quotes" id="quotes"></div>
 
-        <div class="message" id="message"></div>
+        <div class="message" id="message" role="status" aria-live="polite"></div>
 
         <div class="controls">
             <div class="autocomplete-wrapper">
@@ -22,18 +23,22 @@
                     id="guess"
                     placeholder="guess the movie..."
                     autocomplete="off"
+                    aria-label="Movie title guess"
+                    aria-describedby="hint-counter"
                 >
-                <div id="autocomplete-list" class="autocomplete-items"></div>
+                <div id="autocomplete-list" class="autocomplete-items" role="listbox"></div>
             </div>
-            <button id="next">next hint</button>
+            <button id="next" aria-label="Reveal next hint">next hint</button>
+            <button id="give-up" aria-label="Give up and reveal answer" style="display:none;">give up</button>
         </div>
 
         <div class="countdown" id="countdown"></div>
 
         <div class="button-spacer" id="button-spacer"></div>
 
-        <button id="stats" style="margin-top: 20px; width: 100%;">stats</button>
-        <button id="dev-reset" style="margin-top: 10px; width: 100%; opacity: 0.3;">reset (dev)</button>
+        <button id="stats" style="margin-top: 20px; width: 100%;" aria-label="Show statistics">stats</button>
+        <button id="help" style="margin-top: 10px; width: 100%;" aria-label="Show help and keyboard shortcuts">help (?)</button>
+        <button id="dev-reset" style="margin-top: 10px; width: 100%; opacity: 0.3; display: none;">reset (dev)</button>
     </div>
 
     <div class="modal" id="modal">
@@ -51,7 +56,33 @@
         </div>
     </div>
 
-    <script src="movies.js?v=20251028-2"></script>
-    <script src="script.js?v=20251028-2"></script>
+    <div class="modal" id="help-modal">
+        <div class="modal-content">
+            <span class="close" id="close-help">&times;</span>
+            <h2>help</h2>
+            <div class="help-content">
+                <h3>how to play</h3>
+                <p>guess the movie from quotes and clues. you get 6 hints per round.</p>
+                <ul>
+                    <li>hint 1-2: two quotes from the movie</li>
+                    <li>hint 3-4: actors who spoke those quotes</li>
+                    <li>hint 5: release year</li>
+                    <li>hint 6: the movie title</li>
+                </ul>
+
+                <h3>keyboard shortcuts</h3>
+                <ul>
+                    <li><kbd>enter</kbd> - submit guess</li>
+                    <li><kbd>ctrl+h</kbd> - reveal next hint</li>
+                    <li><kbd>ctrl+s</kbd> - show stats</li>
+                    <li><kbd>?</kbd> - show this help</li>
+                    <li><kbd>↑</kbd> / <kbd>↓</kbd> - navigate autocomplete</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="movies.js?v=20251029-1"></script>
+    <script src="script.js?v=20251029-1"></script>
 </body>
 </html>

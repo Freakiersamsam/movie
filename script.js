@@ -1,9 +1,26 @@
 const ROUNDS_PER_DAY = 5;
 
+// Timing constants
+const TIMINGS = {
+    HINT_REVEAL_DELAY: 50,
+    HINT_CASCADE_DELAY: 80,
+    END_ROUND_DELAY: 200,
+    MESSAGE_DURATION: 2000,
+    AUTO_ADVANCE_DELAY: 2000,
+    AUTOCOMPLETE_DEBOUNCE: 150,
+    COPIED_FEEDBACK_DURATION: 1500,
+    SHIFT_KEY_TIMEOUT: 2000
+};
+
+// Game state
 let currentHint = 0;
 let currentRound = 0;
 let gameComplete = false;
 let todayMovie = null;
+
+// Dev mode state
+let shiftPressCount = 0;
+let devModeEnabled = false;
 
 function getDevOffset() {
     const offset = localStorage.getItem('devOffset');
@@ -57,11 +74,32 @@ function getTodayKey() {
     return `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
 }
 
+// Helper function to display messages
+function showMessage(text, duration = TIMINGS.MESSAGE_DURATION) {
+    const messageEl = document.getElementById('message');
+    messageEl.textContent = text;
+    if (duration) {
+        setTimeout(() => {
+            messageEl.textContent = '';
+        }, duration);
+    }
+}
+
+// Helper function to update hint counter
+function updateHintCounter(hintNumber) {
+    document.getElementById('hint-number').textContent = hintNumber;
+}
+
 function loadState() {
-    const saved = localStorage.getItem('state');
-    if (saved) {
-        const state = JSON.parse(saved);
-        if (state.date === getTodayKey()) return state;
+    try {
+        const saved = localStorage.getItem('state');
+        if (saved) {
+            const state = JSON.parse(saved);
+            if (state.date === getTodayKey()) return state;
+        }
+    } catch (e) {
+        console.error('Failed to load state:', e);
+        showMessage('Unable to load saved game. Starting fresh.', TIMINGS.MESSAGE_DURATION);
     }
     return {
         date: getTodayKey(),
@@ -76,24 +114,38 @@ function loadState() {
 }
 
 function saveState(state) {
-    localStorage.setItem('state', JSON.stringify(state));
+    try {
+        localStorage.setItem('state', JSON.stringify(state));
+    } catch (e) {
+        console.error('Failed to save state:', e);
+        showMessage('Unable to save game progress.', TIMINGS.MESSAGE_DURATION);
+    }
 }
 
 function loadStats() {
-    const saved = localStorage.getItem('stats');
-    if (saved) return JSON.parse(saved);
+    try {
+        const saved = localStorage.getItem('stats');
+        if (saved) return JSON.parse(saved);
+    } catch (e) {
+        console.error('Failed to load stats:', e);
+    }
     return {
         roundsPlayed: 0,
         roundsWon: 0,
         daysStreak: 0,
         maxDaysStreak: 0,
         dist: [0, 0, 0, 0, 0, 0],
+        difficultyStats: {1: {played: 0, won: 0}, 2: {played: 0, won: 0}, 3: {played: 0, won: 0}, 4: {played: 0, won: 0}, 5: {played: 0, won: 0}},
         lastDate: null
     };
 }
 
 function saveStats(stats) {
-    localStorage.setItem('stats', JSON.stringify(stats));
+    try {
+        localStorage.setItem('stats', JSON.stringify(stats));
+    } catch (e) {
+        console.error('Failed to save stats:', e);
+    }
 }
 
 function updateStats(won, hints, allRoundsComplete) {
@@ -102,8 +154,16 @@ function updateStats(won, hints, allRoundsComplete) {
 
     stats.roundsPlayed++;
 
+    // Track difficulty stats
+    const difficulty = currentRound + 1;
+    if (!stats.difficultyStats) {
+        stats.difficultyStats = {1: {played: 0, won: 0}, 2: {played: 0, won: 0}, 3: {played: 0, won: 0}, 4: {played: 0, won: 0}, 5: {played: 0, won: 0}};
+    }
+    stats.difficultyStats[difficulty].played++;
+
     if (won) {
         stats.roundsWon++;
+        stats.difficultyStats[difficulty].won++;
         // hints represents currentHint (next hint to show), so subtract 1 to get actual hints seen
         stats.dist[hints - 1]++;
     }
@@ -135,27 +195,27 @@ function revealHint(index) {
     if (index === 0) {
         // First quote (first line)
         const div = document.createElement('div');
-        div.className = 'quote';
+        div.className = 'quote fade-in';
         div.textContent = `"${todayMovie.quotes[0]}"`;
         document.getElementById('quotes').appendChild(div);
-        setTimeout(() => div.classList.add('show'), 50);
+        setTimeout(() => div.classList.add('show'), TIMINGS.HINT_REVEAL_DELAY);
     } else if (index === 1) {
         // Second quote (second line)
         const div = document.createElement('div');
-        div.className = 'quote';
+        div.className = 'quote fade-in';
         div.textContent = `"${todayMovie.quotes[1]}"`;
         document.getElementById('quotes').appendChild(div);
-        setTimeout(() => div.classList.add('show'), 50);
+        setTimeout(() => div.classList.add('show'), TIMINGS.HINT_REVEAL_DELAY);
     } else if (index === 2) {
         // First actor - add inline to first quote
         const quotes = document.getElementById('quotes');
         const firstQuote = quotes.children[0];
         if (firstQuote) {
             const actor = document.createElement('div');
-            actor.className = 'actor-inline';
+            actor.className = 'actor-inline fade-in';
             actor.textContent = `- ${todayMovie.actors[0]}`;
             firstQuote.appendChild(actor);
-            setTimeout(() => actor.classList.add('show'), 50);
+            setTimeout(() => actor.classList.add('show'), TIMINGS.HINT_REVEAL_DELAY);
         }
     } else if (index === 3) {
         // Second actor - add inline to second quote
@@ -163,21 +223,31 @@ function revealHint(index) {
         const secondQuote = quotes.children[1];
         if (secondQuote) {
             const actor = document.createElement('div');
-            actor.className = 'actor-inline';
+            actor.className = 'actor-inline fade-in';
             actor.textContent = `- ${todayMovie.actors[1]}`;
             secondQuote.appendChild(actor);
-            setTimeout(() => actor.classList.add('show'), 50);
+            setTimeout(() => actor.classList.add('show'), TIMINGS.HINT_REVEAL_DELAY);
         }
     } else if (index === 4) {
         // Year
         const yearTitle = document.getElementById('year-title');
         yearTitle.textContent = todayMovie.year;
-        setTimeout(() => yearTitle.classList.add('show'), 50);
+        yearTitle.classList.add('fade-in');
+        setTimeout(() => yearTitle.classList.add('show'), TIMINGS.HINT_REVEAL_DELAY);
     } else if (index === 5) {
         // Title
         const yearTitle = document.getElementById('year-title');
         yearTitle.textContent = `${todayMovie.year} - ${todayMovie.title}`;
-        yearTitle.classList.add('show');
+        yearTitle.classList.add('show', 'fade-in');
+    }
+
+    // Update hint counter
+    updateHintCounter(index + 1);
+
+    // Show/hide give up button
+    const giveUpBtn = document.getElementById('give-up');
+    if (index >= 3 && !gameComplete) {
+        giveUpBtn.style.display = 'inline-block';
     }
 }
 
@@ -197,6 +267,12 @@ function handleGuess() {
         gameComplete = true;
         input.disabled = true;
         document.getElementById('next').disabled = true;
+        document.getElementById('give-up').style.display = 'none';
+
+        // Add celebrate animation to container
+        const container = document.querySelector('.container');
+        container.classList.add('celebrate');
+        setTimeout(() => container.classList.remove('celebrate'), 600);
 
         // Store the current hint count for stats
         const hintsUsed = currentHint;
@@ -207,17 +283,21 @@ function handleGuess() {
             ((hintIndex) => {
                 setTimeout(() => revealHint(hintIndex), delay);
             })(i);
-            delay += 80;
+            delay += TIMINGS.HINT_CASCADE_DELAY;
         }
 
         // Call endRound after all hints are revealed
-        setTimeout(() => endRound(true, hintsUsed), delay + 200);
+        setTimeout(() => endRound(true, hintsUsed), delay + TIMINGS.END_ROUND_DELAY);
     } else {
-        document.getElementById('message').textContent = 'nope';
-        setTimeout(() => {
-            document.getElementById('message').textContent = '';
-        }, 2000);
+        // Add shake animation to input
+        input.classList.add('shake');
+        setTimeout(() => input.classList.remove('shake'), 500);
+
+        showMessage('nope', TIMINGS.MESSAGE_DURATION);
         input.value = '';
+
+        // Maintain focus on input
+        input.focus();
     }
 }
 
@@ -257,25 +337,26 @@ function endRound(won, hints) {
 
     document.getElementById('guess').disabled = true;
     document.getElementById('next').disabled = true;
+    document.getElementById('give-up').style.display = 'none';
 
     if (won) {
-        document.getElementById('message').textContent = 'correct!';
+        showMessage('correct!', null);
 
         // Auto-advance to next round if available
         if (currentRound < ROUNDS_PER_DAY - 1 && !state.rounds[currentRound + 1].complete) {
             setTimeout(() => {
                 startNextRound();
-            }, 2000);
+            }, TIMINGS.AUTO_ADVANCE_DELAY);
         } else {
             // All rounds complete
             if (allComplete) {
                 updateCountdown();
                 setInterval(updateCountdown, 1000);
             }
-            setTimeout(showStats, 2000);
+            setTimeout(showStats, TIMINGS.AUTO_ADVANCE_DELAY);
         }
     } else {
-        document.getElementById('message').textContent = 'failed - the answer was ' + todayMovie.title;
+        showMessage('failed - the answer was ' + todayMovie.title, null);
 
         // Show button to go to next round or stats
         if (currentRound < ROUNDS_PER_DAY - 1 && !state.rounds[currentRound + 1].complete) {
@@ -288,14 +369,14 @@ function endRound(won, hints) {
                 nextBtn.textContent = 'next round';
                 nextBtn.onclick = startNextRound;
                 spacer.appendChild(nextBtn);
-            }, 2000);
+            }, TIMINGS.AUTO_ADVANCE_DELAY);
         } else {
             // All rounds complete
             if (allComplete) {
                 updateCountdown();
                 setInterval(updateCountdown, 1000);
             }
-            setTimeout(showStats, 2000);
+            setTimeout(showStats, TIMINGS.AUTO_ADVANCE_DELAY);
         }
     }
 }
@@ -312,11 +393,12 @@ function startNextRound() {
     // Clear the UI
     document.getElementById('quotes').innerHTML = '';
     document.getElementById('year-title').textContent = '';
-    document.getElementById('year-title').classList.remove('show');
+    document.getElementById('year-title').classList.remove('show', 'fade-in');
     document.getElementById('message').textContent = '';
     document.getElementById('guess').value = '';
     document.getElementById('guess').disabled = false;
     document.getElementById('next').disabled = false;
+    document.getElementById('give-up').style.display = 'none';
 
     // Clear the button spacer
     document.getElementById('button-spacer').innerHTML = '';
@@ -332,6 +414,9 @@ function startNextRound() {
     currentHint = 1;
     state.rounds[currentRound].hint = currentHint;
     saveState(state);
+
+    // Focus on input
+    document.getElementById('guess').focus();
 }
 
 function updateCountdown() {
@@ -385,6 +470,42 @@ function showStats() {
         dist.appendChild(bar);
     });
 
+    // Add difficulty stats
+    if (stats.difficultyStats) {
+        const difficultyStatsDiv = document.createElement('div');
+        difficultyStatsDiv.className = 'difficulty-stats';
+
+        const heading = document.createElement('h3');
+        heading.textContent = 'win rate by difficulty';
+        difficultyStatsDiv.appendChild(heading);
+
+        const difficultyLabels = {1: 'easy', 2: 'medium', 3: 'hard', 4: 'harder', 5: 'expert'};
+
+        for (let i = 1; i <= 5; i++) {
+            const data = stats.difficultyStats[i];
+            if (data && data.played > 0) {
+                const winRate = Math.round((data.won / data.played) * 100);
+
+                const row = document.createElement('div');
+                row.className = 'difficulty-row';
+
+                const labelSpan = document.createElement('span');
+                labelSpan.className = 'label';
+                labelSpan.textContent = difficultyLabels[i];
+
+                const valueSpan = document.createElement('span');
+                valueSpan.className = 'value';
+                valueSpan.textContent = `${winRate}% (${data.won}/${data.played})`;
+
+                row.appendChild(labelSpan);
+                row.appendChild(valueSpan);
+                difficultyStatsDiv.appendChild(row);
+            }
+        }
+
+        dist.parentElement.appendChild(difficultyStatsDiv);
+    }
+
     document.getElementById('modal').classList.add('show');
 }
 
@@ -392,28 +513,34 @@ function shareResults() {
     const state = loadState();
     if (!state.allComplete) return;
 
-    let text = `Cinemdle ${getTodayKey()}\n`;
-
     const wonRounds = state.rounds.filter(r => r.won).length;
-    text += `${wonRounds}/${ROUNDS_PER_DAY} rounds\n\n`;
+    const difficultyEmojis = ['🟢', '🔵', '🟡', '🟠', '🔴'];
+
+    let text = `Cinemdle ${getTodayKey()}\n`;
+    text += `${wonRounds}/${ROUNDS_PER_DAY} rounds won\n\n`;
 
     state.rounds.forEach((round, idx) => {
-        text += `${idx + 1}. `;
+        text += difficultyEmojis[idx] + ' ';
         if (round.won) {
-            text += `${round.hint}/6`;
+            text += '✓ ' + `${round.hint}/6`;
         } else {
-            text += 'X/6';
+            text += '✗ X/6';
         }
         text += '\n';
     });
 
+    text += '\nPlay at cinemdle.com';
+
     navigator.clipboard.writeText(text).then(() => {
         const btn = document.getElementById('share');
         const orig = btn.textContent;
-        btn.textContent = 'copied';
+        btn.textContent = 'copied!';
         setTimeout(() => {
             btn.textContent = orig;
-        }, 1500);
+        }, TIMINGS.COPIED_FEEDBACK_DURATION);
+    }).catch(err => {
+        console.error('Failed to copy:', err);
+        showMessage('Failed to copy results', TIMINGS.MESSAGE_DURATION);
     });
 }
 
@@ -422,28 +549,68 @@ function setupAutocomplete() {
     const autocompleteList = document.getElementById('autocomplete-list');
     const allTitles = getAllMovieTitles();
     let currentFocus = -1;
+    let debounceTimer;
 
     input.addEventListener('input', function() {
         const val = this.value;
-        closeAutocomplete();
-        if (!val) return;
 
-        currentFocus = -1;
+        // Debounce the search
+        clearTimeout(debounceTimer);
 
-        const matches = allTitles.filter(title =>
-            title.toLowerCase().includes(val.toLowerCase())
-        ).slice(0, 10); // Limit to 10 results
+        if (!val) {
+            closeAutocomplete();
+            return;
+        }
 
-        matches.forEach(title => {
-            const div = document.createElement('div');
-            div.className = 'autocomplete-item';
-            div.textContent = title;
-            div.addEventListener('click', function() {
-                input.value = title;
-                closeAutocomplete();
+        debounceTimer = setTimeout(() => {
+            closeAutocomplete();
+            currentFocus = -1;
+
+            // Simple fuzzy matching: check if all characters appear in order
+            const matches = allTitles.filter(title => {
+                const titleLower = title.toLowerCase();
+                const valLower = val.toLowerCase();
+
+                // First try exact substring match
+                if (titleLower.includes(valLower)) return true;
+
+                // Then try fuzzy match
+                let titleIndex = 0;
+                for (let char of valLower) {
+                    titleIndex = titleLower.indexOf(char, titleIndex);
+                    if (titleIndex === -1) return false;
+                    titleIndex++;
+                }
+                return true;
+            }).slice(0, 10); // Limit to 10 results
+
+            matches.forEach(title => {
+                const div = document.createElement('div');
+                div.className = 'autocomplete-item';
+                div.setAttribute('role', 'option');
+
+                // Highlight matching text
+                const valLower = val.toLowerCase();
+                const titleLower = title.toLowerCase();
+                const startIndex = titleLower.indexOf(valLower);
+
+                if (startIndex !== -1) {
+                    // Exact match - highlight it
+                    const before = title.substring(0, startIndex);
+                    const match = title.substring(startIndex, startIndex + val.length);
+                    const after = title.substring(startIndex + val.length);
+                    div.innerHTML = `${before}<strong>${match}</strong>${after}`;
+                } else {
+                    div.textContent = title;
+                }
+
+                div.addEventListener('click', function() {
+                    input.value = title;
+                    closeAutocomplete();
+                });
+                autocompleteList.appendChild(div);
             });
-            autocompleteList.appendChild(div);
-        });
+        }, TIMINGS.AUTOCOMPLETE_DEBOUNCE);
     });
 
     input.addEventListener('keydown', function(e) {
@@ -576,6 +743,34 @@ function init() {
     document.getElementById('next').addEventListener('click', handleNext);
     document.getElementById('stats').addEventListener('click', showStats);
     document.getElementById('share').addEventListener('click', shareResults);
+
+    // Give up button handler
+    document.getElementById('give-up').addEventListener('click', () => {
+        if (!gameComplete && confirm('Give up and reveal the answer?')) {
+            // Reveal all remaining hints
+            let delay = 0;
+            for (let i = currentHint; i <= 5; i++) {
+                ((hintIndex) => {
+                    setTimeout(() => revealHint(hintIndex), delay);
+                })(i);
+                delay += TIMINGS.HINT_CASCADE_DELAY;
+            }
+
+            // Call endRound as failed
+            setTimeout(() => endRound(false, 5), delay + TIMINGS.END_ROUND_DELAY);
+        }
+    });
+
+    // Help modal handlers
+    document.getElementById('help').addEventListener('click', () => {
+        document.getElementById('help-modal').classList.add('show');
+    });
+
+    document.getElementById('close-help').addEventListener('click', () => {
+        document.getElementById('help-modal').classList.remove('show');
+    });
+
+    // Dev reset handler
     document.getElementById('dev-reset').addEventListener('click', () => {
         if (confirm('Reset game with new films? (dev mode)')) {
             // Increment offset for new films
@@ -589,6 +784,7 @@ function init() {
         }
     });
 
+    // Modal close handlers
     document.getElementById('close').addEventListener('click', () => {
         document.getElementById('modal').classList.remove('show');
     });
@@ -596,6 +792,45 @@ function init() {
     window.addEventListener('click', (e) => {
         if (e.target.id === 'modal') {
             document.getElementById('modal').classList.remove('show');
+        }
+        if (e.target.id === 'help-modal') {
+            document.getElementById('help-modal').classList.remove('show');
+        }
+    });
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', (e) => {
+        // Ctrl+H - reveal next hint
+        if (e.ctrlKey && e.key === 'h') {
+            e.preventDefault();
+            if (!gameComplete) handleNext();
+        }
+
+        // Ctrl+S - show stats
+        if (e.ctrlKey && e.key === 's') {
+            e.preventDefault();
+            showStats();
+        }
+
+        // ? - show help
+        if (e.key === '?' && !e.target.matches('input, textarea')) {
+            e.preventDefault();
+            document.getElementById('help-modal').classList.add('show');
+        }
+
+        // Shift key counter for dev mode toggle
+        if (e.key === 'Shift') {
+            shiftPressCount++;
+            if (shiftPressCount >= 3) {
+                devModeEnabled = !devModeEnabled;
+                document.getElementById('dev-reset').style.display = devModeEnabled ? 'block' : 'none';
+                showMessage(devModeEnabled ? 'dev mode enabled' : 'dev mode disabled', TIMINGS.MESSAGE_DURATION);
+                shiftPressCount = 0;
+            }
+
+            setTimeout(() => {
+                shiftPressCount = 0;
+            }, TIMINGS.SHIFT_KEY_TIMEOUT);
         }
     });
 }

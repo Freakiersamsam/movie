@@ -7,36 +7,93 @@ import { submitResult, getUserResults } from './routes/results.js';
 import { getGlobalStats, getDailyStats } from './routes/stats.js';
 import { getWeeklyLeaderboard, getPlayerRankInfo } from './routes/leaderboard.js';
 import { syncMovieDatabase } from './utils/movieSelection.js';
+import { checkRateLimit, getRateLimitIdentifier, cleanupRateLimitStore } from './utils/rateLimit.js';
 
 /**
- * CORS headers for API responses
+ * Allowed origins for CORS
  */
-const CORS_HEADERS = {
-  'Access-Control-Allow-Origin': '*', // TODO: Restrict to cinemdle.com in production
-  'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-  'Access-Control-Allow-Headers': 'Content-Type, X-Session-ID, X-Is-Dev',
-  'Access-Control-Max-Age': '86400', // 24 hours
+const ALLOWED_ORIGINS = [
+  'https://cinemdle.com',
+  'https://www.cinemdle.com',
+  'http://localhost:8787',
+  'http://127.0.0.1:8787',
+  'http://localhost:3000' // Dev server
+];
+
+/**
+ * Security headers applied to all responses
+ */
+const SECURITY_HEADERS = {
+  'X-Content-Type-Options': 'nosniff',
+  'X-Frame-Options': 'DENY',
+  'X-XSS-Protection': '1; mode=block',
+  'Referrer-Policy': 'strict-origin-when-cross-origin',
+  'Permissions-Policy': 'geolocation=(), microphone=(), camera=()',
+  'Strict-Transport-Security': 'max-age=31536000; includeSubDomains'
 };
+
+/**
+ * Get CORS headers based on request origin
+ */
+function getCorsHeaders(request) {
+  const origin = request.headers.get('Origin');
+  const allowedOrigin = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0];
+
+  return {
+    'Access-Control-Allow-Origin': allowedOrigin,
+    'Access-Control-Allow-Methods': 'GET, POST, DELETE, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type, X-Session-ID, X-Is-Dev, X-Admin-Key',
+    'Access-Control-Max-Age': '86400', // 24 hours
+    'Vary': 'Origin' // Important for caching
+  };
+}
 
 /**
  * Handle CORS preflight requests
  */
-function handleOptions() {
+function handleOptions(request) {
+  const corsHeaders = getCorsHeaders(request);
+  const headers = { ...corsHeaders, ...SECURITY_HEADERS };
+
   return new Response(null, {
     status: 204,
-    headers: CORS_HEADERS
+    headers
   });
 }
 
 /**
- * Add CORS headers to response
+ * Add CORS and security headers to response
  */
-function addCorsHeaders(response) {
+function addSecurityHeaders(response, request) {
   const newResponse = new Response(response.body, response);
-  Object.entries(CORS_HEADERS).forEach(([key, value]) => {
+  const corsHeaders = getCorsHeaders(request);
+
+  // Add CORS headers
+  Object.entries(corsHeaders).forEach(([key, value]) => {
     newResponse.headers.set(key, value);
   });
+
+  // Add security headers
+  Object.entries(SECURITY_HEADERS).forEach(([key, value]) => {
+    newResponse.headers.set(key, value);
+  });
+
   return newResponse;
+}
+
+/**
+ * Verify admin authentication
+ */
+function verifyAdmin(request, env) {
+  const adminKey = request.headers.get('X-Admin-Key');
+
+  // Check if admin key is set in environment
+  if (!env.ADMIN_API_KEY) {
+    console.error('ADMIN_API_KEY not set in environment');
+    return false;
+  }
+
+  return adminKey === env.ADMIN_API_KEY;
 }
 
 /**
@@ -50,7 +107,27 @@ export default {
 
     // Handle CORS preflight
     if (method === 'OPTIONS') {
-      return handleOptions();
+      return handleOptions(request);
+    }
+
+    // Rate limiting check (skip for health check)
+    if (path !== '/api/health' && path !== '/health') {
+      const identifier = getRateLimitIdentifier(request);
+      const rateLimitResult = checkRateLimit(identifier, path);
+
+      if (!rateLimitResult.allowed) {
+        const response = new Response(JSON.stringify({
+          error: 'Rate limit exceeded',
+          retryAfter: rateLimitResult.retryAfter
+        }), {
+          status: 429,
+          headers: {
+            'Content-Type': 'application/json',
+            'Retry-After': rateLimitResult.retryAfter.toString()
+          }
+        });
+        return addSecurityHeaders(response, request);
+      }
     }
 
     try {
@@ -109,12 +186,48 @@ export default {
 
       // Admin routes (for syncing movie database)
       else if (path === '/api/admin/sync-movies' && method === 'POST') {
-        // TODO: Add admin authentication
-        const body = await request.json();
-        const result = await syncMovieDatabase(env.DB, body.movies);
-        response = new Response(JSON.stringify(result), {
-          headers: { 'Content-Type': 'application/json' }
-        });
+        // Verify admin authentication
+        if (!verifyAdmin(request, env)) {
+          response = new Response(JSON.stringify({
+            error: 'Unauthorized',
+            message: 'Valid admin API key required'
+          }), {
+            status: 401,
+            headers: { 'Content-Type': 'application/json' }
+          });
+        } else {
+          const body = await request.json();
+          const result = await syncMovieDatabase(env.DB, body.movies);
+          response = new Response(JSON.stringify(result), {
+            headers: { 'Content-Type': 'application/json' }
+          });
+        }
+      }
+
+      // GDPR data deletion endpoint
+      else if (path === '/api/user/data' && method === 'DELETE') {
+        const sessionId = request.headers.get('X-Session-ID');
+
+        if (!sessionId) {
+          response = new Response(JSON.stringify({
+            error: 'Session ID required'
+          }), {
+            status: 400,
+            headers: { 'Content-Type': 'application/json' }
+          });
+        } else {
+          // Delete all user data
+          await env.DB.prepare(`DELETE FROM round_results WHERE session_id = ?`).bind(sessionId).run();
+          await env.DB.prepare(`DELETE FROM weekly_leaderboard WHERE session_id = ?`).bind(sessionId).run();
+          await env.DB.prepare(`DELETE FROM user_sessions WHERE session_id = ?`).bind(sessionId).run();
+
+          response = new Response(JSON.stringify({
+            success: true,
+            message: 'All user data deleted'
+          }), {
+            headers: { 'Content-Type': 'application/json' }
+          });
+        }
       }
 
       // Not found
@@ -129,7 +242,7 @@ export default {
         });
       }
 
-      return addCorsHeaders(response);
+      return addSecurityHeaders(response, request);
 
     } catch (error) {
       console.error('Worker error:', error);
@@ -143,7 +256,12 @@ export default {
         headers: { 'Content-Type': 'application/json' }
       });
 
-      return addCorsHeaders(errorResponse);
+      return addSecurityHeaders(errorResponse, request);
     }
+  },
+
+  // Scheduled task to cleanup rate limit store
+  async scheduled(event, env, ctx) {
+    cleanupRateLimitStore();
   }
 };

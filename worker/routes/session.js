@@ -2,6 +2,9 @@
 
 import { generateUUID, isValidUUID } from '../utils/uuid.js';
 
+// Session expiration: 90 days of inactivity
+const SESSION_EXPIRY_DAYS = 90;
+
 /**
  * POST /api/session/init
  * Initialize or retrieve a session
@@ -18,15 +21,16 @@ export async function initSession(request, env) {
     const existingSessionId = request.headers.get('X-Session-ID');
 
     if (existingSessionId && isValidUUID(existingSessionId)) {
-      // Verify session exists in database
+      // Verify session exists and is not expired
       const session = await env.DB.prepare(`
-        SELECT session_id, is_dev
+        SELECT session_id, is_dev, last_active
         FROM user_sessions
         WHERE session_id = ?
+          AND datetime(last_active, '+${SESSION_EXPIRY_DAYS} days') > datetime('now')
       `).bind(existingSessionId).first();
 
       if (session) {
-        // Update last active
+        // Update last active timestamp
         await env.DB.prepare(`
           UPDATE user_sessions
           SET last_active = datetime('now')
@@ -41,6 +45,8 @@ export async function initSession(request, env) {
           headers: { 'Content-Type': 'application/json' }
         });
       }
+
+      // Session expired or not found - will create new one below
     }
 
     // Create new session
@@ -94,22 +100,23 @@ export async function validateSession(request, env) {
     }
 
     const session = await env.DB.prepare(`
-      SELECT session_id, is_dev, first_seen
+      SELECT session_id, is_dev, first_seen, last_active
       FROM user_sessions
       WHERE session_id = ?
+        AND datetime(last_active, '+${SESSION_EXPIRY_DAYS} days') > datetime('now')
     `).bind(sessionId).first();
 
     if (!session) {
       return new Response(JSON.stringify({
         valid: false,
-        error: 'Session not found'
+        error: 'Session not found or expired'
       }), {
         status: 404,
         headers: { 'Content-Type': 'application/json' }
       });
     }
 
-    // Update last active
+    // Update last active timestamp
     await env.DB.prepare(`
       UPDATE user_sessions
       SET last_active = datetime('now')
@@ -119,7 +126,8 @@ export async function validateSession(request, env) {
     return new Response(JSON.stringify({
       valid: true,
       isDev: session.is_dev === 1,
-      firstSeen: session.first_seen
+      firstSeen: session.first_seen,
+      expiresIn: SESSION_EXPIRY_DAYS
     }), {
       headers: { 'Content-Type': 'application/json' }
     });

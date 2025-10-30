@@ -963,6 +963,20 @@ async function init() {
             document.getElementById('help-modal').classList.add('show');
         }
     });
+
+    // Help link handler
+    document.getElementById('help-link')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        document.getElementById('help').click();
+    });
+
+    // Cookie settings link handler
+    document.getElementById('cookie-settings-link')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (window.showCookieSettings) {
+            window.showCookieSettings();
+        }
+    });
 }
 
 init();

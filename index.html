@@ -59,6 +59,9 @@
     <link rel="preconnect" href="https://www.googletagmanager.com">
     <link rel="dns-prefetch" href="https://www.google-analytics.com">
 
+    <!-- Cookie Consent Styles -->
+    <link rel="stylesheet" href="cookie-consent.css?v=1">
+
     <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css?v=20251029-3">
 
@@ -91,6 +94,9 @@
       }
     }
     </script>
+
+    <!-- Cookie Consent (must load BEFORE gtag) -->
+    <script src="cookie-consent.js?v=1"></script>
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-NMG202J7GP"></script>
@@ -190,6 +196,7 @@
             <p>
                 <a href="/privacy.html">privacy</a> •
                 <a href="/terms.html">terms</a> •
+                <a href="#" onclick="window.showCookieSettings(); return false;">cookie settings</a> •
                 <a href="mailto:samue.ferland@gmail.com">contact</a>
             </p>
             <p class="footer-small">made with ❤️ for cinema lovers</p>

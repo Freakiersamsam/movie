@@ -269,54 +269,38 @@ async function updateStats(won, hints, allRoundsComplete) {
 }
 
 function revealHint(index) {
+    const quotes = document.getElementById('quotes');
+
     if (index === 0) {
-        // First quote
-        const div = document.createElement('div');
-        div.className = 'quote fade-in';
-        div.textContent = `"${todayMovie.quotes[0]}"`;
-        document.getElementById('quotes').appendChild(div);
-        setTimeout(() => div.classList.add('show'), TIMINGS.HINT_REVEAL_DELAY);
+        // First quote - reveal pre-existing element
+        const quote1 = quotes.querySelector('#quote-1');
+        quote1.textContent = `"${todayMovie.quotes[0]}"`;
+        setTimeout(() => quote1.classList.add('show'), TIMINGS.HINT_REVEAL_DELAY);
     } else if (index === 1) {
-        // Second quote
-        const div = document.createElement('div');
-        div.className = 'quote fade-in';
-        div.textContent = `"${todayMovie.quotes[1]}"`;
-        document.getElementById('quotes').appendChild(div);
-        setTimeout(() => div.classList.add('show'), TIMINGS.HINT_REVEAL_DELAY);
+        // Second quote - reveal pre-existing element
+        const quote2 = quotes.querySelector('#quote-2');
+        quote2.textContent = `"${todayMovie.quotes[1]}"`;
+        setTimeout(() => quote2.classList.add('show'), TIMINGS.HINT_REVEAL_DELAY);
     } else if (index === 2) {
-        // First actor - insert BEFORE first quote (screenplay format)
-        const quotes = document.getElementById('quotes');
-        const firstQuote = quotes.children[0];
-        if (firstQuote) {
-            const actor = document.createElement('div');
-            actor.className = 'actor-inline fade-in';
-            actor.textContent = todayMovie.actors[0];
-            quotes.insertBefore(actor, firstQuote);
-            setTimeout(() => actor.classList.add('show'), TIMINGS.HINT_REVEAL_DELAY);
-        }
+        // First actor - reveal pre-existing element
+        const actor1 = quotes.querySelector('#actor-1');
+        actor1.textContent = todayMovie.actors[0];
+        setTimeout(() => actor1.classList.add('show'), TIMINGS.HINT_REVEAL_DELAY);
     } else if (index === 3) {
-        // Second actor - find second quote and insert actor BEFORE it
-        const quotes = document.getElementById('quotes');
-        const allQuotes = quotes.querySelectorAll('.quote');
-        const secondQuote = allQuotes[1];
-        if (secondQuote) {
-            const actor = document.createElement('div');
-            actor.className = 'actor-inline fade-in';
-            actor.textContent = todayMovie.actors[1];
-            quotes.insertBefore(actor, secondQuote);
-            setTimeout(() => actor.classList.add('show'), TIMINGS.HINT_REVEAL_DELAY);
-        }
+        // Second actor - reveal pre-existing element
+        const actor2 = quotes.querySelector('#actor-2');
+        actor2.textContent = todayMovie.actors[1];
+        setTimeout(() => actor2.classList.add('show'), TIMINGS.HINT_REVEAL_DELAY);
     } else if (index === 4) {
         // Year
         const yearTitle = document.getElementById('year-title');
         yearTitle.textContent = todayMovie.year;
-        yearTitle.classList.add('fade-in');
         setTimeout(() => yearTitle.classList.add('show'), TIMINGS.HINT_REVEAL_DELAY);
     } else if (index === 5) {
         // Title
         const yearTitle = document.getElementById('year-title');
         yearTitle.textContent = `${todayMovie.year} - ${todayMovie.title}`;
-        yearTitle.classList.add('show', 'fade-in');
+        yearTitle.classList.add('show');
     }
 
     // Update hint counter
@@ -473,10 +457,19 @@ async function startNextRound() {
     state.currentRound = currentRound;
     await saveState(state);
 
-    // Clear the UI
-    document.getElementById('quotes').innerHTML = '';
+    // Clear the UI - reset pre-existing elements
+    const quotes = document.getElementById('quotes');
+    quotes.querySelector('#actor-1').textContent = '';
+    quotes.querySelector('#actor-1').classList.remove('show');
+    quotes.querySelector('#quote-1').textContent = '';
+    quotes.querySelector('#quote-1').classList.remove('show');
+    quotes.querySelector('#actor-2').textContent = '';
+    quotes.querySelector('#actor-2').classList.remove('show');
+    quotes.querySelector('#quote-2').textContent = '';
+    quotes.querySelector('#quote-2').classList.remove('show');
+
     document.getElementById('year-title').textContent = '';
-    document.getElementById('year-title').classList.remove('show', 'fade-in');
+    document.getElementById('year-title').classList.remove('show');
     document.getElementById('message').textContent = '';
     document.getElementById('guess').value = '';
     document.getElementById('guess').disabled = false;

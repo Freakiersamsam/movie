@@ -12,7 +12,7 @@
     <meta name="theme-color" content="#6B46C1">
 
     <!-- Content Security Policy -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com; frame-src https://googleads.g.doubleclick.net; object-src 'none'; base-uri 'self'; form-action 'self';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' http://localhost:8787 https://*.workers.dev https://www.google-analytics.com https://www.googletagmanager.com; frame-src https://googleads.g.doubleclick.net; object-src 'none'; base-uri 'self'; form-action 'self';">
 
     <!-- Canonical URL -->
     <link rel="canonical" href="https://cinemdle.com/">
@@ -257,6 +257,7 @@
 
     <!-- Scripts -->
     <script src="movies.js?v=20251030-stable"></script>
+    <script src="api-client.js?v=20251030-backend"></script>
     <script src="script.js?v=20251030-stable"></script>
 
     <!-- Service Worker Registration -->

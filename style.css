@@ -359,7 +359,8 @@ h2 {
 }
 
 .button-spacer {
-    height: 20px;
+    min-height: 20px;
+    margin-bottom: var(--spacing);
 }
 
 .help-content {

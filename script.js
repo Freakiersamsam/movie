@@ -17,6 +17,7 @@ let currentHint = 0;
 let currentRound = 0;
 let gameComplete = false;
 let todayMovie = null;
+let todayMoviesCache = null; // Cache for API-fetched movies
 
 // Security: LocalStorage integrity protection
 // Generates a device-specific fingerprint for data integrity
@@ -110,7 +111,8 @@ function incrementDevOffset() {
     localStorage.setItem('devOffset', (current + 1).toString());
 }
 
-function getTodayMovies() {
+// Client-side fallback movie selection (original implementation)
+function getTodayMoviesClientSide() {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     const daysSinceEpoch = Math.floor(today.getTime() / (1000 * 60 * 60 * 24));
@@ -137,8 +139,38 @@ function getTodayMovies() {
     return movies;
 }
 
-function getTodayMovie(round) {
-    const movies = getTodayMovies();
+// Get today's movies - tries API first, falls back to client-side
+async function getTodayMovies() {
+    // Return cached if available
+    if (todayMoviesCache) {
+        return todayMoviesCache;
+    }
+
+    const dateKey = getTodayKey();
+
+    // Try API first (if cinemAPI is available)
+    if (window.cinemAPI) {
+        try {
+            const apiMovies = await window.cinemAPI.getDailyMovies(dateKey);
+            if (apiMovies && apiMovies.length === 5) {
+                console.log('Using API movie selection');
+                todayMoviesCache = apiMovies;
+                return apiMovies;
+            }
+        } catch (error) {
+            console.warn('API fetch failed, using client-side selection:', error);
+        }
+    }
+
+    // Fallback to client-side selection
+    console.log('Using client-side movie selection');
+    const movies = getTodayMoviesClientSide();
+    todayMoviesCache = movies;
+    return movies;
+}
+
+async function getTodayMovie(round) {
+    const movies = await getTodayMovies();
     return movies[round];
 }
 
@@ -149,7 +181,10 @@ function getAllMovieTitles() {
 
 function getTodayKey() {
     const today = new Date();
-    return `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
 }
 
 // Helper function to display messages
@@ -402,6 +437,23 @@ async function endRound(won, hints) {
     await saveState(state);
     await updateStats(won, hints, allComplete);
 
+    // Submit result to API (non-blocking)
+    if (window.cinemAPI) {
+        window.cinemAPI.submitResult({
+            date: getTodayKey(),
+            difficulty: currentRound + 1,
+            won: won,
+            hintsUsed: hints
+        }).then(response => {
+            if (response && response.globalStats) {
+                console.log('Global stats for this round:', response.globalStats);
+                // TODO: Display global stats to user
+            }
+        }).catch(error => {
+            console.warn('Failed to submit result to API:', error);
+        });
+    }
+
     document.getElementById('guess').disabled = true;
     document.getElementById('next').disabled = true;
     document.getElementById('give-up').style.display = 'none';
@@ -480,7 +532,7 @@ async function startNextRound() {
     document.getElementById('button-spacer').innerHTML = '';
 
     // Load new movie
-    todayMovie = getTodayMovie(currentRound);
+    todayMovie = await getTodayMovie(currentRound);
 
     // Update round info
     updateRoundInfo();
@@ -740,6 +792,16 @@ function setupAutocomplete() {
 }
 
 async function init() {
+    // Initialize API session
+    if (window.cinemAPI) {
+        try {
+            await window.cinemAPI.initSession();
+            console.log('API session initialized');
+        } catch (error) {
+            console.warn('Failed to initialize API session:', error);
+        }
+    }
+
     const state = await loadState();
 
     setupAutocomplete();
@@ -758,7 +820,7 @@ async function init() {
         }
     }
 
-    todayMovie = getTodayMovie(currentRound);
+    todayMovie = await getTodayMovie(currentRound);
     currentHint = state.rounds[currentRound].hint;
     gameComplete = state.rounds[currentRound].complete;
 

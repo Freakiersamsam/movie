@@ -1,0 +1,23 @@
+{
+  "name": "cinemdle-api",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Cloudflare Worker API for Cinemdle",
+  "main": "index.js",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "db:create": "wrangler d1 create cinemdle-db",
+    "db:migrate": "wrangler d1 migrations apply cinemdle-db",
+    "db:migrate:local": "wrangler d1 migrations apply cinemdle-db --local",
+    "db:list": "wrangler d1 list",
+    "db:query": "wrangler d1 execute cinemdle-db --command",
+    "db:query:local": "wrangler d1 execute cinemdle-db --local --command"
+  },
+  "keywords": ["cloudflare", "worker", "d1", "api"],
+  "author": "Cinemdle",
+  "license": "MIT",
+  "devDependencies": {
+    "wrangler": "^3.80.0"
+  }
+}

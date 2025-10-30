@@ -1,0 +1,25 @@
+name = "cinemdle-api"
+main = "index.js"
+compatibility_date = "2024-10-30"
+node_compat = true
+
+[vars]
+ENVIRONMENT = "production"
+
+# D1 Database binding
+[[d1_databases]]
+binding = "DB"
+database_name = "cinemdle-db"
+database_id = "a79c3694-c534-4f79-af55-89f96cf08054"
+migrations_dir = "db/migrations"
+
+# Routes for API (configured via Cloudflare Dashboard or via custom domain)
+# Uncomment when ready to deploy to production:
+# routes = [
+#   { pattern = "api.cinemdle.com/*", zone_name = "cinemdle.com" }
+# ]
+
+# For local development
+[env.dev]
+name = "cinemdle-api-dev"
+vars = { ENVIRONMENT = "development" }

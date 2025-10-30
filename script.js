@@ -18,6 +18,88 @@ let currentRound = 0;
 let gameComplete = false;
 let todayMovie = null;
 
+// Security: LocalStorage integrity protection
+// Generates a device-specific fingerprint for data integrity
+function getDeviceFingerprint() {
+    const components = [
+        navigator.userAgent,
+        navigator.language,
+        screen.width + 'x' + screen.height,
+        new Date().getTimezoneOffset(),
+        'cinemdle-v1' // Salt
+    ];
+    return components.join('|');
+}
+
+// Simple hash function for integrity checking
+async function simpleHash(str) {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(str);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+// Create integrity signature for data
+async function createSignature(data) {
+    const fingerprint = getDeviceFingerprint();
+    const combined = JSON.stringify(data) + fingerprint;
+    return await simpleHash(combined);
+}
+
+// Verify data integrity
+async function verifySignature(data, signature) {
+    const expectedSignature = await createSignature(data);
+    return expectedSignature === signature;
+}
+
+// Secure save to localStorage with integrity check
+async function secureSetItem(key, data) {
+    try {
+        const signature = await createSignature(data);
+        const payload = {
+            data: data,
+            sig: signature,
+            ts: Date.now()
+        };
+        localStorage.setItem(key, JSON.stringify(payload));
+        return true;
+    } catch (e) {
+        console.error('Failed to save secure data:', e);
+        return false;
+    }
+}
+
+// Secure load from localStorage with integrity verification
+async function secureGetItem(key) {
+    try {
+        const stored = localStorage.getItem(key);
+        if (!stored) return null;
+
+        const payload = JSON.parse(stored);
+
+        // Check if it's old format (no signature)
+        if (!payload.sig || !payload.data) {
+            // Migrate old data
+            console.log('Migrating old data format for:', key);
+            return JSON.parse(stored);
+        }
+
+        // Verify integrity
+        const isValid = await verifySignature(payload.data, payload.sig);
+        if (!isValid) {
+            console.warn('Data integrity check failed for:', key);
+            // Return null to force reset - prevents tampered data from being used
+            return null;
+        }
+
+        return payload.data;
+    } catch (e) {
+        console.error('Failed to load secure data:', e);
+        return null;
+    }
+}
+
 function getDevOffset() {
     const offset = localStorage.getItem('devOffset');
     return offset ? parseInt(offset) : 0;
@@ -86,11 +168,10 @@ function updateHintCounter(hintNumber) {
     document.getElementById('hint-number').textContent = hintNumber;
 }
 
-function loadState() {
+async function loadState() {
     try {
-        const saved = localStorage.getItem('state');
-        if (saved) {
-            const state = JSON.parse(saved);
+        const state = await secureGetItem('state');
+        if (state) {
             if (state.date === getTodayKey()) return state;
         }
     } catch (e) {
@@ -109,19 +190,19 @@ function loadState() {
     };
 }
 
-function saveState(state) {
+async function saveState(state) {
     try {
-        localStorage.setItem('state', JSON.stringify(state));
+        await secureSetItem('state', state);
     } catch (e) {
         console.error('Failed to save state:', e);
         showMessage('Unable to save game progress.', TIMINGS.MESSAGE_DURATION);
     }
 }
 
-function loadStats() {
+async function loadStats() {
     try {
-        const saved = localStorage.getItem('stats');
-        if (saved) return JSON.parse(saved);
+        const stats = await secureGetItem('stats');
+        if (stats) return stats;
     } catch (e) {
         console.error('Failed to load stats:', e);
     }
@@ -136,16 +217,16 @@ function loadStats() {
     };
 }
 
-function saveStats(stats) {
+async function saveStats(stats) {
     try {
-        localStorage.setItem('stats', JSON.stringify(stats));
+        await secureSetItem('stats', stats);
     } catch (e) {
         console.error('Failed to save stats:', e);
     }
 }
 
-function updateStats(won, hints, allRoundsComplete) {
-    const stats = loadStats();
+async function updateStats(won, hints, allRoundsComplete) {
+    const stats = await loadStats();
     const today = getTodayKey();
 
     stats.roundsPlayed++;
@@ -184,7 +265,7 @@ function updateStats(won, hints, allRoundsComplete) {
         stats.lastDate = today;
     }
 
-    saveStats(stats);
+    await saveStats(stats);
 }
 
 function revealHint(index) {
@@ -302,16 +383,16 @@ function handleGuess() {
     }
 }
 
-function handleNext() {
+async function handleNext() {
     if (gameComplete) return;
 
     // Reveal current hint
     revealHint(currentHint);
     currentHint++;
 
-    const state = loadState();
+    const state = await loadState();
     state.rounds[currentRound].hint = currentHint;
-    saveState(state);
+    await saveState(state);
 
     // After revealing the year (hint 4), next click reveals title and ends round
     if (currentHint > 5) {
@@ -322,10 +403,10 @@ function handleNext() {
     }
 }
 
-function endRound(won, hints) {
+async function endRound(won, hints) {
     gameComplete = true;
 
-    const state = loadState();
+    const state = await loadState();
     state.rounds[currentRound].complete = true;
     state.rounds[currentRound].won = won;
 
@@ -333,8 +414,8 @@ function endRound(won, hints) {
     const allComplete = state.rounds.every(r => r.complete);
     state.allComplete = allComplete;
 
-    saveState(state);
-    updateStats(won, hints, allComplete);
+    await saveState(state);
+    await updateStats(won, hints, allComplete);
 
     document.getElementById('guess').disabled = true;
     document.getElementById('next').disabled = true;
@@ -382,14 +463,14 @@ function endRound(won, hints) {
     }
 }
 
-function startNextRound() {
+async function startNextRound() {
     currentRound++;
     currentHint = 0;
     gameComplete = false;
 
-    const state = loadState();
+    const state = await loadState();
     state.currentRound = currentRound;
-    saveState(state);
+    await saveState(state);
 
     // Clear the UI
     document.getElementById('quotes').innerHTML = '';
@@ -414,7 +495,7 @@ function startNextRound() {
     revealHint(0);
     currentHint = 1;
     state.rounds[currentRound].hint = currentHint;
-    saveState(state);
+    await saveState(state);
 
     // Focus on input
     document.getElementById('guess').focus();
@@ -441,8 +522,8 @@ function updateRoundInfo() {
     info.textContent = `round ${currentRound + 1}/${ROUNDS_PER_DAY} - ${difficultyLabels[currentRound]}`;
 }
 
-function showStats() {
-    const stats = loadStats();
+async function showStats() {
+    const stats = await loadStats();
 
     document.getElementById('played').textContent = stats.roundsPlayed;
     document.getElementById('won').textContent = stats.roundsWon;
@@ -590,17 +671,24 @@ function setupAutocomplete() {
                 div.className = 'autocomplete-item';
                 div.setAttribute('role', 'option');
 
-                // Highlight matching text
+                // Highlight matching text - using safe DOM manipulation instead of innerHTML
                 const valLower = val.toLowerCase();
                 const titleLower = title.toLowerCase();
                 const startIndex = titleLower.indexOf(valLower);
 
                 if (startIndex !== -1) {
-                    // Exact match - highlight it
+                    // Exact match - highlight it using DOM methods (prevents XSS)
                     const before = title.substring(0, startIndex);
                     const match = title.substring(startIndex, startIndex + val.length);
                     const after = title.substring(startIndex + val.length);
-                    div.innerHTML = `${before}<strong>${match}</strong>${after}`;
+
+                    if (before) div.appendChild(document.createTextNode(before));
+
+                    const strong = document.createElement('strong');
+                    strong.textContent = match;
+                    div.appendChild(strong);
+
+                    if (after) div.appendChild(document.createTextNode(after));
                 } else {
                     div.textContent = title;
                 }
@@ -657,8 +745,8 @@ function setupAutocomplete() {
     });
 }
 
-function init() {
-    const state = loadState();
+async function init() {
+    const state = await loadState();
 
     setupAutocomplete();
 
@@ -670,7 +758,7 @@ function init() {
             if (!state.rounds[i].complete) {
                 currentRound = i;
                 state.currentRound = i;
-                saveState(state);
+                await saveState(state);
                 break;
             }
         }
@@ -688,7 +776,7 @@ function init() {
         revealHint(0);
         currentHint = 1;
         state.rounds[currentRound].hint = currentHint;
-        saveState(state);
+        await saveState(state);
     } else {
         // Restore previous hints
         for (let i = 0; i < currentHint; i++) {

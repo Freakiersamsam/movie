@@ -270,39 +270,40 @@ async function updateStats(won, hints, allRoundsComplete) {
 
 function revealHint(index) {
     if (index === 0) {
-        // First quote (first line)
+        // First quote
         const div = document.createElement('div');
         div.className = 'quote fade-in';
         div.textContent = `"${todayMovie.quotes[0]}"`;
         document.getElementById('quotes').appendChild(div);
         setTimeout(() => div.classList.add('show'), TIMINGS.HINT_REVEAL_DELAY);
     } else if (index === 1) {
-        // Second quote (second line)
+        // Second quote
         const div = document.createElement('div');
         div.className = 'quote fade-in';
         div.textContent = `"${todayMovie.quotes[1]}"`;
         document.getElementById('quotes').appendChild(div);
         setTimeout(() => div.classList.add('show'), TIMINGS.HINT_REVEAL_DELAY);
     } else if (index === 2) {
-        // First actor - add inline to first quote
+        // First actor - insert BEFORE first quote (screenplay format)
         const quotes = document.getElementById('quotes');
         const firstQuote = quotes.children[0];
         if (firstQuote) {
             const actor = document.createElement('div');
             actor.className = 'actor-inline fade-in';
-            actor.textContent = `- ${todayMovie.actors[0]}`;
-            firstQuote.appendChild(actor);
+            actor.textContent = todayMovie.actors[0];
+            quotes.insertBefore(actor, firstQuote);
             setTimeout(() => actor.classList.add('show'), TIMINGS.HINT_REVEAL_DELAY);
         }
     } else if (index === 3) {
-        // Second actor - add inline to second quote
+        // Second actor - find second quote and insert actor BEFORE it
         const quotes = document.getElementById('quotes');
-        const secondQuote = quotes.children[1];
+        const allQuotes = quotes.querySelectorAll('.quote');
+        const secondQuote = allQuotes[1];
         if (secondQuote) {
             const actor = document.createElement('div');
             actor.className = 'actor-inline fade-in';
-            actor.textContent = `- ${todayMovie.actors[1]}`;
-            secondQuote.appendChild(actor);
+            actor.textContent = todayMovie.actors[1];
+            quotes.insertBefore(actor, secondQuote);
             setTimeout(() => actor.classList.add('show'), TIMINGS.HINT_REVEAL_DELAY);
         }
     } else if (index === 4) {

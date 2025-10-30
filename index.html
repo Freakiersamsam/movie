@@ -66,7 +66,7 @@
     <link rel="stylesheet" href="cookie-consent.css?v=1">
 
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="style.css?v=20251030-security">
+    <link rel="stylesheet" href="style.css?v=20251030-redesign">
 
     <!-- Structured Data - Schema.org -->
     <script type="application/ld+json">
@@ -150,9 +150,9 @@
         </header>
 
         <div class="round-info" id="round-info"></div>
-        <div class="hint-counter" id="hint-counter">hint <span id="hint-number">1</span>/6</div>
         <div class="year-title" id="year-title"></div>
 
+        <div class="hint-counter" id="hint-counter">hint <span id="hint-number">1</span>/6</div>
         <div class="quotes" id="quotes"></div>
 
         <div class="message" id="message" role="status" aria-live="polite"></div>
@@ -162,14 +162,14 @@
                 <input
                     type="text"
                     id="guess"
-                    placeholder="guess the movie..."
+                    placeholder="type a movie title..."
                     autocomplete="off"
                     aria-label="Movie title guess"
                     aria-describedby="hint-counter"
                 >
                 <div id="autocomplete-list" class="autocomplete-items" role="listbox"></div>
             </div>
-            <button id="next" aria-label="Reveal next hint">next hint</button>
+            <button id="next" aria-label="Reveal next hint">reveal next hint</button>
             <button id="give-up" aria-label="Give up and reveal answer" style="display:none;">give up</button>
         </div>
 
@@ -191,9 +191,9 @@
 
         <div class="button-spacer" id="button-spacer"></div>
 
-        <button id="stats" style="margin-top: 20px; width: 100%;" aria-label="Show statistics">stats</button>
-        <button id="help" style="margin-top: 10px; width: 100%;" aria-label="Show help and keyboard shortcuts">help (?)</button>
-        <button id="dev-reset" style="margin-top: 10px; width: 100%; opacity: 0.3;">reset (dev)</button>
+        <button id="stats" style="width: 100%;" aria-label="Show statistics">view stats</button>
+        <button id="help" style="margin-top: 12px; width: 100%;" aria-label="Show help and keyboard shortcuts">help & shortcuts</button>
+        <button id="dev-reset" style="margin-top: 12px; width: 100%;">reset (dev)</button>
 
         <footer class="footer">
             <p>

@@ -25,6 +25,10 @@ movies_to_add.md
 test.js
 browser-test.html
 comprehensive-test.html
+test-*.html
+DEBUG_*.html
+NETWORK_TEST.html
+FINAL_TEST.html
 
 # Keep only production-ready HTML
 index-production.html

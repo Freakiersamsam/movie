@@ -10,6 +10,8 @@ Sitemap: https://cinemdle.com/sitemap.xml
 Disallow: /movies.js
 Disallow: /script.js
 Disallow: /*.json$
+Disallow: /admin.html
+Disallow: /admin-client.js
 
 # Crawl delay (be nice to servers)
 Crawl-delay: 1

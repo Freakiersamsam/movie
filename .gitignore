@@ -4,6 +4,7 @@ __pycache__/
 .DS_Store
 node_modules/
 .env
+.wrangler/
 
 # Backup files
 *_backup_*.js
@@ -40,3 +41,4 @@ index-production.html
 # FAVICON_GUIDE.md
 # LAUNCH_NOW.md
 # README_DEPLOYMENT.md
+DEPLOYMENT_REPORT.md

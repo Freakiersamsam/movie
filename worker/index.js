@@ -6,6 +6,7 @@ import { getDailyMovies, getMovieHistory } from './routes/movies.js';
 import { submitResult, getUserResults } from './routes/results.js';
 import { getGlobalStats, getDailyStats } from './routes/stats.js';
 import { getWeeklyLeaderboard, getPlayerRankInfo } from './routes/leaderboard.js';
+import { getAllMovies, getMovie, addMovie, updateMovie, deleteMovie } from './routes/admin.js';
 import { syncMovieDatabase } from './utils/movieSelection.js';
 import { checkRateLimit, getRateLimitIdentifier, cleanupRateLimitStore } from './utils/rateLimit.js';
 
@@ -93,7 +94,17 @@ function verifyAdmin(request, env) {
     return false;
   }
 
-  return adminKey === env.ADMIN_API_KEY;
+  // Trim whitespace from both values for comparison
+  const trimmedAdminKey = adminKey ? adminKey.trim() : '';
+  const trimmedEnvKey = env.ADMIN_API_KEY.trim();
+
+  // Debug logging
+  console.log('Admin key from header:', adminKey ? 'present' : 'missing');
+  console.log('Header key length:', adminKey ? adminKey.length : 0);
+  console.log('Env key length:', env.ADMIN_API_KEY.length);
+  console.log('Keys match:', trimmedAdminKey === trimmedEnvKey);
+
+  return trimmedAdminKey === trimmedEnvKey;
 }
 
 /**
@@ -138,7 +149,9 @@ export default {
         response = new Response(JSON.stringify({
           status: 'ok',
           version: '1.0.0',
-          timestamp: new Date().toISOString()
+          timestamp: new Date().toISOString(),
+          adminKeyConfigured: !!env.ADMIN_API_KEY,
+          adminKeyLength: env.ADMIN_API_KEY ? env.ADMIN_API_KEY.length : 0
         }), {
           headers: { 'Content-Type': 'application/json' }
         });
@@ -201,6 +214,76 @@ export default {
           response = new Response(JSON.stringify(result), {
             headers: { 'Content-Type': 'application/json' }
           });
+        }
+      }
+
+      // Admin movie management routes
+      else if (path === '/api/admin/movies' && method === 'GET') {
+        if (!verifyAdmin(request, env)) {
+          response = new Response(JSON.stringify({
+            error: 'Unauthorized',
+            message: 'Valid admin API key required'
+          }), {
+            status: 401,
+            headers: { 'Content-Type': 'application/json' }
+          });
+        } else {
+          response = await getAllMovies(request, env);
+        }
+      }
+      else if (path === '/api/admin/movies' && method === 'POST') {
+        if (!verifyAdmin(request, env)) {
+          response = new Response(JSON.stringify({
+            error: 'Unauthorized',
+            message: 'Valid admin API key required'
+          }), {
+            status: 401,
+            headers: { 'Content-Type': 'application/json' }
+          });
+        } else {
+          response = await addMovie(request, env);
+        }
+      }
+      else if (path.match(/^\/api\/admin\/movies\/\d+$/) && method === 'GET') {
+        if (!verifyAdmin(request, env)) {
+          response = new Response(JSON.stringify({
+            error: 'Unauthorized',
+            message: 'Valid admin API key required'
+          }), {
+            status: 401,
+            headers: { 'Content-Type': 'application/json' }
+          });
+        } else {
+          const id = path.split('/').pop();
+          response = await getMovie(request, env, id);
+        }
+      }
+      else if (path.match(/^\/api\/admin\/movies\/\d+$/) && method === 'PUT') {
+        if (!verifyAdmin(request, env)) {
+          response = new Response(JSON.stringify({
+            error: 'Unauthorized',
+            message: 'Valid admin API key required'
+          }), {
+            status: 401,
+            headers: { 'Content-Type': 'application/json' }
+          });
+        } else {
+          const id = path.split('/').pop();
+          response = await updateMovie(request, env, id);
+        }
+      }
+      else if (path.match(/^\/api\/admin\/movies\/\d+$/) && method === 'DELETE') {
+        if (!verifyAdmin(request, env)) {
+          response = new Response(JSON.stringify({
+            error: 'Unauthorized',
+            message: 'Valid admin API key required'
+          }), {
+            status: 401,
+            headers: { 'Content-Type': 'application/json' }
+          });
+        } else {
+          const id = path.split('/').pop();
+          response = await deleteMovie(request, env, id);
         }
       }
 

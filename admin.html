@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Cinemdle Admin</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      color: #e0e0e0;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* Login Screen */
+    .login-screen {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 80vh;
+    }
+
+    .login-box {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 40px;
+      width: 100%;
+      max-width: 400px;
+      backdrop-filter: blur(10px);
+    }
+
+    .login-box h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #fff;
+      font-size: 28px;
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    .login-box input:focus {
+      outline: none;
+      border-color: #4a90e2;
+    }
+
+    .login-box button {
+      width: 100%;
+      padding: 14px;
+      background: #4a90e2;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .login-box button:hover {
+      background: #357abd;
+    }
+
+    .error-message {
+      background: rgba(255, 77, 77, 0.2);
+      border: 1px solid rgba(255, 77, 77, 0.4);
+      color: #ff6b6b;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    /* Admin Interface */
+    .admin-interface {
+      display: none;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    }
+
+    header h1 {
+      font-size: 32px;
+      color: #fff;
+    }
+
+    .logout-btn {
+      padding: 10px 20px;
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.3s;
+    }
+
+    .logout-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .controls {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 25px;
+      flex-wrap: wrap;
+    }
+
+    .controls input,
+    .controls select {
+      padding: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+      font-size: 14px;
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .controls input:focus,
+    .controls select:focus {
+      outline: none;
+      border-color: #4a90e2;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .btn-primary {
+      background: #4a90e2;
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: #357abd;
+    }
+
+    .btn-success {
+      background: #4caf50;
+      color: #fff;
+    }
+
+    .btn-success:hover {
+      background: #45a049;
+    }
+
+    .btn-danger {
+      background: #f44336;
+      color: #fff;
+    }
+
+    .btn-danger:hover {
+      background: #da190b;
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .stat-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .stat-card h3 {
+      font-size: 14px;
+      color: #aaa;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .stat-card p {
+      font-size: 28px;
+      font-weight: 700;
+      color: #4a90e2;
+    }
+
+    .movies-table {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 30px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    thead {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    thead th {
+      padding: 15px;
+      text-align: left;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #aaa;
+      font-weight: 600;
+    }
+
+    tbody tr {
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      transition: background 0.2s;
+    }
+
+    tbody tr:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    tbody td {
+      padding: 15px;
+      font-size: 14px;
+    }
+
+    .difficulty-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .difficulty-1 { background: #4caf50; color: #fff; }
+    .difficulty-2 { background: #8bc34a; color: #fff; }
+    .difficulty-3 { background: #ff9800; color: #fff; }
+    .difficulty-4 { background: #ff5722; color: #fff; }
+    .difficulty-5 { background: #f44336; color: #fff; }
+
+    .action-btns {
+      display: flex;
+      gap: 8px;
+    }
+
+    .action-btns button {
+      padding: 6px 12px;
+      font-size: 12px;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(5px);
+      z-index: 1000;
+      overflow-y: auto;
+    }
+
+    .modal.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-content {
+      background: #1a1a2e;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      padding: 30px;
+      width: 100%;
+      max-width: 700px;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-content h2 {
+      margin-bottom: 25px;
+      color: #fff;
+      font-size: 24px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: #aaa;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+      font-size: 14px;
+      font-family: inherit;
+    }
+
+    .form-group textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: #4a90e2;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+      margin-top: 25px;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 40px;
+      color: #aaa;
+    }
+
+    .no-movies {
+      text-align: center;
+      padding: 60px 20px;
+      color: #aaa;
+    }
+
+    .no-movies p {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Login Screen -->
+    <div class="login-screen" id="loginScreen">
+      <div class="login-box">
+        <h1>Cinemdle Admin</h1>
+        <div id="loginError" class="error-message" style="display: none;"></div>
+        <form id="loginForm">
+          <input
+            type="password"
+            id="passwordInput"
+            placeholder="Enter admin password"
+            autocomplete="current-password"
+            required
+          >
+          <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Admin Interface -->
+    <div class="admin-interface" id="adminInterface">
+      <header>
+        <h1>Cinemdle Admin Panel</h1>
+        <button class="logout-btn" id="logoutBtn">Logout</button>
+      </header>
+
+      <div class="stats" id="stats">
+        <div class="stat-card">
+          <h3>Total Movies</h3>
+          <p id="totalMovies">0</p>
+        </div>
+        <div class="stat-card">
+          <h3>Difficulty 1</h3>
+          <p id="diff1Count">0</p>
+        </div>
+        <div class="stat-card">
+          <h3>Difficulty 2</h3>
+          <p id="diff2Count">0</p>
+        </div>
+        <div class="stat-card">
+          <h3>Difficulty 3</h3>
+          <p id="diff3Count">0</p>
+        </div>
+        <div class="stat-card">
+          <h3>Difficulty 4</h3>
+          <p id="diff4Count">0</p>
+        </div>
+        <div class="stat-card">
+          <h3>Difficulty 5</h3>
+          <p id="diff5Count">0</p>
+        </div>
+      </div>
+
+      <div class="controls">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search movies, actors..."
+        >
+        <select id="difficultyFilter">
+          <option value="">All Difficulties</option>
+          <option value="1">Difficulty 1</option>
+          <option value="2">Difficulty 2</option>
+          <option value="3">Difficulty 3</option>
+          <option value="4">Difficulty 4</option>
+          <option value="5">Difficulty 5</option>
+        </select>
+        <button class="btn btn-primary" id="addMovieBtn">+ Add Movie</button>
+      </div>
+
+      <div id="moviesContainer">
+        <div class="loading">Loading movies...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add/Edit Movie Modal -->
+  <div class="modal" id="movieModal">
+    <div class="modal-content">
+      <h2 id="modalTitle">Add Movie</h2>
+      <form id="movieForm">
+        <div class="form-group">
+          <label for="titleInput">Title*</label>
+          <input type="text" id="titleInput" required>
+        </div>
+        <div class="form-group">
+          <label for="yearInput">Year*</label>
+          <input type="number" id="yearInput" min="1900" max="2030" required>
+        </div>
+        <div class="form-group">
+          <label for="difficultyInput">Difficulty* (1=Easy, 5=Expert)</label>
+          <select id="difficultyInput" required>
+            <option value="">Select difficulty</option>
+            <option value="1">1 - Easy</option>
+            <option value="2">2 - Medium</option>
+            <option value="3">3 - Hard</option>
+            <option value="4">4 - Harder</option>
+            <option value="5">5 - Expert</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="quote1Input">Quote 1*</label>
+          <textarea id="quote1Input" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="quote2Input">Quote 2*</label>
+          <textarea id="quote2Input" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="actor1Input">Actor 1*</label>
+          <input type="text" id="actor1Input" required>
+        </div>
+        <div class="form-group">
+          <label for="actor2Input">Actor 2*</label>
+          <input type="text" id="actor2Input" required>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-secondary" id="cancelBtn">Cancel</button>
+          <button type="submit" class="btn btn-success" id="saveBtn">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="admin-client.js"></script>
+</body>
+</html>

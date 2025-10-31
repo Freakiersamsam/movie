@@ -101,13 +101,18 @@
     <!-- Cookie Consent (must load BEFORE gtag) -->
     <script src="cookie-consent.js?v=1"></script>
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NMG202J7GP"></script>
-    <script src="analytics.js?v=20251030-security"></script>
-
     <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8052290720138654" crossorigin="anonymous"></script>
 </head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NMG202J7GP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-NMG202J7GP');
+</script>
 <body>
     <!-- AdSense Top Banner Slot (728x90 or responsive) -->
     <!-- Uncomment when ready to show ads

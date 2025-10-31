@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>Cinemdle - Daily Movie Quote Guessing Game | Like Wordle for Movies</title>
     <meta name="title" content="Cinemdle - Daily Movie Quote Guessing Game">
-    <meta name="description" content="Guess the movie from quotes, actors, and clues! A new daily movie challenge. 5 difficulty levels. Share your results. Like Wordle but for cinema lovers.">
+    <meta name="description" content="Play Cinemdle - Free daily movie quiz game! Guess films from iconic quotes, actors & clues. 5 rounds, 6 hints each. New movies every day. Like Wordle for cinema fans.">
     <meta name="keywords" content="movie game, daily movie quiz, movie quotes, wordle movies, cinema game, movie trivia, guess the movie, film quiz">
     <meta name="author" content="Cinemdle">
     <meta name="theme-color" content="#6B46C1">
@@ -72,28 +72,100 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "WebApplication",
+      "@type": "VideoGame",
       "name": "Cinemdle",
+      "alternateName": "Cinemdle - Daily Movie Quote Game",
       "url": "https://cinemdle.com",
-      "description": "Daily movie quote guessing game. Guess the movie from quotes, actors, and clues.",
+      "image": "https://cinemdle.com/og-image.png",
+      "description": "Daily movie quote guessing game. Guess the movie from quotes, actors, and clues. 5 difficulty levels, 6 hints per round. Like Wordle but for cinema lovers.",
+      "genre": ["Puzzle", "Trivia", "Movie Quiz"],
+      "gamePlatform": ["Web Browser", "Mobile Web", "Desktop"],
+      "playMode": "SinglePlayer",
       "applicationCategory": "GameApplication",
       "operatingSystem": "Any",
+      "browserRequirements": "Requires JavaScript",
       "offers": {
         "@type": "Offer",
         "price": "0",
-        "priceCurrency": "USD"
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Cinemdle",
+        "url": "https://cinemdle.com",
+        "logo": "https://cinemdle.com/android-chrome-512x512.png",
+        "sameAs": [
+          "https://twitter.com/cinemdle"
+        ]
       },
       "author": {
         "@type": "Organization",
         "name": "Cinemdle"
       },
-      "genre": "Puzzle Game",
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.8",
-        "ratingCount": "1250",
-        "bestRating": "5",
-        "worstRating": "1"
+      "inLanguage": "en-US",
+      "datePublished": "2024-10-29",
+      "dateModified": "2025-10-31"
+    }
+    </script>
+
+    <!-- FAQ Schema for Rich Snippets -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is Cinemdle?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cinemdle is a free daily movie guessing game where you identify films from iconic quotes, actor clues, and hints. Like Wordle but for movies, with 5 rounds of increasing difficulty every day."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How many hints do you get in Cinemdle?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You get 6 progressive hints per movie: 2 consecutive quotes, 2 actor names, the release year, and finally the title. Try to guess with fewer hints for better stats!"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is Cinemdle free to play?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes! Cinemdle is completely free to play. No registration, no subscription, no paywall. Just visit daily for new movie challenges."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How often does Cinemdle update?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "New movies are released daily at midnight. You get 5 fresh movie puzzles every 24 hours with difficulty ranging from easy blockbusters to expert arthouse films."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <!-- Organization Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Cinemdle",
+      "url": "https://cinemdle.com",
+      "logo": "https://cinemdle.com/android-chrome-512x512.png",
+      "sameAs": [
+        "https://twitter.com/cinemdle"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "samue.ferland@gmail.com",
+        "contactType": "Customer Support"
       }
     }
     </script>
@@ -131,9 +203,20 @@
                 cinemdle
             </h1>
             <nav class="nav-links">
+                <a href="/about.html">about</a>
                 <a href="#" id="help-link" aria-label="How to play">how to play</a>
             </nav>
         </header>
+
+        <!-- SEO-friendly game description -->
+        <section class="game-intro">
+            <h2 class="sr-only">Daily Movie Quote Guessing Game</h2>
+            <p class="game-description">
+                Test your cinema knowledge with today's movie quote challenge.
+                Guess <strong>5 daily movies</strong> from iconic quotes, cast clues, and hints.
+                Play free every day!
+            </p>
+        </section>
 
         <div class="round-info" id="round-info"></div>
         <div class="year-title" id="year-title"></div>
@@ -186,12 +269,29 @@
         <button id="help" class="btn-full-width btn-with-margin" aria-label="Show help and keyboard shortcuts">help & shortcuts</button>
         <button id="dev-reset" class="btn-full-width btn-with-margin">reset (dev)</button>
 
+        <!-- Game Features Section -->
+        <section class="game-features">
+            <h3 class="sr-only">Game Features</h3>
+            <ul class="feature-list">
+                <li><strong>289 movies</strong> from classics to modern hits</li>
+                <li><strong>5 difficulty levels</strong> - blockbusters to arthouse</li>
+                <li><strong>New daily challenge</strong> - fresh movies every 24 hours</li>
+                <li><strong>Track your stats</strong> - streaks, wins & patterns</li>
+            </ul>
+        </section>
+
         <footer class="footer">
-            <p>
+            <nav aria-label="Footer navigation">
+                <a href="/about.html">about</a> •
                 <a href="/privacy.html">privacy</a> •
                 <a href="/terms.html">terms</a> •
                 <a href="#" id="cookie-settings-link">cookie settings</a> •
                 <a href="mailto:samue.ferland@gmail.com">contact</a>
+            </nav>
+            <p class="footer-description">
+                <strong>Cinemdle</strong> is a free daily movie trivia game.
+                Guess films from iconic quotes, cast clues, and hints.
+                Like Wordle but for movies. New challenge every day!
             </p>
             <p class="footer-small">made with ❤️ for cinema lovers</p>
         </footer>
@@ -240,6 +340,54 @@
             </div>
         </div>
     </div>
+
+    <!-- Hidden SEO Content (Indexable by Search Engines) -->
+    <article class="sr-only" id="seo-help-content">
+        <h2>How to Play Cinemdle - Daily Movie Quote Game</h2>
+        <p>Cinemdle is a free daily movie guessing game where you identify films from quotes and clues. Test your cinema knowledge with 5 rounds of increasing difficulty each day.</p>
+
+        <h3>Game Rules</h3>
+        <p>Each day features 5 new movie puzzles with progressive difficulty levels:</p>
+        <ul>
+            <li>Round 1: Popular blockbusters and mainstream movies</li>
+            <li>Round 2: Well-known classics and fan favorites</li>
+            <li>Round 3: Cult films and cinema buff picks</li>
+            <li>Round 4: Indie movies and deeper cuts</li>
+            <li>Round 5: Arthouse and international cinema</li>
+        </ul>
+
+        <h3>How Hints Work</h3>
+        <p>You receive up to 6 progressive hints per movie:</p>
+        <ol>
+            <li>First iconic quote from the film</li>
+            <li>Second consecutive quote (dialogue continues)</li>
+            <li>Actor who spoke the first quote</li>
+            <li>Actor who spoke the second quote</li>
+            <li>Release year of the movie</li>
+            <li>Movie title revealed</li>
+        </ol>
+
+        <h3>Features</h3>
+        <ul>
+            <li>289 movies in curated database spanning classic to modern cinema</li>
+            <li>Free to play with no registration required</li>
+            <li>Track your statistics, win rate, and winning streaks</li>
+            <li>Share results with friends on social media</li>
+            <li>Keyboard shortcuts for power users</li>
+            <li>Mobile-friendly responsive design</li>
+            <li>Daily reset at midnight for fresh challenges</li>
+        </ul>
+
+        <h3>Tips for Success</h3>
+        <p>Master the movie quote game with these strategies:</p>
+        <ul>
+            <li>Read quotes carefully for context clues about genre and era</li>
+            <li>Use the autocomplete feature to explore movie titles</li>
+            <li>Remember that difficulty increases with each round</li>
+            <li>Come back daily to maintain your winning streak</li>
+            <li>Share your results to compete with friends</li>
+        </ul>
+    </article>
 
     <!-- Scripts -->
     <script src="movies.js?v=20251030-security"></script>

@@ -977,6 +977,11 @@ async function init() {
             window.showCookieSettings();
         }
     });
+
+    // Focus input if game is not complete
+    if (!gameComplete) {
+        document.getElementById('guess').focus();
+    }
 }
 
 init();

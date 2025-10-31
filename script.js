@@ -344,7 +344,7 @@ function revealHint(index) {
     // Show/hide give up button
     const giveUpBtn = document.getElementById('give-up');
     if (index >= 3 && !gameComplete) {
-        giveUpBtn.style.display = 'inline-block';
+        giveUpBtn.classList.remove('hidden');
     }
 }
 
@@ -364,7 +364,7 @@ function handleGuess() {
         gameComplete = true;
         input.disabled = true;
         document.getElementById('next').disabled = true;
-        document.getElementById('give-up').style.display = 'none';
+        document.getElementById('give-up').classList.add('hidden');
 
         // Add celebrate animation to container
         const container = document.querySelector('.container');
@@ -456,7 +456,7 @@ async function endRound(won, hints) {
 
     document.getElementById('guess').disabled = true;
     document.getElementById('next').disabled = true;
-    document.getElementById('give-up').style.display = 'none';
+    document.getElementById('give-up').classList.add('hidden');
 
     if (won) {
         showMessage('correct!', null);
@@ -526,7 +526,7 @@ async function startNextRound() {
     document.getElementById('guess').value = '';
     document.getElementById('guess').disabled = false;
     document.getElementById('next').disabled = false;
-    document.getElementById('give-up').style.display = 'none';
+    document.getElementById('give-up').classList.add('hidden');
 
     // Clear the button spacer
     document.getElementById('button-spacer').innerHTML = '';

@@ -22,6 +22,32 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Touch-specific optimizations */
+@media (hover: none) and (pointer: coarse) {
+    /* Touch device styles */
+    * {
+        -webkit-tap-highlight-color: rgba(255, 255, 255, 0.1);
+    }
+
+    button,
+    a,
+    .autocomplete-item,
+    .close {
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: rgba(255, 255, 255, 0.15);
+    }
+
+    /* Ensure all interactive elements have adequate touch targets */
+    button,
+    a,
+    input,
+    .autocomplete-item {
+        min-height: 44px;
+    }
 }
 
 .container {
@@ -433,27 +459,269 @@ h2 {
     color: var(--text);
 }
 
-@media (max-width: 600px) {
+/* Mobile Portrait - Primary mobile breakpoint */
+@media (max-width: 767px) {
     body {
-        font-size: 14px;
-        padding: 10px;
+        font-size: 15px;
+        padding: 12px;
+        padding-top: max(12px, env(safe-area-inset-top));
+        padding-bottom: max(12px, env(safe-area-inset-bottom));
+        padding-left: max(12px, env(safe-area-inset-left));
+        padding-right: max(12px, env(safe-area-inset-right));
     }
 
     .container {
-        padding: 30px 10px;
+        padding: 20px 12px;
     }
 
-    .modal-content {
-        padding: 30px 20px;
+    /* Typography - Maintain readability on small screens */
+    h2 {
+        font-size: 15px;
+        margin-bottom: 20px;
     }
 
-    .controls {
-        flex-direction: column;
+    /* Header optimizations */
+    .logo {
+        font-size: 18px;
+        gap: 8px;
+        margin-bottom: 12px;
+    }
+
+    .logo-icon {
+        font-size: 18px;
+    }
+
+    .nav-links {
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .nav-links a {
+        font-size: 10px;
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        padding: 8px;
+    }
+
+    /* Game description */
+    .game-description {
+        font-size: 0.85em;
+        padding: 0 8px;
+    }
+
+    /* Round info & hint counter */
+    .round-info {
+        font-size: 11px;
+        margin-bottom: 12px;
+    }
+
+    .hint-counter {
+        font-size: 10px;
+        margin-bottom: 6px;
+    }
+
+    /* Quotes section - optimize for mobile */
+    .quotes {
+        height: auto;
+        min-height: 240px;
+        width: 100%;
+        margin-bottom: 16px;
     }
 
     .quote {
-        padding-left: 10px;
-        padding-right: 10px;
+        font-size: 11pt;
+        padding-left: 12px;
+        padding-right: 12px;
+        margin-bottom: 20px;
+        line-height: 1.6;
+    }
+
+    .actor-inline {
+        font-size: 11pt;
+        margin-bottom: 10px;
+    }
+
+    .year-title {
+        font-size: 15px;
+        margin-bottom: 12px;
+    }
+
+    /* Message */
+    .message {
+        font-size: 11pt;
+        margin-bottom: 16px;
+        height: auto;
+        min-height: 24px;
+    }
+
+    /* Controls - Stack vertically for easier touch */
+    .controls {
+        flex-direction: column;
+        gap: 12px;
+        max-width: 100%;
+        margin-bottom: 16px;
+    }
+
+    /* Input - Prevent iOS zoom with 16px minimum */
+    #guess {
+        font-size: 16px;
+        padding: 14px 16px;
+        min-height: 48px;
+        border-radius: 0;
+        -webkit-appearance: none;
+    }
+
+    #guess::placeholder {
+        font-size: 16px;
+    }
+
+    /* Autocomplete - Better mobile UX */
+    .autocomplete-items {
+        max-height: 240px;
+        border-radius: 0;
+    }
+
+    .autocomplete-item {
+        font-size: 15px;
+        padding: 14px 16px;
+        min-height: 48px;
+    }
+
+    /* Buttons - Ensure 44px minimum touch target */
+    button {
+        font-size: 15px;
+        padding: 14px 20px;
+        min-height: 48px;
+        width: 100%;
+    }
+
+    #next,
+    #give-up {
+        width: 100%;
+    }
+
+    /* Modal - Better mobile experience */
+    .modal-content {
+        width: 95%;
+        max-width: 95%;
+        padding: 28px 20px;
+        max-height: 85vh;
+        border-radius: 0;
+    }
+
+    .close {
+        top: 16px;
+        right: 16px;
+        font-size: 28px;
+        min-width: 44px;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Stats - Optimize layout */
+    .stats {
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 24px;
+    }
+
+    .stats div {
+        flex: 1 1 30%;
+        min-width: 80px;
+        padding: 8px;
+    }
+
+    .stats span {
+        font-size: 18px;
+    }
+
+    /* Distribution bars */
+    .bar {
+        margin-bottom: 10px;
+        gap: 8px;
+    }
+
+    .bar-label {
+        font-size: 11pt;
+        width: 18px;
+    }
+
+    .bar-fill {
+        font-size: 11pt;
+        padding: 6px 10px;
+    }
+
+    /* Difficulty stats */
+    .difficulty-stats {
+        margin-top: 24px;
+        padding-top: 24px;
+    }
+
+    .difficulty-row {
+        font-size: 11pt;
+        margin-bottom: 10px;
+        flex-wrap: wrap;
+    }
+
+    /* Help modal */
+    .help-content {
+        font-size: 14px;
+    }
+
+    .help-content h3 {
+        font-size: 13px;
+        margin-top: 24px;
+        margin-bottom: 8px;
+    }
+
+    .help-content ul {
+        margin-left: 16px;
+    }
+
+    .help-content li {
+        line-height: 1.7;
+        margin-bottom: 8px;
+    }
+
+    kbd {
+        font-size: 10px;
+        padding: 3px 6px;
+    }
+
+    /* Footer */
+    .footer {
+        margin-top: 32px;
+        padding-top: 24px;
+        font-size: 10px;
+    }
+
+    .footer-description {
+        font-size: 0.8em;
+        padding: 0 12px;
+    }
+
+    .footer-small {
+        font-size: 10px;
+    }
+
+    /* Countdown */
+    .countdown {
+        font-size: 11pt;
+        margin-top: 16px;
+    }
+
+    /* Button spacer */
+    .button-spacer {
+        min-height: 16px;
+        margin-bottom: 16px;
+    }
+
+    /* Ad containers */
+    .ad-container {
+        margin: 16px auto;
     }
 }
 
@@ -544,23 +812,45 @@ header {
     max-width: 336px;
 }
 
-/* Responsive ad containers */
-@media (max-width: 768px) {
-    .ad-top {
-        max-width: 100%;
+/* Tablet & Mobile Landscape - Intermediate breakpoint */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .container {
+        max-width: 700px;
+        padding: 24px;
     }
 
+    .quotes {
+        max-width: 600px;
+    }
+
+    .controls {
+        max-width: 600px;
+    }
+
+    button {
+        min-height: 44px;
+    }
+
+    #guess {
+        font-size: 16px;
+        min-height: 44px;
+    }
+
+    .autocomplete-item {
+        min-height: 44px;
+    }
+
+    .modal-content {
+        max-width: 600px;
+        width: 85%;
+    }
+}
+
+/* Small tablets and large phones in landscape */
+@media (max-width: 1024px) {
+    .ad-top,
     .ad-mid {
         max-width: 100%;
-    }
-
-    .nav-links {
-        font-size: 10px;
-        gap: 15px;
-    }
-
-    .logo {
-        font-size: 18px;
     }
 }
 

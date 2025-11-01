@@ -659,6 +659,32 @@ function shareResults() {
 
     text += '\nPlay at cinemdle.com';
 
+    // Use native share API on mobile devices when available
+    if (navigator.share && /mobile|android|iphone|ipad|ipod/i.test(navigator.userAgent)) {
+        navigator.share({
+            title: 'Cinemdle Results',
+            text: text
+        }).then(() => {
+            // Optional: show brief success message
+            const btn = document.getElementById('share');
+            const orig = btn.textContent;
+            btn.textContent = 'shared!';
+            setTimeout(() => {
+                btn.textContent = orig;
+            }, TIMINGS.COPIED_FEEDBACK_DURATION);
+        }).catch(err => {
+            // User cancelled or share failed, fall back to clipboard
+            if (err.name !== 'AbortError') {
+                fallbackCopyToClipboard(text);
+            }
+        });
+    } else {
+        // Desktop or no share support: copy to clipboard
+        fallbackCopyToClipboard(text);
+    }
+}
+
+function fallbackCopyToClipboard(text) {
     navigator.clipboard.writeText(text).then(() => {
         const btn = document.getElementById('share');
         const orig = btn.textContent;
@@ -884,6 +910,16 @@ async function init() {
     document.getElementById('guess').addEventListener('keypress', (e) => {
         if (e.key === 'Enter') handleGuess();
     });
+
+    // Mobile: Scroll input into view when virtual keyboard opens
+    const guessInput = document.getElementById('guess');
+    if (/mobile|android|iphone|ipad|ipod/i.test(navigator.userAgent)) {
+        guessInput.addEventListener('focus', () => {
+            setTimeout(() => {
+                guessInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 300); // Delay to wait for keyboard animation
+        });
+    }
 
     document.getElementById('next').addEventListener('click', handleNext);
     document.getElementById('stats').addEventListener('click', showStats);

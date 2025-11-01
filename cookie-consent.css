@@ -316,18 +316,33 @@
 }
 
 /* Mobile Responsive */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
     #cookie-consent-banner {
         padding: 16px;
+        padding-bottom: max(16px, env(safe-area-inset-bottom));
+        padding-left: max(16px, env(safe-area-inset-left));
+        padding-right: max(16px, env(safe-area-inset-right));
     }
 
     .cookie-consent-content {
         flex-direction: column;
-        gap: 20px;
+        gap: 16px;
     }
 
     .cookie-consent-text {
         min-width: 100%;
+    }
+
+    .cookie-consent-text h3 {
+        font-size: 16px;
+    }
+
+    .cookie-consent-text p {
+        font-size: 13px;
+    }
+
+    .cookie-consent-links {
+        font-size: 12px;
     }
 
     .cookie-consent-buttons {
@@ -337,11 +352,43 @@
 
     .cookie-btn {
         width: 100%;
+        min-height: 48px;
+        padding: 14px 20px;
+        font-size: 15px;
     }
 
     .cookie-modal-content {
         width: 95%;
-        padding: 20px;
+        padding: 24px 16px;
+        max-height: 85vh;
+        border-radius: 12px;
+    }
+
+    .cookie-modal-close {
+        top: 12px;
+        right: 12px;
+        width: 44px;
+        height: 44px;
+        font-size: 28px;
+    }
+
+    .cookie-modal-content h2 {
+        font-size: 20px;
+        margin-bottom: 20px;
+        padding-right: 40px;
+    }
+
+    .cookie-setting-item {
+        padding: 16px;
+        margin-bottom: 12px;
+    }
+
+    .cookie-setting-item h3 {
+        font-size: 15px;
+    }
+
+    .cookie-setting-item p {
+        font-size: 13px;
     }
 
     .cookie-modal-buttons {
@@ -350,6 +397,25 @@
 
     .cookie-modal-buttons .cookie-btn {
         width: 100%;
+    }
+}
+
+/* Touch device enhancements */
+@media (hover: none) and (pointer: coarse) {
+    .cookie-btn {
+        touch-action: manipulation;
+        min-height: 44px;
+    }
+
+    .cookie-toggle {
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+    }
+
+    .cookie-modal-close {
+        min-width: 44px;
+        min-height: 44px;
     }
 }
 

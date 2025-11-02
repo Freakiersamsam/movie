@@ -318,15 +318,15 @@
 /* Mobile Responsive */
 @media (max-width: 767px) {
     #cookie-consent-banner {
-        padding: 16px;
-        padding-bottom: max(16px, env(safe-area-inset-bottom));
-        padding-left: max(16px, env(safe-area-inset-left));
-        padding-right: max(16px, env(safe-area-inset-right));
+        padding: 14px;
+        padding-bottom: max(14px, env(safe-area-inset-bottom));
+        padding-left: max(14px, env(safe-area-inset-left));
+        padding-right: max(14px, env(safe-area-inset-right));
     }
 
     .cookie-consent-content {
         flex-direction: column;
-        gap: 16px;
+        gap: 14px;
     }
 
     .cookie-consent-text {
@@ -334,7 +334,7 @@
     }
 
     .cookie-consent-text h3 {
-        font-size: 16px;
+        font-size: 15px;
     }
 
     .cookie-consent-text p {
@@ -353,38 +353,38 @@
     .cookie-btn {
         width: 100%;
         min-height: 48px;
-        padding: 14px 20px;
-        font-size: 15px;
+        padding: 12px 18px;
+        font-size: 14px;
     }
 
     .cookie-modal-content {
-        width: 95%;
-        padding: 24px 16px;
-        max-height: 85vh;
-        border-radius: 12px;
+        width: 92%;
+        padding: 20px 16px;
+        max-height: 80vh;
+        border-radius: 8px;
     }
 
     .cookie-modal-close {
-        top: 12px;
-        right: 12px;
+        top: 10px;
+        right: 10px;
         width: 44px;
         height: 44px;
-        font-size: 28px;
+        font-size: 26px;
     }
 
     .cookie-modal-content h2 {
-        font-size: 20px;
-        margin-bottom: 20px;
-        padding-right: 40px;
+        font-size: 16px;
+        margin-bottom: 16px;
+        padding-right: 36px;
     }
 
     .cookie-setting-item {
-        padding: 16px;
-        margin-bottom: 12px;
+        padding: 14px;
+        margin-bottom: 10px;
     }
 
     .cookie-setting-item h3 {
-        font-size: 15px;
+        font-size: 14px;
     }
 
     .cookie-setting-item p {

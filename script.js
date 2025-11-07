@@ -363,6 +363,12 @@ function handleGuess() {
         // Mark game as complete immediately to prevent other interactions
         gameComplete = true;
         input.disabled = true;
+
+        // Dismiss keyboard on mobile to show celebration
+        if (/mobile|android|iphone|ipad|ipod/i.test(navigator.userAgent)) {
+            input.blur();
+        }
+
         document.getElementById('next').disabled = true;
         document.getElementById('give-up').classList.add('hidden');
 
@@ -398,8 +404,10 @@ function handleGuess() {
             setTimeout(() => handleNext(), 500); // After shake animation
         }
 
-        // Maintain focus on input
-        input.focus();
+        // Maintain focus on input (desktop only - prevents keyboard popup on mobile)
+        if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+            input.focus();
+        }
     }
 }
 
@@ -633,6 +641,9 @@ async function showStats() {
 
         dist.parentElement.appendChild(difficultyStatsDiv);
     }
+
+    // Lock body scroll on mobile when modal opens
+    document.body.style.overflow = 'hidden';
 
     document.getElementById('modal').classList.add('show');
 }
@@ -944,10 +955,14 @@ async function init() {
 
     // Help modal handlers
     document.getElementById('help').addEventListener('click', () => {
+        // Lock body scroll on mobile when modal opens
+        document.body.style.overflow = 'hidden';
         document.getElementById('help-modal').classList.add('show');
     });
 
     document.getElementById('close-help').addEventListener('click', () => {
+        // Restore body scroll when modal closes
+        document.body.style.overflow = '';
         document.getElementById('help-modal').classList.remove('show');
     });
 
@@ -967,14 +982,20 @@ async function init() {
 
     // Modal close handlers
     document.getElementById('close').addEventListener('click', () => {
+        // Restore body scroll when modal closes
+        document.body.style.overflow = '';
         document.getElementById('modal').classList.remove('show');
     });
 
     window.addEventListener('click', (e) => {
         if (e.target.id === 'modal') {
+            // Restore body scroll when modal closes
+            document.body.style.overflow = '';
             document.getElementById('modal').classList.remove('show');
         }
         if (e.target.id === 'help-modal') {
+            // Restore body scroll when modal closes
+            document.body.style.overflow = '';
             document.getElementById('help-modal').classList.remove('show');
         }
     });
@@ -996,6 +1017,8 @@ async function init() {
         // ? - show help
         if (e.key === '?' && !e.target.matches('input, textarea')) {
             e.preventDefault();
+            // Lock body scroll on mobile when modal opens
+            document.body.style.overflow = 'hidden';
             document.getElementById('help-modal').classList.add('show');
         }
     });

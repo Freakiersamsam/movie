@@ -24,6 +24,8 @@ body {
     flex-direction: column;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    /* Prevent pull-to-refresh on mobile */
+    overscroll-behavior-y: contain;
 }
 
 /* Touch-specific optimizations */
@@ -221,6 +223,10 @@ body {
     max-height: 200px;
     overflow-y: auto;
     background: var(--bg);
+    /* Smooth momentum scrolling on iOS */
+    -webkit-overflow-scrolling: touch;
+    /* Prevent scroll chaining */
+    overscroll-behavior: contain;
 }
 
 .autocomplete-item {
@@ -234,6 +240,14 @@ body {
 .autocomplete-active {
     background: var(--text);
     color: var(--bg);
+}
+
+/* Touch feedback for autocomplete items */
+.autocomplete-item:active {
+    background: var(--text);
+    color: var(--bg);
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
 }
 
 button {
@@ -306,6 +320,8 @@ kbd {
     justify-content: center;
     align-items: center;
     z-index: 1000;
+    /* Prevent scroll chaining in modal */
+    overscroll-behavior: contain;
 }
 
 .modal.show {
@@ -321,6 +337,10 @@ kbd {
     max-height: 90vh;
     overflow-y: auto;
     position: relative;
+    /* Smooth momentum scrolling on iOS */
+    -webkit-overflow-scrolling: touch;
+    /* Prevent scroll chaining */
+    overscroll-behavior: contain;
 }
 
 .close {
@@ -465,7 +485,8 @@ h2 {
         font-size: 14px;
         padding: 0;
         padding-top: env(safe-area-inset-top);
-        padding-bottom: env(safe-area-inset-bottom);
+        /* Extra padding for iOS Safari bottom bar */
+        padding-bottom: calc(env(safe-area-inset-bottom) + 20px);
     }
 
     .container {
@@ -726,6 +747,31 @@ h2 {
     /* Ad containers */
     .ad-container {
         margin: 14px auto;
+    }
+}
+
+/* Mobile Landscape - Optimize for horizontal space */
+@media (max-width: 767px) and (orientation: landscape) {
+    body {
+        /* Reduce vertical padding in landscape */
+        padding-bottom: calc(env(safe-area-inset-bottom) + 10px);
+    }
+
+    .quotes {
+        min-height: 150px; /* Reduce vertical space in landscape */
+    }
+
+    .modal-content {
+        max-height: 70vh; /* More compact modal in landscape */
+        padding: 24px 32px; /* Adjust padding */
+    }
+
+    .help-content h3 {
+        margin-top: 15px; /* Reduce spacing */
+    }
+
+    .stats {
+        margin-bottom: 16px; /* Tighter spacing */
     }
 }
 

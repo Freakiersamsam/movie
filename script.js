@@ -352,6 +352,92 @@ function shareResults() {
     });
 }
 
+function setupAutocomplete() {
+    const input = document.getElementById('guess');
+    const autocompleteContainer = document.createElement('div');
+    autocompleteContainer.id = 'autocomplete';
+    autocompleteContainer.className = 'autocomplete-items';
+    input.parentNode.insertBefore(autocompleteContainer, input.nextSibling);
+
+    let currentFocus = -1;
+
+    input.addEventListener('input', function() {
+        const val = this.value.trim();
+        currentFocus = -1;
+
+        // Clear previous suggestions
+        autocompleteContainer.innerHTML = '';
+
+        if (!val || gameComplete) {
+            return;
+        }
+
+        // Find matching movies
+        const matches = MOVIES.filter(movie =>
+            movie.title.toLowerCase().includes(val.toLowerCase())
+        ).slice(0, 5); // Limit to 5 suggestions
+
+        matches.forEach(movie => {
+            const div = document.createElement('div');
+            div.className = 'autocomplete-item';
+            div.textContent = movie.title;
+
+            // Auto-select on click (no need to press Enter)
+            div.addEventListener('click', function(e) {
+                e.preventDefault();
+                input.value = movie.title;
+                autocompleteContainer.innerHTML = '';
+                handleGuess();
+            });
+
+            autocompleteContainer.appendChild(div);
+        });
+    });
+
+    // Handle keyboard navigation
+    input.addEventListener('keydown', function(e) {
+        const items = autocompleteContainer.getElementsByClassName('autocomplete-item');
+
+        if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            currentFocus++;
+            addActive(items);
+        } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            currentFocus--;
+            addActive(items);
+        } else if (e.key === 'Enter') {
+            if (currentFocus > -1 && items[currentFocus]) {
+                e.preventDefault();
+                items[currentFocus].click();
+            }
+        }
+    });
+
+    function addActive(items) {
+        if (!items) return;
+        removeActive(items);
+        if (currentFocus >= items.length) currentFocus = 0;
+        if (currentFocus < 0) currentFocus = items.length - 1;
+        if (items[currentFocus]) {
+            items[currentFocus].classList.add('autocomplete-active');
+        }
+    }
+
+    function removeActive(items) {
+        for (let i = 0; i < items.length; i++) {
+            items[i].classList.remove('autocomplete-active');
+        }
+    }
+
+    // Close autocomplete when clicking outside
+    document.addEventListener('click', function(e) {
+        if (e.target !== input) {
+            autocompleteContainer.innerHTML = '';
+        }
+    });
+}
+
 function init() {
     todayMovie = getTodayMovie();
     const state = loadState();
@@ -374,6 +460,8 @@ function init() {
         updateCountdown();
         setInterval(updateCountdown, 1000);
     }
+
+    setupAutocomplete();
 
     document.getElementById('guess').addEventListener('keypress', (e) => {
         if (e.key === 'Enter') handleGuess();

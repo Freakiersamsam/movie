@@ -779,6 +779,7 @@ function setupAutocomplete() {
                 div.addEventListener('click', function() {
                     input.value = title;
                     closeAutocomplete();
+                    handleGuess(); // Auto-submit on click
                 });
                 autocompleteList.appendChild(div);
             });
